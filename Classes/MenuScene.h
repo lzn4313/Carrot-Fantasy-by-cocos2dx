@@ -11,6 +11,18 @@ public:
     virtual bool init();
 
     virtual void update(float dt);
+    
+    void close_game(Ref* pSender);
+
+    void goto_options(Ref* pSender);
+
+    void goto_helper(Ref* pSender);
+
+    void goto_adventure(Ref* psender);
+
+    void goto_boss(Ref* psender);
+
+    void goto_nest(Ref* psender);
 
     CREATE_FUNC(MenuScene);
 };
