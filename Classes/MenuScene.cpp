@@ -1,5 +1,6 @@
 #include "MenuScene.h"
-
+#include "OptionsScene.h"
+#include "HelperScene.h"
 USING_NS_CC;
 /*菜单场景*/
 Scene* MenuScene::createScene()
@@ -10,7 +11,6 @@ Scene* MenuScene::createScene()
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 /*初始化*/
 bool MenuScene::init()
@@ -24,7 +24,7 @@ bool MenuScene::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /*背景图*/
+    /*****************************************背景图**************************************************/
     auto background_image = Sprite::create("/MenuScene/MainBG.PNG");
     if (background_image == nullptr)
     {
@@ -37,7 +37,7 @@ bool MenuScene::init()
 
         this->addChild(background_image);
     }
-    /*云*/
+    /******************************************云*******************************************************/
     auto cloud = Sprite::create();
     cloud->setName("Cloud");
     //大云
@@ -51,26 +51,27 @@ bool MenuScene::init()
         cloud1->setPosition(Vec2(origin.x - cloud1->getContentSize().width,
             origin.y + visibleSize.height * 0.85));
         cloud1->setTag(1);
+        cloud1->setOpacity(95);
         cloud->addChild(cloud1);
     }
-    ////大云运动
     //小云
-    auto cloud2 = Sprite::create("/MenuScene/Cloud.PNG");
+    auto cloud2 = Sprite::create("/MenuScene/Cloud2.PNG");
     if (cloud2 == nullptr)
     {
         problemLoading("'Cloud.PNG'");
     }
     else
     {
-        cloud2->setScale(0.5);
         cloud2->setPosition(Vec2(origin.x + visibleSize.width + cloud2->getContentSize().width,
             origin.y + visibleSize.height * 0.8));
         cloud2->setTag(2);
+        cloud2->setScale(2);
+        cloud2->setOpacity(95);
         cloud->addChild(cloud2);
     }
 
     this->addChild(cloud);
-    /*添加怪物图形*/
+    /*****************************************************添加怪物图形****************************************************/
     auto monster = Sprite::create("/MenuScene/FlyMonster.PNG");
     if (monster == nullptr) {
         problemLoading("'FlyMonster.PNG'");
@@ -81,7 +82,7 @@ bool MenuScene::init()
         monster->setName("Monster");
         this->addChild(monster);
     }
-    /*添加萝卜图形*/
+    /****************************************************添加萝卜图形*****************************************************/
     auto carrot = Sprite::create();
     //1,添加萝卜叶子
     auto carrot_leaf1 = Sprite::create("/MenuScene/Leaf1.PNG");
@@ -137,7 +138,7 @@ bool MenuScene::init()
     }
 
     this->addChild(carrot);
-    /*添加保卫萝卜标题*/
+    /*************************************************************添加保卫萝卜标题******************************************************************/
     auto title = Sprite::create("/MenuScene/MainTitle.PNG");
     if (title == nullptr) {
         problemLoading("'MainTitle.PNG'");
@@ -148,7 +149,7 @@ bool MenuScene::init()
         this->addChild(title);
     }
 
-    /*菜单界面*/
+    /*****************************************************************菜单界面************************************************************************/
     auto menu = Menu::create();
     menu->setPosition(Vec2::ZERO);
     //退出游戏按钮
@@ -217,7 +218,7 @@ bool MenuScene::init()
 
 
     this->addChild(menu);
-    /*开启调度器*/
+    /***********************************************************开启调度器********************************************************/
     this->scheduleUpdate();
 
 
@@ -227,7 +228,7 @@ bool MenuScene::init()
 void MenuScene::update(float dt) {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    /*动物的上下运动*/
+    /*****************************************************怪物的上下运动*******************************************/
     Node* Monster = this->getChildByName("Monster");
     static bool direction = 1;//向下运动
     static float dx = 0;
@@ -248,7 +249,7 @@ void MenuScene::update(float dt) {
         }
     }
 
-    /*云的运动*/
+    /**************************************************************云的运动*****************************************************************************/
     Node* Cloud = this->getChildByName("Cloud");
     Node* Cloud1 = Cloud->getChildByTag(1);
     Node* Cloud2 = Cloud->getChildByTag(2);
@@ -269,11 +270,13 @@ void MenuScene::close_game(Ref* psender) {
 }
 
 void  MenuScene::goto_options(Ref* pSender) {
-    //待开发
+    auto options_scene = OptionsScene::createScene();
+    Director::getInstance()->replaceScene(TransitionSlideInT::create(0.3, options_scene));//以从上向下滑动方式切换
 }
 
 void  MenuScene::goto_helper(Ref* pSender) {
-    //待开发
+    auto helper_scene = HelperScene::createScene();
+    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.3, helper_scene));
 }
 
 void  MenuScene::goto_adventure(Ref* psender) {
