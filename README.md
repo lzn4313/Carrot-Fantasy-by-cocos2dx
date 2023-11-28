@@ -17,3 +17,6 @@
 /*更新说明*/
 在实际运行中发现，实际程序会根据Resources文件夹里的内容在proj.win32/bin/Carrot_Fantasy/Debug/目录下重新创建一个Resources文件夹。
 所以每次更新Resources文件，请再将其覆盖proj.win32/bin/Carrot_Fantasy/Debug/目录下的Resources文件以保证正常使用。
+
+/*再更新说明*/
+由于Classes文件中不断加入新的.cpp和.h文件，使用时需要在覆盖文件夹后，在项目的Calsses分类中手动添加已有项目，再运行。
