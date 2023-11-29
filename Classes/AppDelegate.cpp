@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "MenuScene.h"
-
+#include "AudioEngine.h"
+#include "sound&music.h"
 // #define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
@@ -88,6 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
+    bg_music_id = AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5f);
 
     return true;
 }

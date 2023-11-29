@@ -23,7 +23,7 @@ bool MenuScene::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+;
     /*****************************************背景图**************************************************/
     auto background_image = Sprite::create("/MenuScene/MainBG.PNG");
     if (background_image == nullptr)
@@ -50,8 +50,12 @@ bool MenuScene::init()
     {
         cloud1->setPosition(Vec2(origin.x - cloud1->getContentSize().width,
             origin.y + visibleSize.height * 0.85));
-        cloud1->setTag(1);
         cloud1->setOpacity(95);
+        //添加动画
+        auto cloud1_moveto_1 = MoveTo::create(20, Vec2(origin.x + visibleSize.width + cloud1->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        auto cloud1_moveto_2 = MoveTo::create(20, Vec2(origin.x - cloud1->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        auto cloud1_sequence = Sequence::create(cloud1_moveto_1, DelayTime::create(5), cloud1_moveto_2, DelayTime::create(5),nullptr);
+        cloud1->runAction(RepeatForever::create(cloud1_sequence));
         cloud->addChild(cloud1);
     }
     //小云
@@ -64,9 +68,13 @@ bool MenuScene::init()
     {
         cloud2->setPosition(Vec2(origin.x + visibleSize.width + cloud2->getContentSize().width,
             origin.y + visibleSize.height * 0.8));
-        cloud2->setTag(2);
         cloud2->setScale(2);
         cloud2->setOpacity(95);
+        //添加动画
+        auto cloud2_moveto_1 = MoveTo::create(20, Vec2(origin.x - cloud2->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        auto cloud2_moveto_2 = MoveTo::create(20, Vec2(origin.x + visibleSize.width + cloud2->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        auto cloud2_sequence = Sequence::create(cloud2_moveto_1, DelayTime::create(5), cloud2_moveto_2, DelayTime::create(5),nullptr);
+        cloud2->runAction(RepeatForever::create(cloud2_sequence));
         cloud->addChild(cloud2);
     }
 
@@ -79,11 +87,17 @@ bool MenuScene::init()
     else {
         monster->setPosition(Vec2(origin.x + visibleSize.width / 4,
             origin.y + visibleSize.height * 0.8));
-        monster->setName("Monster");
+        //添加动作
+        auto monster_moveby_down = MoveBy::create(1.0f, Vec2(0, -monster->getContentSize().height / 4));
+        auto monster_moveby_up = MoveBy::create(1.0f, Vec2(0, monster->getContentSize().height / 4));
+        auto monster_sequence = Sequence::createWithTwoActions(monster_moveby_down, monster_moveby_up);
+        monster->runAction(RepeatForever::create(monster_sequence));
         this->addChild(monster);
     }
     /****************************************************添加萝卜图形*****************************************************/
     auto carrot = Sprite::create();
+    carrot->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        origin.y + visibleSize.height / 4));
     //1,添加萝卜叶子
     auto carrot_leaf1 = Sprite::create("/MenuScene/Leaf1.PNG");
     if (carrot_leaf1 == nullptr)
@@ -92,8 +106,8 @@ bool MenuScene::init()
     }
     else
     {
-        carrot_leaf1->setPosition(Vec2(origin.x + visibleSize.width / 2 - carrot_leaf1->getContentSize().width / 2,
-            origin.y + visibleSize.height / 2 + carrot_leaf1->getContentSize().height * 1.2));
+        carrot_leaf1->setPosition(Vec2(origin.x - carrot_leaf1->getContentSize().width / 2,
+            origin.y + visibleSize.height / 4 + carrot_leaf1->getContentSize().height * 1.2));
         carrot->addChild(carrot_leaf1);
     }
 
@@ -104,8 +118,8 @@ bool MenuScene::init()
     }
     else
     {
-        carrot_leaf2->setPosition(Vec2(origin.x + visibleSize.width / 2 + carrot_leaf2->getContentSize().width / 2,
-            origin.y + visibleSize.height / 2 + carrot_leaf2->getContentSize().height * 1.3));
+        carrot_leaf2->setPosition(Vec2(origin.x + carrot_leaf2->getContentSize().width*0.6,
+            origin.y + visibleSize.height / 4 + carrot_leaf2->getContentSize().height * 1.3));
         carrot_leaf2->setName("Leaf2");
         carrot->addChild(carrot_leaf2);
     }
@@ -117,8 +131,8 @@ bool MenuScene::init()
     }
     else
     {
-        carrot_leaf3->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height / 2 + carrot_leaf3->getContentSize().height * 1.1));
+        carrot_leaf3->setPosition(Vec2(origin.x,
+            origin.y + visibleSize.height / 4 + carrot_leaf3->getContentSize().height * 1.1));
         carrot_leaf3->setName("Leaf3");
         carrot->addChild(carrot_leaf3);
     }
@@ -131,13 +145,25 @@ bool MenuScene::init()
     }
     else
     {
-        carrot_body->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height / 2 + carrot_body->getContentSize().height / 4));
+        carrot_body->setPosition(Vec2(origin.x,
+            origin.y + visibleSize.height / 4 + carrot_body->getContentSize().height / 4));
 
         carrot->addChild(carrot_body);
     }
 
     this->addChild(carrot);
+    //萝卜动画添加
+    carrot->setScale(0.1);
+    auto carrot_start_scale = ScaleTo::create(0.3, 1);
+    carrot->runAction(carrot_start_scale);
+
+    auto carrot_leaf2_sequence = Sequence::create(DelayTime::create(5), RotateBy::create(0.2, 30), RotateBy::create(0.2, -30), 
+        RotateBy::create(0.2, 30),RotateBy::create(0.2, -30), DelayTime::create(5), nullptr);
+    carrot_leaf2->runAction(RepeatForever::create(carrot_leaf2_sequence));
+
+    auto carrot_leaf3_sequence = Sequence::create(DelayTime::create(7), RotateBy::create(0.2, 30), RotateBy::create(0.2, -30),
+        RotateBy::create(0.2, 30), RotateBy::create(0.2, -30), DelayTime::create(3), nullptr);
+    carrot_leaf3->runAction(RepeatForever::create(carrot_leaf3_sequence));
     /*************************************************************添加保卫萝卜标题******************************************************************/
     auto title = Sprite::create("/MenuScene/MainTitle.PNG");
     if (title == nullptr) {
@@ -148,7 +174,6 @@ bool MenuScene::init()
             origin.y + visibleSize.height / 2 - title->getContentSize().height / 7));
         this->addChild(title);
     }
-
     /*****************************************************************菜单界面************************************************************************/
     auto menu = Menu::create();
     menu->setPosition(Vec2::ZERO);
@@ -218,48 +243,8 @@ bool MenuScene::init()
 
 
     this->addChild(menu);
-    /***********************************************************开启调度器********************************************************/
-    this->scheduleUpdate();
-
 
     return true;
-}
-
-void MenuScene::update(float dt) {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    /*****************************************************怪物的上下运动*******************************************/
-    Node* Monster = this->getChildByName("Monster");
-    static bool direction = 1;//向下运动
-    static float dx = 0;
-    if (direction == 1) {
-        Monster->setPosition(Vec2(Monster->getPosition().x, Monster->getPosition().y - 20 * dt));
-        dx += 20 * dt;
-        if (dx >= Monster->getContentSize().height / 4) {
-            direction = 0;
-            dx = 0;
-        }
-    }
-    else {
-        Monster->setPosition(Vec2(Monster->getPosition().x, Monster->getPosition().y + 20 * dt));
-        dx += 20 * dt;
-        if (dx >= Monster->getContentSize().height / 4) {
-            direction = 1;
-            dx = 0;
-        }
-    }
-
-    /**************************************************************云的运动*****************************************************************************/
-    Node* Cloud = this->getChildByName("Cloud");
-    Node* Cloud1 = Cloud->getChildByTag(1);
-    Node* Cloud2 = Cloud->getChildByTag(2);
-
-    Cloud1->setPosition(Vec2(Cloud1->getPosition().x + 50 * dt, Cloud1->getPosition().y));
-    Cloud2->setPosition(Vec2(Cloud2->getPosition().x - 50 * dt, Cloud2->getPosition().y));
-    if (Cloud1->getPosition().x >= visibleSize.width + Cloud1->getContentSize().width&& Cloud2->getPosition().x <= 0 - Cloud2->getContentSize().width) {
-        Cloud1->setPosition(Vec2(0 - Cloud1->getContentSize().width, Cloud1->getPosition().y));
-        Cloud2->setPosition(Vec2(visibleSize.width + Cloud2->getContentSize().width, Cloud2->getPosition().y));
-    }
 }
 
 void MenuScene::close_game(Ref* psender) {
@@ -271,12 +256,12 @@ void MenuScene::close_game(Ref* psender) {
 
 void  MenuScene::goto_options(Ref* pSender) {
     auto options_scene = OptionsScene::createScene();
-    Director::getInstance()->replaceScene(TransitionSlideInT::create(0.3, options_scene));//以从上向下滑动方式切换
+    Director::getInstance()->replaceScene(TransitionSlideInT::create(0.2, options_scene));//以从上向下滑动方式切换
 }
 
 void  MenuScene::goto_helper(Ref* pSender) {
     auto helper_scene = HelperScene::createScene();
-    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.3, helper_scene));
+    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.2, helper_scene));
 }
 
 void  MenuScene::goto_adventure(Ref* psender) {

@@ -9,8 +9,6 @@ public:
     static cocos2d::Scene* createScene();//¼Ì³Ð´´½¨³¡¾°
 
     virtual bool init();
-
-    virtual void update(float dt);
     
     void close_game(Ref* pSender);
 

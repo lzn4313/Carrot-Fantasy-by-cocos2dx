@@ -12,6 +12,39 @@ public:
 
     virtual void goto_home(Ref* psender);
 
+    virtual void goto_help(Ref* psender);
+
+    virtual void goto_monster(Ref* psender);
+
+    virtual void goto_tower(Ref* psender);
+
     CREATE_FUNC(HelperScene);
+};
+
+class HelpLayer : public cocos2d::Layer {
+public:
+    static cocos2d::Layer* createLayer();//继承创建场景
+
+    virtual bool init();
+
+    CREATE_FUNC(HelpLayer);
+};
+
+class MonsterLayer :public cocos2d::Layer {
+public:
+    static cocos2d::Layer* createLayer();//继承创建场景
+
+    virtual bool init();
+
+    CREATE_FUNC(MonsterLayer);
+};
+
+class TowerLayer :public cocos2d::Layer {
+public:
+    static cocos2d::Layer* createLayer();//继承创建场景
+
+    virtual bool init();
+
+    CREATE_FUNC(TowerLayer);
 };
 #endif // __Helper_SCENE_H__
