@@ -1,6 +1,8 @@
 #include "MenuScene.h"
 #include "OptionsScene.h"
 #include "HelperScene.h"
+#include"sound&music.h"
+#include"GameData.h"
 USING_NS_CC;
 /*菜单场景*/
 Scene* MenuScene::createScene()
@@ -228,6 +230,19 @@ bool MenuScene::init()
         boss_item->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height / 8));
         menu->addChild(boss_item);
+        if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {
+            auto boss_lock = Sprite::create("/MenuScene/lock.png");
+            if (boss_lock == nullptr) {
+                problemLoading("'lock.png'");
+            }
+            else {
+                boss_lock->setName("boss_lock");
+                boss_lock->setScale(1.4);
+                boss_lock->setPosition(Vec2(origin.x + visibleSize.width / 2 + boss_item->getContentSize().width * 0.41,
+                    origin.y + visibleSize.height / 8 - boss_item->getContentSize().height / 5));
+                this->addChild(boss_lock, 1);
+            }
+        }
     }
     //怪物巢
     auto nest_item = MenuItemImage::create("/MenuScene/Btn_MonsterNest.PNG", "/MenuScene/Btn_MonsterNestLight.PNG", CC_CALLBACK_1(MenuScene::goto_nest, this));
@@ -239,9 +254,20 @@ bool MenuScene::init()
         nest_item->setPosition(Vec2(origin.x + visibleSize.width / 2 + nest_item->getContentSize().width,
             origin.y + visibleSize.height / 8));
         menu->addChild(nest_item);
+        if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {
+            auto nest_lock = Sprite::create("/MenuScene/lock.png");
+            if (nest_lock == nullptr) {
+                problemLoading("'lock.png'");
+            }
+            else {
+                nest_lock->setName("nest_lock");
+                nest_lock->setScale(1.4);
+                nest_lock->setPosition(Vec2(origin.x + visibleSize.width / 2 + nest_item->getContentSize().width * 1.44,
+                    origin.y + visibleSize.height / 8 - nest_item->getContentSize().height / 5));
+                this->addChild(nest_lock, 1);
+            }
+        }
     }
-
-
     this->addChild(menu);
 
     return true;
@@ -249,29 +275,35 @@ bool MenuScene::init()
 
 void MenuScene::close_game(Ref* psender) {
 
+    AudioEngine::end();
     Director::getInstance()->end();
 
     exit(0);
 }
 
 void  MenuScene::goto_options(Ref* pSender) {
+    button_sound_effect();
     auto options_scene = OptionsScene::createScene();
     Director::getInstance()->replaceScene(TransitionSlideInT::create(0.2, options_scene));//以从上向下滑动方式切换
 }
 
 void  MenuScene::goto_helper(Ref* pSender) {
+    button_sound_effect();
     auto helper_scene = HelperScene::createScene();
     Director::getInstance()->replaceScene(TransitionSlideInB::create(0.2, helper_scene));
 }
 
 void  MenuScene::goto_adventure(Ref* psender) {
+    button_sound_effect();
     //待开发
 }
 
 void  MenuScene::goto_boss(Ref* psender) {
+    button_sound_effect();
     //待开发
 }
 
 void  MenuScene::goto_nest(Ref* psender) {
+    button_sound_effect();
     //待开发
 }

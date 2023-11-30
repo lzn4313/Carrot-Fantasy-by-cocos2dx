@@ -2,7 +2,8 @@
 #define __Helper_SCENE_H__
 
 #include "cocos2d.h"
-
+#include"ui/CocosGUI.h"
+using namespace cocos2d::ui;
 class HelperScene : public cocos2d::Scene
 {
 public:
@@ -12,11 +13,11 @@ public:
 
     virtual void goto_home(Ref* psender);
 
-    virtual void goto_help(Ref* psender);
+    void goto_help(Ref* psender,Widget::TouchEventType type);
 
-    virtual void goto_monster(Ref* psender);
+    void goto_monster(Ref* psender, Widget::TouchEventType type);
 
-    virtual void goto_tower(Ref* psender);
+    void goto_tower(Ref* psender, Widget::TouchEventType type);
 
     CREATE_FUNC(HelperScene);
 };

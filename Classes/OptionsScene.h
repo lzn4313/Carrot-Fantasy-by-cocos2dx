@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
-
+using namespace cocos2d::ui;
 class OptionsScene : public cocos2d::Scene
 {
 public:
@@ -13,13 +13,13 @@ public:
 
     CREATE_FUNC(OptionsScene);
 
-    virtual void goto_menu(Ref* psender);
+    void goto_menu(Ref* psender);
 
-    virtual void goto_set(Ref* psender);
+    void goto_set(Ref* psender, Widget::TouchEventType type);
 
-    virtual void goto_statistics(Ref* psender);
+    void goto_statistics(Ref* psender, Widget::TouchEventType type);
 
-    virtual void goto_person(Ref* psender);
+    void goto_person(Ref* psender, Widget::TouchEventType type);
 };
 
 class SetLayer :public cocos2d::Layer

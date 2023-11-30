@@ -1,7 +1,7 @@
 #include "AppDelegate.h"
 #include "MenuScene.h"
 #include "AudioEngine.h"
-#include "sound&music.h"
+#include "GameData.h"
 // #define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
@@ -81,15 +81,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
     {        
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
-
     register_all_packages();
+    FileUtils::getInstance()->setWritablePath("D:/Carrot Fantasy/Carrot_Fantasy/proj.win32/");
+
+    init_data();
+
+    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
+        AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5f);
+    }
 
     // create a scene. it's an autorelease object
     auto scene = MenuScene::createScene();
-
     // run
     director->runWithScene(scene);
-    bg_music_id = AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5f);
 
     return true;
 }

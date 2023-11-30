@@ -3,7 +3,9 @@
 #include "ui/CocosGUI.h"
 #include "AudioEngine.h"
 #include "sound&music.h"
+#include"GameData.h"
 USING_NS_CC;
+using namespace cocos2d::ui;
 /*错误处理*/
 static void problemLoading(const char* filename)
 {
@@ -28,15 +30,7 @@ bool OptionsScene::init()
     /**********************  选项层  ***********************/
     auto set_layer = SetLayer::createLayer();
     set_layer->setName("SetLayer");
-    this->addChild(set_layer);
-    /*****************  统计界面  ******************/
-    auto statistics_layer = StatisticsLayer::createLayer();
-    statistics_layer->setName("StatisticsLayer");
-    this->addChild(statistics_layer);
-    /****************  开发人员界面  ***************/
-    auto person_layer = PersonLayer::createLayer();
-    person_layer->setName("PersonLayer");
-    this->addChild(person_layer);
+    this->addChild(set_layer, 0);
     /********************************  主菜单  ************************************/
     auto menu_all = Menu::create();
     menu_all->setPosition(Vec2::ZERO);
@@ -46,7 +40,7 @@ bool OptionsScene::init()
         origin.y + visibleSize.height * 0.9));
     menu_all->addChild(home);
 
-    this->addChild(menu_all);
+    this->addChild(menu_all, 10);
     /*********************************  切换选项卡  ************************************/
     //set选项卡
     auto set_btn = ui::Button::create("/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45.PNG");
@@ -54,127 +48,176 @@ bool OptionsScene::init()
     set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
         origin.y + visibleSize.height * 0.925));
     set_btn->setContentSize(Size(set_btn->getContentSize().width * 2, set_btn->getContentSize().height));
-    set_btn->addTouchEventListener(CC_CALLBACK_1(OptionsScene::goto_set, this));
+    set_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_set, this));
     set_btn->setEnabled(false);
-    this->addChild(set_btn);
+    this->addChild(set_btn,10);
     //statistics选项卡
     auto statistics_btn = ui::Button::create("/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43.PNG");
     statistics_btn->setName("StatisticsBtn");
     statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
         origin.y + visibleSize.height * 0.925));
     statistics_btn->setScale(1.4);
-    statistics_btn->addTouchEventListener(CC_CALLBACK_1(OptionsScene::goto_statistics, this));
-    this->addChild(statistics_btn);
+    statistics_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_statistics, this));
+    this->addChild(statistics_btn,10);
     //person选项卡
     auto person_btn = ui::Button::create("/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48.PNG");
     person_btn->setName("PersonBtn");
     person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
         origin.y + visibleSize.height * 0.925));
     person_btn->setScale(1.4);
-    person_btn->addTouchEventListener(CC_CALLBACK_1(OptionsScene::goto_person, this));
-    this->addChild(person_btn);
-
+    person_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_person, this));
+    this->addChild(person_btn,10);
+ 
     return true;
 }
 void OptionsScene::goto_menu(Ref* psender)
 {
+    button_sound_effect();
     auto menu_scene = MenuScene::createScene();
     Director::getInstance()->replaceScene(TransitionSlideInB::create(0.3, menu_scene));
 
 }
-void OptionsScene::goto_set(Ref* psender)//设置仅选项层可见
+void OptionsScene::goto_set(Ref* psender, Widget::TouchEventType type)//设置仅选项层可见
 {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    switch (type) {
+        case Widget::TouchEventType::BEGAN:
+            break;
+        case Widget::TouchEventType::MOVED:
+            break;
+        case Widget::TouchEventType::CANCELED:
+            break;
+        case Widget::TouchEventType::ENDED:
+            button_sound_effect();
+            auto visibleSize = Director::getInstance()->getVisibleSize();
+            Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    Node* set = this->getChildByName("SetLayer");
-    Node* statistics = this->getChildByName("StatisticsLayer");
-    Node* person = this->getChildByName("PersonLayer");
+            if (this->getChildByName("StatisticsLayer") != nullptr) {
+                this->removeChildByName("StatisticsLayer");
+            }
+            if (this->getChildByName("PersonLayer") != nullptr) {
+                this->removeChildByName("PersonLayer");
+            }
+            auto set_layer = SetLayer::createLayer();
+            set_layer->setName("SetLayer");
+            this->addChild(set_layer, 0);
 
-    set->setVisible(true);
-    statistics->setVisible(false);
-    person->setVisible(false);
+            Node* set_btn = this->getChildByName("SetBtn");
+            static_cast<ui::Button*>(set_btn)->setEnabled(false);
+            set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
+                origin.y + visibleSize.height * 0.925));
+            set_btn->setScale(1);
 
-    Node* set_btn = this->getChildByName("SetBtn");
-    static_cast<ui::Button*>(set_btn)->setEnabled(false);
-    set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
-        origin.y + visibleSize.height * 0.925));
-    set_btn->setScale(1);
+            Node* statistics_btn = this->getChildByName("StatisticsBtn");
+            static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
+            statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                origin.y + visibleSize.height * 0.925));
+            statistics_btn->setScale(1.4);
 
-    Node* statistics_btn =this->getChildByName("StatisticsBtn");
-    static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
-    statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
-        origin.y + visibleSize.height * 0.925));
-    statistics_btn->setScale(1.4);
+            Node* person_btn = this->getChildByName("PersonBtn");
+            static_cast<ui::Button*>(person_btn)->setEnabled(true);
+            person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
+                origin.y + visibleSize.height * 0.925));
+            person_btn->setScale(1.4);
 
-    Node* person_btn = this->getChildByName("PersonBtn");
-    static_cast<ui::Button*>(person_btn)->setEnabled(true);
-    person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
-        origin.y + visibleSize.height * 0.925));
-    person_btn->setScale(1.4);
+            break;
+    }
 }
-void OptionsScene::goto_statistics(Ref* psender)//设置仅统计层可见
+void OptionsScene::goto_statistics(Ref* psender, Widget::TouchEventType type)//设置仅统计层可见
 {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    switch (type) {
+        case Widget::TouchEventType::BEGAN:
+            break;
+        case Widget::TouchEventType::MOVED:
+            break;
+        case Widget::TouchEventType::CANCELED:
+            break;
+        case Widget::TouchEventType::ENDED:
 
-    Node* set = this->getChildByName("SetLayer");
-    Node* statistics = this->getChildByName("StatisticsLayer");
-    Node* person = this->getChildByName("PersonLayer");
+            button_sound_effect();
+            auto visibleSize = Director::getInstance()->getVisibleSize();
+            Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    set->setVisible(false);
-    statistics->setVisible(true);
-    person->setVisible(false);
+            if (this->getChildByName("SetLayer") != nullptr) {
+                this->removeChildByName("SetLayer");
+            }
+            if (this->getChildByName("PersonLayer") != nullptr) {
+                this->removeChildByName("PersonLayer");
+            }
+            auto statistics_layer = StatisticsLayer::createLayer();
+            if (statistics_layer == nullptr) {
+                problemLoading("'statistics_layer'");
+            }
+            statistics_layer->setName("StatisticsLayer");
+            this->addChild(statistics_layer, 0);
 
-    Node* set_btn = this->getChildByName("SetBtn");
-    static_cast<ui::Button*>(set_btn)->setEnabled(true);
-    set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
-        origin.y + visibleSize.height * 0.93));
-    set_btn->setScale(1.4);
+            Node* set_btn = this->getChildByName("SetBtn");
+            static_cast<ui::Button*>(set_btn)->setEnabled(true);
+            set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
+                origin.y + visibleSize.height * 0.93));
+            set_btn->setScale(1.4);
 
-    Node* statistics_btn = this->getChildByName("StatisticsBtn");
-    static_cast<ui::Button*>(statistics_btn)->setEnabled(false);
-    statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
-        origin.y + visibleSize.height * 0.925));
-    statistics_btn->setScale(1);
+            Node* statistics_btn = this->getChildByName("StatisticsBtn");
+            static_cast<ui::Button*>(statistics_btn)->setEnabled(false);
+            statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                origin.y + visibleSize.height * 0.925));
+            statistics_btn->setScale(1);
 
-    Node* person_btn = this->getChildByName("PersonBtn");
-    static_cast<ui::Button*>(person_btn)->setEnabled(true);
-    person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
-        origin.y + visibleSize.height * 0.925));
-    person_btn->setScale(1.4);
+            Node* person_btn = this->getChildByName("PersonBtn");
+            static_cast<ui::Button*>(person_btn)->setEnabled(true);
+            person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
+                origin.y + visibleSize.height * 0.925));
+            person_btn->setScale(1.4);
+
+            break;
+    }
 }
-void OptionsScene::goto_person(Ref* psender)//设置仅人员层可见
+void OptionsScene::goto_person(Ref* psender, Widget::TouchEventType type)//设置仅人员层可见
 {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    switch (type) {
+        case Widget::TouchEventType::BEGAN:
+            break;
+        case Widget::TouchEventType::MOVED:
+            break;
+        case Widget::TouchEventType::CANCELED:
+            break;
+        case Widget::TouchEventType::ENDED:
 
-    Node* set = this->getChildByName("SetLayer");
-    Node* statistics = this->getChildByName("StatisticsLayer");
-    Node* person = this->getChildByName("PersonLayer");
+            button_sound_effect();
+            auto visibleSize = Director::getInstance()->getVisibleSize();
+            Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    set->setVisible(false);
-    statistics->setVisible(false);
-    person->setVisible(true);
+            if (this->getChildByName("SetLayer") != nullptr) {
+                this->removeChildByName("SetLayer");
+            }
+            if (this->getChildByName("StatisticsLayer") != nullptr) {
+                this->removeChildByName("StatisticsLayer");
+            }
+            auto person_layer = PersonLayer::createLayer();
+            person_layer->setName("PersonLayer");
+            this->addChild(person_layer, 0);
 
-    Node* set_btn = this->getChildByName("SetBtn");
-    static_cast<ui::Button*>(set_btn)->setEnabled(true);
-    set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
-        origin.y + visibleSize.height * 0.93));
-    set_btn->setScale(1.4);
 
-    Node* statistics_btn = this->getChildByName("StatisticsBtn");
-    static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
-    statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
-        origin.y + visibleSize.height * 0.925));
-    statistics_btn->setScale(1.4);
-    statistics_btn->setScale(1.4);
+            Node* set_btn = this->getChildByName("SetBtn");
+            static_cast<ui::Button*>(set_btn)->setEnabled(true);
+            set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
+                origin.y + visibleSize.height * 0.93));
+            set_btn->setScale(1.4);
 
-    Node* person_btn = this->getChildByName("PersonBtn");
-    static_cast<ui::Button*>(person_btn)->setEnabled(false);
-    person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
-        origin.y + visibleSize.height * 0.925));
-    person_btn->setScale(1);
+            Node* statistics_btn = this->getChildByName("StatisticsBtn");
+            static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
+            statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                origin.y + visibleSize.height * 0.925));
+            statistics_btn->setScale(1.4);
+            statistics_btn->setScale(1.4);
+
+            Node* person_btn = this->getChildByName("PersonBtn");
+            static_cast<ui::Button*>(person_btn)->setEnabled(false);
+            person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
+                origin.y + visibleSize.height * 0.925));
+            person_btn->setScale(1);
+
+            break;
+    }
 }
 /**************************   SetLayer类   ******************************/
 cocos2d::Layer* SetLayer::createLayer()
@@ -263,7 +306,7 @@ bool SetLayer::init()
     auto sound_off_sprite = Sprite::create("/OptionsScene/setting02-hd_11.PNG");
     auto sound_off = MenuItemSprite::create(sound_off_sprite, sound_off_sprite);
     MenuItemToggle* sound_toggle; 
-    if (sound_effect==1) {
+    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
         sound_toggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::close_sound, this), sound_on, sound_off, NULL);
     }
     else {
@@ -278,7 +321,7 @@ bool SetLayer::init()
     auto bgmusic_off_sprite = Sprite::create("/OptionsScene/setting02-hd_21.PNG");
     auto bgmusic_off = MenuItemSprite::create(bgmusic_off_sprite, bgmusic_off_sprite);
     MenuItemToggle* bgmusic_toggle;
-    if (AudioEngine::getState(bg_music_id) == AudioEngine::AudioState(1)) {
+    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
         bgmusic_toggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::close_bgmusic, this), bgmusic_on, bgmusic_off, NULL);
     }
     else {
@@ -301,26 +344,35 @@ bool SetLayer::init()
 }
 void SetLayer::close_sound(Ref* psender)
 {
-    if (sound_effect == 1) {
-        sound_effect = 0;
+    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 0) {
+        UserDefault::getInstance()->setIntegerForKey("sound_effect", 1);
     }
-    else {
-        sound_effect = 1;
+    else if(UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1){
+        UserDefault::getInstance()->setIntegerForKey("sound_effect", 0);
     }
 }
 void SetLayer::close_bgmusic(Ref* psender)
 {
-    auto state = AudioEngine::getState(bg_music_id);
-    if (AudioEngine::getState(bg_music_id) == AudioEngine::AudioState(1)) {
-        AudioEngine::pause(bg_music_id);
+    //auto state = AudioEngine::getState(0);
+    /*if (AudioEngine::getState(0) == AudioEngine::AudioState(1)) {
+        AudioEngine::pause(0);
     }
-    else if (AudioEngine::getState(bg_music_id) == AudioEngine::AudioState(2)) {
-        AudioEngine::resume(bg_music_id);
+    else if (AudioEngine::getState(0) == AudioEngine::AudioState(2)) {
+        AudioEngine::resume(0);
+    }*/
+    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 0) {
+        UserDefault::getInstance()->setIntegerForKey("bg_music", 1);
+        AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5);
+    }
+    else if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
+        UserDefault::getInstance()->setIntegerForKey("bg_music", 0);
+        AudioEngine::stopAll();
     }
 }
 void SetLayer::reset_game(Ref* psender)
 {
-    //待实现
+    button_sound_effect();
+    reset_data();
 }
 /*************************   StatisticsLayer类  ****************************/
 cocos2d::Layer* StatisticsLayer::createLayer()
@@ -335,7 +387,6 @@ bool StatisticsLayer::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
     //背景图
     auto statics = Sprite::create("/OptionsScene/SettingBG2.PNG");
     if (statics == nullptr)
@@ -414,9 +465,6 @@ bool StatisticsLayer::init()
         this->addChild(bg7);
     }
 
-    this->setVisible(false);
-
-
     return true;
 }
 /*************************  PersonLayer类  ********************************/
@@ -447,6 +495,5 @@ bool PersonLayer::init()
         this->addChild(person);
     }
 
-    this->setVisible(false);
     return true;
 }
