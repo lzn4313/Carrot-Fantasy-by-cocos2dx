@@ -1,6 +1,7 @@
 #include "MenuScene.h"
 #include "OptionsScene.h"
 #include "HelperScene.h"
+#include "GameSelectionScene.h"
 #include"sound&music.h"
 #include"GameData.h"
 USING_NS_CC;
@@ -240,7 +241,7 @@ bool MenuScene::init()
                 boss_lock->setScale(1.4);
                 boss_lock->setPosition(Vec2(origin.x + visibleSize.width / 2 + boss_item->getContentSize().width * 0.41,
                     origin.y + visibleSize.height / 8 - boss_item->getContentSize().height / 5));
-                this->addChild(boss_lock, 1);
+                this->addChild(boss_lock,1);
             }
         }
     }
@@ -264,7 +265,7 @@ bool MenuScene::init()
                 nest_lock->setScale(1.4);
                 nest_lock->setPosition(Vec2(origin.x + visibleSize.width / 2 + nest_item->getContentSize().width * 1.44,
                     origin.y + visibleSize.height / 8 - nest_item->getContentSize().height / 5));
-                this->addChild(nest_lock, 1);
+                this->addChild(nest_lock,1);
             }
         }
     }
@@ -295,15 +296,94 @@ void  MenuScene::goto_helper(Ref* pSender) {
 
 void  MenuScene::goto_adventure(Ref* psender) {
     button_sound_effect();
-    //待开发
+    auto gameselection_scene = GameSelectionScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFlipAngular::create(0.2, gameselection_scene));
 }
 
 void  MenuScene::goto_boss(Ref* psender) {
     button_sound_effect();
-    //待开发
+    if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {
+
+        auto visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        /*****************************  纯色层  ******************************************/
+        auto black_layer = LayerColor::create(Color4B::BLACK);
+        black_layer->setOpacity(85);
+
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+            return true;
+        };
+        listener->setSwallowTouches(true);
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+        /********************************  背景  *****************************************/
+        auto boss_lock_image = Sprite::create("/MenuScene/boss_lock_image.png");
+        boss_lock_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height / 2));
+        boss_lock_image->setScale(1.4);
+        black_layer->addChild(boss_lock_image);
+        /********************************  按钮  ****************************************/
+        auto menu = Menu::create();
+        menu->setPosition(Vec2::ZERO);
+
+        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");
+        lock_btn->setPosition(Vec2(origin.x + visibleSize.width *0.55,
+            origin.y + visibleSize.height * 0.4));
+        lock_btn->setCallback([this,black_layer](Ref* psender) {
+            button_sound_effect();
+            this->removeChild(black_layer);
+        });
+        lock_btn->setScale(1.4);
+        menu->addChild(lock_btn);
+        black_layer->addChild(menu);
+
+        this->addChild(black_layer,2);
+    }
+    else {
+        ;//boss_pattern待开发
+    }
 }
 
 void  MenuScene::goto_nest(Ref* psender) {
     button_sound_effect();
-    //待开发
+    if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {
+
+        auto visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+        /*****************************  纯色层  ******************************************/
+        auto black_layer = LayerColor::create(Color4B::BLACK);
+        black_layer->setOpacity(85);
+
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+            return true;
+        };
+        listener->setSwallowTouches(true);
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+        /********************************  背景  *****************************************/
+        auto boss_lock_image = Sprite::create("/MenuScene/nest_lock_image.png");
+        boss_lock_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height / 2));
+        boss_lock_image->setScale(1.4);
+        black_layer->addChild(boss_lock_image);
+        /********************************  按钮  ****************************************/
+        auto menu = Menu::create();
+        menu->setPosition(Vec2::ZERO);
+
+        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");
+        lock_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.55,
+            origin.y + visibleSize.height * 0.4));
+        lock_btn->setCallback([this, black_layer](Ref* psender) {
+            button_sound_effect();
+            this->removeChild(black_layer);
+            });
+        lock_btn->setScale(1.4);
+        menu->addChild(lock_btn);
+        black_layer->addChild(menu);
+
+        this->addChild(black_layer, 2);
+    }
+    else {
+        ;//nest_pattern待开发
+    }
 }

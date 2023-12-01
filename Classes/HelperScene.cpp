@@ -11,7 +11,7 @@ static void problemLoading(const char* filename)
 	printf("Error while loading: %s\n", filename);
 }
 /*¹¤¾ßº¯Êý*/
-int find(float page[], int N, float x) {
+static int find(float page[], int N, float x) {
 	for (int i = 0; i < N; i++) {
 		if (x >= page[i]) {
 			return i - 1;
@@ -264,7 +264,7 @@ bool HelpLayer::init()
 	listener->onTouchBegan = [](Touch* touch, Event* event) {
 		return true;
 	};
-	listener->onTouchMoved = [this,toplayer](Touch* touch, Event* event) {
+	listener->onTouchMoved = [toplayer](Touch* touch, Event* event) {
 		float distance = touch->getLocation().x - touch->getPreviousLocation().x;
 		toplayer->setPositionX(toplayer->getPositionX() + distance);
 	};
@@ -504,7 +504,7 @@ bool TowerLayer::init()
 	listener->onTouchBegan = [](Touch* touch, Event* event) {
 		return true;
 	};
-	listener->onTouchMoved = [this, toplayer](Touch* touch, Event* event) {
+	listener->onTouchMoved = [toplayer](Touch* touch, Event* event) {
 		float distance = touch->getLocation().x - touch->getPreviousLocation().x;
 		toplayer->setPositionX(toplayer->getPositionX() + distance);
 	};

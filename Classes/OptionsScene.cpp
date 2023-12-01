@@ -4,6 +4,7 @@
 #include "AudioEngine.h"
 #include "sound&music.h"
 #include"GameData.h"
+#include<string>
 USING_NS_CC;
 using namespace cocos2d::ui;
 /*错误处理*/
@@ -40,7 +41,7 @@ bool OptionsScene::init()
         origin.y + visibleSize.height * 0.9));
     menu_all->addChild(home);
 
-    this->addChild(menu_all, 10);
+    this->addChild(menu_all, 1);
     /*********************************  切换选项卡  ************************************/
     //set选项卡
     auto set_btn = ui::Button::create("/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45.PNG");
@@ -50,7 +51,7 @@ bool OptionsScene::init()
     set_btn->setContentSize(Size(set_btn->getContentSize().width * 2, set_btn->getContentSize().height));
     set_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_set, this));
     set_btn->setEnabled(false);
-    this->addChild(set_btn,10);
+    this->addChild(set_btn,1);
     //statistics选项卡
     auto statistics_btn = ui::Button::create("/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43.PNG");
     statistics_btn->setName("StatisticsBtn");
@@ -58,7 +59,7 @@ bool OptionsScene::init()
         origin.y + visibleSize.height * 0.925));
     statistics_btn->setScale(1.4);
     statistics_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_statistics, this));
-    this->addChild(statistics_btn,10);
+    this->addChild(statistics_btn,1);
     //person选项卡
     auto person_btn = ui::Button::create("/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48.PNG");
     person_btn->setName("PersonBtn");
@@ -66,7 +67,7 @@ bool OptionsScene::init()
         origin.y + visibleSize.height * 0.925));
     person_btn->setScale(1.4);
     person_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_person, this));
-    this->addChild(person_btn,10);
+    this->addChild(person_btn,1);
  
     return true;
 }
@@ -344,6 +345,7 @@ bool SetLayer::init()
 }
 void SetLayer::close_sound(Ref* psender)
 {
+    button_sound_effect();
     if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 0) {
         UserDefault::getInstance()->setIntegerForKey("sound_effect", 1);
     }
@@ -353,13 +355,7 @@ void SetLayer::close_sound(Ref* psender)
 }
 void SetLayer::close_bgmusic(Ref* psender)
 {
-    //auto state = AudioEngine::getState(0);
-    /*if (AudioEngine::getState(0) == AudioEngine::AudioState(1)) {
-        AudioEngine::pause(0);
-    }
-    else if (AudioEngine::getState(0) == AudioEngine::AudioState(2)) {
-        AudioEngine::resume(0);
-    }*/
+    button_sound_effect();
     if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 0) {
         UserDefault::getInstance()->setIntegerForKey("bg_music", 1);
         AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5);
@@ -372,7 +368,53 @@ void SetLayer::close_bgmusic(Ref* psender)
 void SetLayer::reset_game(Ref* psender)
 {
     button_sound_effect();
-    reset_data();
+
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    /*****************************  纯色层  ******************************************/
+    auto black_layer = LayerColor::create(Color4B::BLACK);
+    black_layer->setOpacity(85);
+
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+        return true;
+    };
+    listener->setSwallowTouches(true);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+    /********************************  背景  *****************************************/
+    auto reset_image = Sprite::create("/OptionsScene/reset_image.png");
+    reset_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        origin.y + visibleSize.height / 2));
+    reset_image->setScale(1.4);
+    black_layer->addChild(reset_image);
+    /********************************  按钮  ****************************************/
+    auto menu = Menu::create();
+    menu->setPosition(Vec2::ZERO);
+
+    auto reset_yes_btn = MenuItemImage::create("/OptionsScene/reset_yes_normal.png", "/OptionsScene/reset_yes_selected.png");
+    reset_yes_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.35,
+        origin.y + visibleSize.height * 0.5));
+    reset_yes_btn->setCallback([this, black_layer](Ref* psender) {
+        reset_data();
+        button_sound_effect();
+        this->getParent()->removeChild(black_layer);
+        });
+    reset_yes_btn->setScale(1.4);
+    menu->addChild(reset_yes_btn);
+
+    auto reset_no_btn = MenuItemImage::create("/OptionsScene/reset_no_normal.png", "/OptionsScene/reset_no_selected.png");
+    reset_no_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.65,
+        origin.y + visibleSize.height * 0.5));
+    reset_no_btn->setCallback([this, black_layer](Ref* psender) {
+        button_sound_effect();
+        this->getParent()->removeChild(black_layer);
+        });
+    reset_no_btn->setScale(1.4);
+    menu->addChild(reset_no_btn);
+    black_layer->addChild(menu);
+
+    this->getParent()->addChild(black_layer, 2);
+
 }
 /*************************   StatisticsLayer类  ****************************/
 cocos2d::Layer* StatisticsLayer::createLayer()
@@ -388,83 +430,152 @@ bool StatisticsLayer::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     //背景图
-    auto statics = Sprite::create("/OptionsScene/SettingBG2.PNG");
-    if (statics == nullptr)
+    auto statistics = Sprite::create("/OptionsScene/SettingBG2.PNG");
+    if (statistics == nullptr)
     {
         problemLoading("'SettingBG2.PNG'");
     }
     else
     {
-        statics->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        statistics->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height / 2));
 
-        this->addChild(statics);
-    }
-    //其他背景
-    auto bg1 = Sprite::create("/OptionsScene/setting02-hd_22.PNG");
-    if (bg1 == nullptr) {
-        problemLoading("'setting02-hd_22.PNG'");
-    }
-    else {
-        bg1->setPosition(Vec2(origin.x + visibleSize.width * 0.5,
-            origin.y + visibleSize.height * 0.68));
-        this->addChild(bg1);
-    }
-    auto bg2 = Sprite::create("/OptionsScene/setting02-hd_27.PNG");
-    if (bg2 == nullptr) {
-        problemLoading("'setting02-hd_27.PNG'");
-    }
-    else {
-        bg2->setPosition(Vec2(origin.x + visibleSize.width * 0.5,
-            origin.y + visibleSize.height * 0.58));
-        this->addChild(bg2);
-    }
-    auto bg3 = Sprite::create("/OptionsScene/setting02-hd_31.PNG");
-    if (bg3 == nullptr) {
-        problemLoading("'setting02-hd_31.PNG'");
-    }
-    else {
-        bg3->setPosition(Vec2(origin.x + visibleSize.width * 0.51,
-            origin.y + visibleSize.height * 0.49));
-        this->addChild(bg3);
-    }
-    auto bg4 = Sprite::create("/OptionsScene/setting02-hd_35.PNG");
-    if (bg4 == nullptr) {
-        problemLoading("'setting02-hd_35.PNG'");
-    }
-    else {
-        bg4->setPosition(Vec2(origin.x + visibleSize.width * 0.485,
-            origin.y + visibleSize.height * 0.41));
-        this->addChild(bg4);
-    }
-    auto bg5 = Sprite::create("/OptionsScene/setting02-hd_38.PNG");
-    if (bg5 == nullptr) {
-        problemLoading("'setting02-hd_38.PNG'");
-    }
-    else {
-        bg5->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
-            origin.y + visibleSize.height * 0.32));
-        this->addChild(bg5);
-    }
-    auto bg6 = Sprite::create("/OptionsScene/setting02-hd_42.PNG");
-    if (bg6 == nullptr) {
-        problemLoading("'setting02-hd_42.PNG'");
-    }
-    else {
-        bg6->setPosition(Vec2(origin.x + visibleSize.width * 0.534,
-            origin.y + visibleSize.height * 0.23));
-        this->addChild(bg6);
-    }
-    auto bg7 = Sprite::create("/OptionsScene/setting02-hd_44.PNG");
-    if (bg7 == nullptr) {
-        problemLoading("'setting02-hd_44.PNG'");
-    }
-    else {
-        bg7->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
-            origin.y + visibleSize.height * 0.14));
-        this->addChild(bg7);
-    }
+        this->addChild(statistics);
+        //其他背景
+        auto bg1 = Sprite::create("/OptionsScene/setting02-hd_22.PNG");
+        if (bg1 == nullptr) {
+            problemLoading("'setting02-hd_22.PNG'");
+        }
+        else {
+            bg1->setPosition(Vec2(origin.x + visibleSize.width * 0.5,
+                origin.y + visibleSize.height * 0.68));
+            this->addChild(bg1);
 
+            auto statistics_txt_1 = Sprite::create("/OptionsScene/setting02-hd_23.PNG");
+            statistics_txt_1->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
+                origin.y + visibleSize.height * 0.68));
+            this->addChild(statistics_txt_1);
+            string adventure_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("adventure_statistics"));
+            auto adventure_statistics_label = Label::createWithTTF(adventure_statistics, "fonts/Marker Felt.ttf", 28);
+            adventure_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            adventure_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            adventure_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.77,
+                origin.y + visibleSize.height * 0.68));
+            this->addChild(adventure_statistics_label);
+        }
+        auto bg2 = Sprite::create("/OptionsScene/setting02-hd_27.PNG");
+        if (bg2 == nullptr) {
+            problemLoading("'setting02-hd_27.PNG'");
+        }
+        else {
+            bg2->setPosition(Vec2(origin.x + visibleSize.width * 0.5,
+                origin.y + visibleSize.height * 0.58));
+            this->addChild(bg2);
+
+            auto statistics_txt_2 = Sprite::create("/OptionsScene/setting02-hd_23.PNG");
+            statistics_txt_2->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
+                origin.y + visibleSize.height * 0.58));
+            this->addChild(statistics_txt_2);
+
+            string hide_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("hide_statistics"));
+            auto hide_statistics_label = Label::createWithTTF(hide_statistics, "fonts/Marker Felt.ttf", 28);
+            hide_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            hide_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            hide_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.77,
+                origin.y + visibleSize.height * 0.58));
+            this->addChild(hide_statistics_label);
+        }
+        auto bg3 = Sprite::create("/OptionsScene/setting02-hd_31.PNG");
+        if (bg3 == nullptr) {
+            problemLoading("'setting02-hd_31.PNG'");
+        }
+        else {
+            bg3->setPosition(Vec2(origin.x + visibleSize.width * 0.51,
+                origin.y + visibleSize.height * 0.49));
+            this->addChild(bg3);
+
+            auto statistics_txt_3 = Sprite::create("/OptionsScene/setting02-hd_23.PNG");
+            statistics_txt_3->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
+                origin.y + visibleSize.height * 0.49));
+            this->addChild(statistics_txt_3);
+
+            string bosspattern_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("bosspattern_statistics"));
+            auto bosspattern_statistics_label = Label::createWithTTF(bosspattern_statistics, "fonts/Marker Felt.ttf", 28);
+            bosspattern_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            bosspattern_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            bosspattern_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.77,
+                origin.y + visibleSize.height * 0.49));
+            this->addChild(bosspattern_statistics_label);
+        }
+        auto bg4 = Sprite::create("/OptionsScene/setting02-hd_35.PNG");
+        if (bg4 == nullptr) {
+            problemLoading("'setting02-hd_35.PNG'");
+        }
+        else {
+            bg4->setPosition(Vec2(origin.x + visibleSize.width * 0.485,
+                origin.y + visibleSize.height * 0.41));
+            this->addChild(bg4);
+
+            string money_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("money_statistics"));
+            auto money_statistics_label = Label::createWithTTF(money_statistics, "fonts/Marker Felt.ttf", 28);
+            money_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            money_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            money_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.85,
+                origin.y + visibleSize.height * 0.41));
+            this->addChild(money_statistics_label);
+        }
+        auto bg5 = Sprite::create("/OptionsScene/setting02-hd_38.PNG");
+        if (bg5 == nullptr) {
+            problemLoading("'setting02-hd_38.PNG'");
+        }
+        else {
+            bg5->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
+                origin.y + visibleSize.height * 0.32));
+            this->addChild(bg5);
+
+            string monster_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("monster_statistics"));
+            auto monster_statistics_label = Label::createWithTTF(monster_statistics, "fonts/Marker Felt.ttf", 28);
+            monster_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            monster_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            monster_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.85,
+                origin.y + visibleSize.height * 0.32));
+            this->addChild(monster_statistics_label);
+        }
+        auto bg6 = Sprite::create("/OptionsScene/setting02-hd_42.PNG");
+        if (bg6 == nullptr) {
+            problemLoading("'setting02-hd_42.PNG'");
+        }
+        else {
+            bg6->setPosition(Vec2(origin.x + visibleSize.width * 0.534,
+                origin.y + visibleSize.height * 0.23));
+            this->addChild(bg6);
+
+            string boss_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("boss_statistics"));
+            auto boss_statistics_label = Label::createWithTTF(boss_statistics, "fonts/Marker Felt.ttf", 28);
+            boss_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            boss_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            boss_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.85,
+                origin.y + visibleSize.height * 0.23));
+            this->addChild(boss_statistics_label);
+        }
+        auto bg7 = Sprite::create("/OptionsScene/setting02-hd_44.PNG");
+        if (bg7 == nullptr) {
+            problemLoading("'setting02-hd_44.PNG'");
+        }
+        else {
+            bg7->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
+                origin.y + visibleSize.height * 0.14));
+            this->addChild(bg7);
+
+            string damage_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("damage_statistics"));
+            auto damage_statistics_label = Label::createWithTTF(damage_statistics, "fonts/Marker Felt.ttf", 28);
+            damage_statistics_label->setAlignment(TextHAlignment::RIGHT);
+            damage_statistics_label->setAnchorPoint(Vec2(1, 0.5));
+            damage_statistics_label->setPosition(Vec2(origin.x + visibleSize.width * 0.85,
+                origin.y + visibleSize.height * 0.14));
+            this->addChild(damage_statistics_label);
+        }
+    }
     return true;
 }
 /*************************  PersonLayer类  ********************************/
