@@ -17,6 +17,7 @@ Scene* OptionsScene::createScene()
 {
     return OptionsScene::create();
 }
+//³õÊ¼»¯
 bool OptionsScene::init()
 {
     /*³õÊ¼»¯³¡¾°*/
@@ -24,18 +25,18 @@ bool OptionsScene::init()
     {
         return false;
     }
-
+    //»ñÈ¡ÆÁÄ»´óÐ¡
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
     /**********************  Ñ¡Ïî²ã  ***********************/
+    //ÓÉÓÚ¸ÃSceneµÄ³õÊ¼½çÃæ¼´ÎªÑ¡Ïî²ã£¬ËùÒÔ´´½¨Ñ¡Ïî²ã²¢äÖÈ¾
     auto set_layer = SetLayer::createLayer();
     set_layer->setName("SetLayer");
     this->addChild(set_layer, 0);
-    /********************************  Ö÷²Ëµ¥  ************************************/
+    /********************************  ²Ëµ¥  ************************************/
     auto menu_all = Menu::create();
     menu_all->setPosition(Vec2::ZERO);
-
+    //·µ»ØÖ÷²Ëµ¥µÄ°´Å¥£¨ÒÔMenuItemImageÐÎÊ½ÊµÏÖ£©
     auto home = MenuItemImage::create("/OptionsScene/Btn_Return.PNG", "/OptionsScene/Btn_ReturnLight.PNG", CC_CALLBACK_1(OptionsScene::goto_menu, this));
     home->setPosition(Vec2(origin.x + visibleSize.width * 0.1,
         origin.y + visibleSize.height * 0.9));
@@ -43,43 +44,52 @@ bool OptionsScene::init()
 
     this->addChild(menu_all, 1);
     /*********************************  ÇÐ»»Ñ¡Ïî¿¨  ************************************/
-    //setÑ¡Ïî¿¨
+    //setÑ¡ÏîÒ³°´Å¥
     auto set_btn = ui::Button::create("/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45_normal.PNG", "/OptionsScene/setting02-hd_45.PNG");
     set_btn->setName("SetBtn");
     set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
         origin.y + visibleSize.height * 0.925));
     set_btn->setContentSize(Size(set_btn->getContentSize().width * 2, set_btn->getContentSize().height));
-    set_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_set, this));
-    set_btn->setEnabled(false);
+    set_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_set, this));//Ìí¼Ó°´Å¥»Øµ÷
+    set_btn->setEnabled(false);//µ±Ç°Î»ÓÚÑ¡Ïî¿¨Ò³£¬ËùÒÔÑ¡Ïî¿¨Ò³µÄ°´Å¥Îª²»¿ÉÓÃ
     this->addChild(set_btn,1);
-    //statisticsÑ¡Ïî¿¨
+    //statisticsÑ¡ÏîÒ³°´Å¥
     auto statistics_btn = ui::Button::create("/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43_normal.PNG", "/OptionsScene/setting02-hd_43.PNG");
+    if (statistics_btn == nullptr) {
+        problemLoading("setting02-hd_43_normal.PNG||setting02-hd_43.PNG");
+    }
     statistics_btn->setName("StatisticsBtn");
     statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
         origin.y + visibleSize.height * 0.925));
     statistics_btn->setScale(1.4);
-    statistics_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_statistics, this));
+    statistics_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_statistics, this));//Ìí¼Ó°´Å¥»Øµ÷
     this->addChild(statistics_btn,1);
     //personÑ¡Ïî¿¨
     auto person_btn = ui::Button::create("/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48_normal.PNG", "/OptionsScene/setting02-hd_48.PNG");
+    if (person_btn == nullptr) {
+        problemLoading("setting02-hd_48_normal.PNG||setting02-hd_48.PNG");
+    }
     person_btn->setName("PersonBtn");
     person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
         origin.y + visibleSize.height * 0.925));
     person_btn->setScale(1.4);
-    person_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_person, this));
+    person_btn->addTouchEventListener(CC_CALLBACK_2(OptionsScene::goto_person, this));//Ìí¼Ó°´Å¥»Øµ÷
     this->addChild(person_btn,1);
  
     return true;
 }
+//È¥Ö÷²Ëµ¥
 void OptionsScene::goto_menu(Ref* psender)
 {
-    button_sound_effect();
-    auto menu_scene = MenuScene::createScene();
-    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.3, menu_scene));
+    button_sound_effect();//²¥·ÅÒôÐ§
+    auto menu_scene = MenuScene::createScene();//´´½¨²Ëµ¥³¡¾°
+    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.3, menu_scene));//ÒÔ´ÓÏÂÏòÉÏ»¬¶¯ÐÎÊ½ÇÐ»»
 
 }
-void OptionsScene::goto_set(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½öÑ¡Ïî²ã¿É¼û
+//È¥Ñ¡ÏîÒ³
+void OptionsScene::goto_set(Ref* psender, Widget::TouchEventType type)
 {
+    //Button°´Å¥µÄ»Øµ÷º¯Êý
     switch (type) {
         case Widget::TouchEventType::BEGAN:
             break;
@@ -87,33 +97,39 @@ void OptionsScene::goto_set(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½öÑ¡
             break;
         case Widget::TouchEventType::CANCELED:
             break;
-        case Widget::TouchEventType::ENDED:
-            button_sound_effect();
+        case Widget::TouchEventType::ENDED://µ±ÇÒ½öµ±¼ì²âµ½´¥ÃþÌ§ÆðÊ±Íê³ÉÒÔÏÂ²Ù×÷
+            button_sound_effect();//²¥·ÅÒôÐ§
+            //»ñÈ¡ÆÁÄ»´óÐ¡
             auto visibleSize = Director::getInstance()->getVisibleSize();
             Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+            //°ÑÇÐ»»Ç°µÄÑ¡ÏîÒ³¶ÔÓ¦Layer´ÓSceneÖÐÉ¾È¥
             if (this->getChildByName("StatisticsLayer") != nullptr) {
                 this->removeChildByName("StatisticsLayer");
             }
             if (this->getChildByName("PersonLayer") != nullptr) {
                 this->removeChildByName("PersonLayer");
             }
+            //´´½¨setÑ¡ÏîÒ³¶ÔÓ¦µÄLayer²¢Ìí¼ÓäÖÈ¾
             auto set_layer = SetLayer::createLayer();
             set_layer->setName("SetLayer");
             this->addChild(set_layer, 0);
 
+            //ÐÞ¸ÄÇÐ»»Ñ¡ÏîÒ³µÄ°´Å¥Îª²»¿ÉÓÃ
             Node* set_btn = this->getChildByName("SetBtn");
             static_cast<ui::Button*>(set_btn)->setEnabled(false);
             set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
                 origin.y + visibleSize.height * 0.925));
             set_btn->setScale(1);
 
+            //ÐÞ¸ÄÇÐ»»Í³¼ÆÒ³µÄ°´Å¥Îª¿ÉÓÃ
             Node* statistics_btn = this->getChildByName("StatisticsBtn");
             static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
             statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
                 origin.y + visibleSize.height * 0.925));
             statistics_btn->setScale(1.4);
 
+
+            //ÐÞ¸ÄÇÐ»»ÈËÔ±Ò³µÄ°´Å¥Îª¿ÉÓÃ
             Node* person_btn = this->getChildByName("PersonBtn");
             static_cast<ui::Button*>(person_btn)->setEnabled(true);
             person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
@@ -123,8 +139,10 @@ void OptionsScene::goto_set(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½öÑ¡
             break;
     }
 }
-void OptionsScene::goto_statistics(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½öÍ³¼Æ²ã¿É¼û
+//È¥Í³¼ÆÒ³
+void OptionsScene::goto_statistics(Ref* psender, Widget::TouchEventType type)
 {
+    //Button°´Å¥µÄ»Øµ÷º¯Êý
     switch (type) {
         case Widget::TouchEventType::BEGAN:
             break;
@@ -132,37 +150,36 @@ void OptionsScene::goto_statistics(Ref* psender, Widget::TouchEventType type)//É
             break;
         case Widget::TouchEventType::CANCELED:
             break;
-        case Widget::TouchEventType::ENDED:
-
-            button_sound_effect();
+        case Widget::TouchEventType::ENDED://µ±ÇÒ½öµ±¼ì²âµ½´¥ÃþÌ§ÆðÊ±Íê³ÉÒÔÏÂ²Ù×÷
+            button_sound_effect();//²¥·ÅÒôÐ§
+            //»ñÈ¡ÆÁÄ»´óÐ¡
             auto visibleSize = Director::getInstance()->getVisibleSize();
             Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+            //°ÑÇÐ»»Ç°µÄÑ¡ÏîÒ³¶ÔÓ¦Layer´ÓSceneÖÐÉ¾È¥
             if (this->getChildByName("SetLayer") != nullptr) {
                 this->removeChildByName("SetLayer");
             }
             if (this->getChildByName("PersonLayer") != nullptr) {
                 this->removeChildByName("PersonLayer");
             }
+            //´´½¨Í³¼ÆÒ³¶ÔÓ¦Layer²¢Ìí¼Ó½øSceneÖÐ
             auto statistics_layer = StatisticsLayer::createLayer();
-            if (statistics_layer == nullptr) {
-                problemLoading("'statistics_layer'");
-            }
             statistics_layer->setName("StatisticsLayer");
             this->addChild(statistics_layer, 0);
 
+            //ÉèÖÃset°´Å¥Îª¿É¿ÉÓÃ
             Node* set_btn = this->getChildByName("SetBtn");
             static_cast<ui::Button*>(set_btn)->setEnabled(true);
             set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
                 origin.y + visibleSize.height * 0.93));
             set_btn->setScale(1.4);
-
+            //ÉèÖÃstatistics°´Å¥Îª²»¿ÉÓÃ
             Node* statistics_btn = this->getChildByName("StatisticsBtn");
             static_cast<ui::Button*>(statistics_btn)->setEnabled(false);
             statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
                 origin.y + visibleSize.height * 0.925));
             statistics_btn->setScale(1);
-
+            //ÉèÖÃperson°´Å¥Îª¿ÉÓÃ
             Node* person_btn = this->getChildByName("PersonBtn");
             static_cast<ui::Button*>(person_btn)->setEnabled(true);
             person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
@@ -172,8 +189,10 @@ void OptionsScene::goto_statistics(Ref* psender, Widget::TouchEventType type)//É
             break;
     }
 }
-void OptionsScene::goto_person(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½öÈËÔ±²ã¿É¼û
+//È¥ÈËÔ±Ò³
+void OptionsScene::goto_person(Ref* psender, Widget::TouchEventType type)
 {
+    //Button°´Å¥µÄ»Øµ÷º¯Êý
     switch (type) {
         case Widget::TouchEventType::BEGAN:
             break;
@@ -181,36 +200,37 @@ void OptionsScene::goto_person(Ref* psender, Widget::TouchEventType type)//ÉèÖÃ½
             break;
         case Widget::TouchEventType::CANCELED:
             break;
-        case Widget::TouchEventType::ENDED:
-
-            button_sound_effect();
+        case Widget::TouchEventType::ENDED://µ±ÇÒ½öµ±¼ì²âµ½´¥ÃþÌ§ÆðÊ±Íê³ÉÒÔÏÂ²Ù×÷
+            button_sound_effect();//²¥·ÅÒôÐ§
+            //»ñÈ¡ÆÁÄ»´óÐ¡
             auto visibleSize = Director::getInstance()->getVisibleSize();
             Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+            //°ÑÇÐ»»Ç°µÄÑ¡ÏîÒ³¶ÔÓ¦Layer´ÓSceneÖÐÉ¾È¥
             if (this->getChildByName("SetLayer") != nullptr) {
                 this->removeChildByName("SetLayer");
             }
             if (this->getChildByName("StatisticsLayer") != nullptr) {
                 this->removeChildByName("StatisticsLayer");
             }
+            //´´½¨ÈËÔ±Ò³¶ÔÓ¦Layer²¢Ìí¼Ó½øSceneÖÐ
             auto person_layer = PersonLayer::createLayer();
             person_layer->setName("PersonLayer");
             this->addChild(person_layer, 0);
-
-
+            
+            //ÉèÖÃset°´Å¥Îª¿ÉÓÃ
             Node* set_btn = this->getChildByName("SetBtn");
             static_cast<ui::Button*>(set_btn)->setEnabled(true);
             set_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.3,
                 origin.y + visibleSize.height * 0.93));
             set_btn->setScale(1.4);
-
+            //ÉèÖÃstatistics°´Å¥Îª¿ÉÓÃ
             Node* statistics_btn = this->getChildByName("StatisticsBtn");
             static_cast<ui::Button*>(statistics_btn)->setEnabled(true);
             statistics_btn->setPosition(Vec2(origin.x + visibleSize.width / 2,
                 origin.y + visibleSize.height * 0.925));
             statistics_btn->setScale(1.4);
             statistics_btn->setScale(1.4);
-
+            //ÉèÖÃÈËÔ±°´Å¥Îª¿ÉÓÃ
             Node* person_btn = this->getChildByName("PersonBtn");
             static_cast<ui::Button*>(person_btn)->setEnabled(false);
             person_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.7,
@@ -225,15 +245,16 @@ cocos2d::Layer* SetLayer::createLayer()
 {
     return SetLayer::create();
 }
+//³õÊ¼»¯
 bool SetLayer::init()
 {
     if (!Layer::init()) {
         return false;
     }
-
+    //»ñÈ¡ÆÁÄ»´óÐ¡
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    /***********************************  ±³¾°  **************************************/
     auto set = Sprite::create("/OptionsScene/SettingBG1.PNG");
     if (set == nullptr)
     {
@@ -307,7 +328,7 @@ bool SetLayer::init()
     auto sound_off_sprite = Sprite::create("/OptionsScene/setting02-hd_11.PNG");
     auto sound_off = MenuItemSprite::create(sound_off_sprite, sound_off_sprite);
     MenuItemToggle* sound_toggle; 
-    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {//¸ù¾Ýµ±Ç°ÒôÐ§ÊÇ·ñ´ò¿ª¾ö¶¨äÖÈ¾¿ª¹ØµÄÍ¼ÑùÊÇ¿ª»¹ÊÇ¹Ø
         sound_toggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::close_sound, this), sound_on, sound_off, NULL);
     }
     else {
@@ -322,7 +343,7 @@ bool SetLayer::init()
     auto bgmusic_off_sprite = Sprite::create("/OptionsScene/setting02-hd_21.PNG");
     auto bgmusic_off = MenuItemSprite::create(bgmusic_off_sprite, bgmusic_off_sprite);
     MenuItemToggle* bgmusic_toggle;
-    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
+    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {//¸ù¾Ýµ±Ç°bgmÊÇ·ñ´ò¿ª¾ö¶¨äÖÈ¾¿ª¹ØµÄÍ¼ÑùÊÇ¿ª»¹ÊÇ¹Ø
         bgmusic_toggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::close_bgmusic, this), bgmusic_on, bgmusic_off, NULL);
     }
     else {
@@ -343,32 +364,35 @@ bool SetLayer::init()
 
     return true;
 }
+//¹Ø±ÕÒôÐ§
 void SetLayer::close_sound(Ref* psender)
 {
-    button_sound_effect();
-    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 0) {
+    button_sound_effect();//²¥·ÅÒôÐ§
+    if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 0) {//Èôµ±Ç°ÒôÐ§Îª¹Ø£¬ÔòÇÐ»»Îª´ò¿ª
         UserDefault::getInstance()->setIntegerForKey("sound_effect", 1);
     }
-    else if(UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1){
+    else if(UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1){//Èôµ±Ç°ÒôÐ§Îª¿ª£¬ÔòÇÐ»»Îª¹Ø
         UserDefault::getInstance()->setIntegerForKey("sound_effect", 0);
     }
 }
+//¹Ø±Õbgm
 void SetLayer::close_bgmusic(Ref* psender)
 {
-    button_sound_effect();
-    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 0) {
+    button_sound_effect();//²¥·ÅÒôÐ§
+    if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 0) {//Èôµ±Ç°bgmÎª¹Ø£¬ÔòÇÐ»»Îª´ò¿ª£¬²¢²¥·Åbgm
         UserDefault::getInstance()->setIntegerForKey("bg_music", 1);
         AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5);
     }
-    else if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
+    else if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {//Èôµ±Ç°bgmÎª¿ª£¬ÔòÇÐ»»Îª¹Ø±Õ£¬²¢¹Ø±Õbgm
         UserDefault::getInstance()->setIntegerForKey("bg_music", 0);
         AudioEngine::stopAll();
     }
 }
+//ÖØÖÃÓÎÏ·
 void SetLayer::reset_game(Ref* psender)
 {
-    button_sound_effect();
-
+    button_sound_effect();//²¥·ÅÒôÐ§
+    //»ñÈ¡ÆÁÄ»´óÐ¡
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     /*****************************  ´¿É«²ã  ******************************************/
@@ -380,7 +404,7 @@ void SetLayer::reset_game(Ref* psender)
         return true;
     };
     listener->setSwallowTouches(true);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, black_layer);
     /********************************  ±³¾°  *****************************************/
     auto reset_image = Sprite::create("/OptionsScene/reset_image.png");
     reset_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -394,10 +418,10 @@ void SetLayer::reset_game(Ref* psender)
     auto reset_yes_btn = MenuItemImage::create("/OptionsScene/reset_yes_normal.png", "/OptionsScene/reset_yes_selected.png");
     reset_yes_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.35,
         origin.y + visibleSize.height * 0.5));
-    reset_yes_btn->setCallback([this, black_layer](Ref* psender) {
-        reset_data();
-        button_sound_effect();
-        this->getParent()->removeChild(black_layer);
+    reset_yes_btn->setCallback([this, black_layer](Ref* psender) {//°´Å¥»Øµ÷º¯Êý
+        button_sound_effect();//²¥·ÅÒôÐ§
+        reset_data();//¶Ô´æµµÊý¾Ý½øÐÐÖØÖÃ²Ù×÷
+        this->getParent()->removeChild(black_layer);//É¾³ýµ±Ç°²ã
         });
     reset_yes_btn->setScale(1.4);
     menu->addChild(reset_yes_btn);
@@ -405,9 +429,9 @@ void SetLayer::reset_game(Ref* psender)
     auto reset_no_btn = MenuItemImage::create("/OptionsScene/reset_no_normal.png", "/OptionsScene/reset_no_selected.png");
     reset_no_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.65,
         origin.y + visibleSize.height * 0.5));
-    reset_no_btn->setCallback([this, black_layer](Ref* psender) {
-        button_sound_effect();
-        this->getParent()->removeChild(black_layer);
+    reset_no_btn->setCallback([this, black_layer](Ref* psender) {//°´Å¥»Øµ÷º¯Êý
+        button_sound_effect();//²¥·ÅÒôÐ§
+        this->getParent()->removeChild(black_layer);//¹Ø±Õ¸Ã²ã
         });
     reset_no_btn->setScale(1.4);
     menu->addChild(reset_no_btn);
@@ -421,12 +445,13 @@ cocos2d::Layer* StatisticsLayer::createLayer()
 {
     return StatisticsLayer::create();
 }
+//³õÊ¼»¯
 bool StatisticsLayer::init()
 {
     if (!Layer::init()) {
         return false;
     }
-
+    //»ñÈ¡ÆÁÄ»´óÐ¡
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     //±³¾°Í¼
@@ -455,6 +480,7 @@ bool StatisticsLayer::init()
             statistics_txt_1->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
                 origin.y + visibleSize.height * 0.68));
             this->addChild(statistics_txt_1);
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄÃ°ÏÕÄ£Ê½¹Ø¿¨Êä³öÍ³¼ÆÊý¾Ý
             string adventure_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("adventure_statistics"));
             auto adventure_statistics_label = Label::createWithTTF(adventure_statistics, "fonts/Marker Felt.ttf", 28);
             adventure_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -476,7 +502,7 @@ bool StatisticsLayer::init()
             statistics_txt_2->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
                 origin.y + visibleSize.height * 0.58));
             this->addChild(statistics_txt_2);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄÒþ²Ø¹Ø¿¨Êä³öÍ³¼ÆÊý¾Ý
             string hide_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("hide_statistics"));
             auto hide_statistics_label = Label::createWithTTF(hide_statistics, "fonts/Marker Felt.ttf", 28);
             hide_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -498,7 +524,7 @@ bool StatisticsLayer::init()
             statistics_txt_3->setPosition(Vec2(origin.x + visibleSize.width * 0.823,
                 origin.y + visibleSize.height * 0.49));
             this->addChild(statistics_txt_3);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄbossÄ£Ê½¹Ø¿¨Êä³öÍ³¼ÆÊý¾Ý
             string bosspattern_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("bosspattern_statistics"));
             auto bosspattern_statistics_label = Label::createWithTTF(bosspattern_statistics, "fonts/Marker Felt.ttf", 28);
             bosspattern_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -515,7 +541,7 @@ bool StatisticsLayer::init()
             bg4->setPosition(Vec2(origin.x + visibleSize.width * 0.485,
                 origin.y + visibleSize.height * 0.41));
             this->addChild(bg4);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄ½ð±ÒÍ³¼Æ£¬Êä³öÍ³¼ÆÊý¾Ý
             string money_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("money_statistics"));
             auto money_statistics_label = Label::createWithTTF(money_statistics, "fonts/Marker Felt.ttf", 28);
             money_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -532,7 +558,7 @@ bool StatisticsLayer::init()
             bg5->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
                 origin.y + visibleSize.height * 0.32));
             this->addChild(bg5);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄ»÷°Ü¹ÖÎï¸öÊýÍ³¼Æ£¬Êä³öÍ³¼ÆÊý¾Ý
             string monster_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("monster_statistics"));
             auto monster_statistics_label = Label::createWithTTF(monster_statistics, "fonts/Marker Felt.ttf", 28);
             monster_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -549,7 +575,7 @@ bool StatisticsLayer::init()
             bg6->setPosition(Vec2(origin.x + visibleSize.width * 0.534,
                 origin.y + visibleSize.height * 0.23));
             this->addChild(bg6);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄ»÷°Üboss¸öÊý£¬Êä³öÍ³¼ÆÊý¾Ý
             string boss_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("boss_statistics"));
             auto boss_statistics_label = Label::createWithTTF(boss_statistics, "fonts/Marker Felt.ttf", 28);
             boss_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -566,7 +592,7 @@ bool StatisticsLayer::init()
             bg7->setPosition(Vec2(origin.x + visibleSize.width * 0.523,
                 origin.y + visibleSize.height * 0.14));
             this->addChild(bg7);
-
+            //¸ù¾Ý´æµµÊý¾ÝÖÐµÄ´Ý»ÙÕÏ°­Îï¸öÊý£¬Êä³öÍ³¼ÆÊý¾Ý
             string damage_statistics = std::to_string(UserDefault::getInstance()->getIntegerForKey("damage_statistics"));
             auto damage_statistics_label = Label::createWithTTF(damage_statistics, "fonts/Marker Felt.ttf", 28);
             damage_statistics_label->setAlignment(TextHAlignment::RIGHT);
@@ -583,12 +609,13 @@ cocos2d::Layer* PersonLayer::createLayer()
 {
     return PersonLayer::create();
 }
+//³õÊ¼»¯
 bool PersonLayer::init()
 {
     if (!Layer::init()) {
         return false;
     }
-
+    //»ñÈ¡ÆÁÄ»´óÐ¡
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 

@@ -5,15 +5,15 @@
 #include"sound&music.h"
 #include"GameData.h"
 USING_NS_CC;
-/*菜单场景*/
-Scene* MenuScene::createScene()
-{
-    return MenuScene::create();
-}
 /*错误处理*/
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
+}
+/************************************  MenuScene类  *********************************/
+Scene* MenuScene::createScene()
+{
+    return MenuScene::create();
 }
 /*初始化*/
 bool MenuScene::init()
@@ -23,12 +23,11 @@ bool MenuScene::init()
     {
         return false;
     }
-
+    //获取屏幕大小
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-;
     /*****************************************背景图**************************************************/
-    auto background_image = Sprite::create("/MenuScene/MainBG.PNG");
+    auto background_image = Sprite::create("/MenuScene/MainBG.PNG");//背景图
     if (background_image == nullptr)
     {
         problemLoading("'MainBG.PNG'");
@@ -55,9 +54,13 @@ bool MenuScene::init()
             origin.y + visibleSize.height * 0.85));
         cloud1->setOpacity(95);
         //添加动画
+        //从左向右飘
         auto cloud1_moveto_1 = MoveTo::create(20, Vec2(origin.x + visibleSize.width + cloud1->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        //从右向左飘
         auto cloud1_moveto_2 = MoveTo::create(20, Vec2(origin.x - cloud1->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        //动作序列，先从左到右，再停5s，再从右向左，再停5s
         auto cloud1_sequence = Sequence::create(cloud1_moveto_1, DelayTime::create(5), cloud1_moveto_2, DelayTime::create(5),nullptr);
+        //无限循环播放动作序列
         cloud1->runAction(RepeatForever::create(cloud1_sequence));
         cloud->addChild(cloud1);
     }
@@ -74,9 +77,13 @@ bool MenuScene::init()
         cloud2->setScale(2);
         cloud2->setOpacity(95);
         //添加动画
+        //从右向左
         auto cloud2_moveto_1 = MoveTo::create(20, Vec2(origin.x - cloud2->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        //从左向右
         auto cloud2_moveto_2 = MoveTo::create(20, Vec2(origin.x + visibleSize.width + cloud2->getContentSize().width, origin.y + visibleSize.height * 0.85));
+        //动作序列，先从右向左，再停5s，再从左向右，再停5s
         auto cloud2_sequence = Sequence::create(cloud2_moveto_1, DelayTime::create(5), cloud2_moveto_2, DelayTime::create(5),nullptr);
+        //无限循环播放动作序列
         cloud2->runAction(RepeatForever::create(cloud2_sequence));
         cloud->addChild(cloud2);
     }
@@ -91,9 +98,13 @@ bool MenuScene::init()
         monster->setPosition(Vec2(origin.x + visibleSize.width / 4,
             origin.y + visibleSize.height * 0.8));
         //添加动作
+        //从上向下
         auto monster_moveby_down = MoveBy::create(1.0f, Vec2(0, -monster->getContentSize().height / 4));
+        //从下向上
         auto monster_moveby_up = MoveBy::create(1.0f, Vec2(0, monster->getContentSize().height / 4));
+        //动作序列，从上到下，再从下到上返回原点
         auto monster_sequence = Sequence::createWithTwoActions(monster_moveby_down, monster_moveby_up);
+        //无限循环播放动作序列
         monster->runAction(RepeatForever::create(monster_sequence));
         this->addChild(monster);
     }
@@ -157,15 +168,20 @@ bool MenuScene::init()
     this->addChild(carrot);
     //萝卜动画添加
     carrot->setScale(0.1);
+    //每次切换到主菜单时，萝卜蹦出，通过缩放动画来实现
     auto carrot_start_scale = ScaleTo::create(0.3, 1);
     carrot->runAction(carrot_start_scale);
 
+    //萝卜叶子2的动作序列，通过旋转来实现叶子晃动
     auto carrot_leaf2_sequence = Sequence::create(DelayTime::create(5), RotateBy::create(0.2, 30), RotateBy::create(0.2, -30), 
         RotateBy::create(0.2, 30),RotateBy::create(0.2, -30), DelayTime::create(5), nullptr);
+    //无限循环动作序列
     carrot_leaf2->runAction(RepeatForever::create(carrot_leaf2_sequence));
 
+    //萝卜叶子3的动作序列，通过旋转来实现叶子晃动
     auto carrot_leaf3_sequence = Sequence::create(DelayTime::create(7), RotateBy::create(0.2, 30), RotateBy::create(0.2, -30),
         RotateBy::create(0.2, 30), RotateBy::create(0.2, -30), DelayTime::create(3), nullptr);
+    //无限循环动作序列
     carrot_leaf3->runAction(RepeatForever::create(carrot_leaf3_sequence));
     /*************************************************************添加保卫萝卜标题******************************************************************/
     auto title = Sprite::create("/MenuScene/MainTitle.PNG");
@@ -231,7 +247,7 @@ bool MenuScene::init()
         boss_item->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height / 8));
         menu->addChild(boss_item);
-        if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {
+        if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {//若boss模式未解锁，则生成一个“锁”的图形
             auto boss_lock = Sprite::create("/MenuScene/lock.png");
             if (boss_lock == nullptr) {
                 problemLoading("'lock.png'");
@@ -255,7 +271,7 @@ bool MenuScene::init()
         nest_item->setPosition(Vec2(origin.x + visibleSize.width / 2 + nest_item->getContentSize().width,
             origin.y + visibleSize.height / 8));
         menu->addChild(nest_item);
-        if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {
+        if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {//若怪物窝未解锁，则生成一个“锁”的图形
             auto nest_lock = Sprite::create("/MenuScene/lock.png");
             if (nest_lock == nullptr) {
                 problemLoading("'lock.png'");
@@ -273,37 +289,37 @@ bool MenuScene::init()
 
     return true;
 }
-
+//关闭游戏
 void MenuScene::close_game(Ref* psender) {
 
-    AudioEngine::end();
-    Director::getInstance()->end();
+    AudioEngine::end();//关闭声音引擎
+    Director::getInstance()->end();//Director控制结束
 
-    exit(0);
+    exit(0);//退出程序
 }
-
+//去设置界面
 void  MenuScene::goto_options(Ref* pSender) {
-    button_sound_effect();
-    auto options_scene = OptionsScene::createScene();
+    button_sound_effect();//播放音效
+    auto options_scene = OptionsScene::createScene();//创建设置界面场景
     Director::getInstance()->replaceScene(TransitionSlideInT::create(0.2, options_scene));//以从上向下滑动方式切换
 }
-
+//去帮助界面
 void  MenuScene::goto_helper(Ref* pSender) {
-    button_sound_effect();
-    auto helper_scene = HelperScene::createScene();
-    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.2, helper_scene));
+    button_sound_effect();//播放音效
+    auto helper_scene = HelperScene::createScene();//创建帮助场景
+    Director::getInstance()->replaceScene(TransitionSlideInB::create(0.2, helper_scene));//以从下至上滑动的方式切换
 }
-
+//去冒险模式
 void  MenuScene::goto_adventure(Ref* psender) {
-    button_sound_effect();
-    auto gameselection_scene = GameSelectionScene::createScene();
-    Director::getInstance()->replaceScene(TransitionFlipAngular::create(0.2, gameselection_scene));
+    button_sound_effect();//播放音效
+    auto gameselection_scene = GameSelectionScene::createScene();//创建冒险模式选关场景
+    Director::getInstance()->replaceScene(TransitionFlipAngular::create(0.2, gameselection_scene));//以对角线翻转的形式切换
 }
-
+//去boss模式
 void  MenuScene::goto_boss(Ref* psender) {
-    button_sound_effect();
-    if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {
-
+    button_sound_effect();//播放音效
+    if (UserDefault::getInstance()->getIntegerForKey("if_boss_lock") == 1) {//若boss模式未解锁
+        //获取屏幕大小
         auto visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
         /*****************************  纯色层  ******************************************/
@@ -311,13 +327,16 @@ void  MenuScene::goto_boss(Ref* psender) {
         black_layer->setOpacity(85);
 
         auto listener = EventListenerTouchOneByOne::create();
-        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {//对触摸事件吞没（必须按确认键才可返回）
             return true;
         };
         listener->setSwallowTouches(true);
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, black_layer);
         /********************************  背景  *****************************************/
-        auto boss_lock_image = Sprite::create("/MenuScene/boss_lock_image.png");
+        auto boss_lock_image = Sprite::create("/MenuScene/boss_lock_image.png");//boss模式未解锁的图片提示
+        if (boss_lock_image == nullptr) {
+            problemLoading("'boss_lock_image.png'");
+        }
         boss_lock_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height / 2));
         boss_lock_image->setScale(1.4);
@@ -326,11 +345,14 @@ void  MenuScene::goto_boss(Ref* psender) {
         auto menu = Menu::create();
         menu->setPosition(Vec2::ZERO);
 
-        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");
+        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");//确定按钮
+        if (lock_btn == nullptr) {
+            problemLoading("lock_btn_normal.png||lock_btn_selected.png");
+        }
         lock_btn->setPosition(Vec2(origin.x + visibleSize.width *0.55,
             origin.y + visibleSize.height * 0.4));
-        lock_btn->setCallback([this,black_layer](Ref* psender) {
-            button_sound_effect();
+        lock_btn->setCallback([this,black_layer](Ref* psender) {//回调函数，返回上MenuScene
+            button_sound_effect();//播放音效
             this->removeChild(black_layer);
         });
         lock_btn->setScale(1.4);
@@ -343,11 +365,11 @@ void  MenuScene::goto_boss(Ref* psender) {
         ;//boss_pattern待开发
     }
 }
-
+//去怪物窝
 void  MenuScene::goto_nest(Ref* psender) {
-    button_sound_effect();
-    if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {
-
+    button_sound_effect();//播放音效
+    if (UserDefault::getInstance()->getIntegerForKey("if_nest_lock") == 1) {//若怪物窝未解锁
+        //获取屏幕大小
         auto visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 origin = Director::getInstance()->getVisibleOrigin();
         /*****************************  纯色层  ******************************************/
@@ -355,22 +377,28 @@ void  MenuScene::goto_nest(Ref* psender) {
         black_layer->setOpacity(85);
 
         auto listener = EventListenerTouchOneByOne::create();
-        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+        listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {//对触摸事件吞没（必须按确定按钮才能返回）
             return true;
         };
         listener->setSwallowTouches(true);
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, black_layer);
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, black_layer);
         /********************************  背景  *****************************************/
-        auto boss_lock_image = Sprite::create("/MenuScene/nest_lock_image.png");
-        boss_lock_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        auto nest_lock_image = Sprite::create("/MenuScene/nest_lock_image.png");//怪物窝未解锁图片提示
+        if (nest_lock_image == nullptr) {
+            problemLoading("'nest_lock_image.png'");
+        }
+        nest_lock_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height / 2));
-        boss_lock_image->setScale(1.4);
-        black_layer->addChild(boss_lock_image);
+        nest_lock_image->setScale(1.4);
+        black_layer->addChild(nest_lock_image);
         /********************************  按钮  ****************************************/
         auto menu = Menu::create();
         menu->setPosition(Vec2::ZERO);
 
-        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");
+        auto lock_btn = MenuItemImage::create("/MenuScene/lock_btn_normal.png", "/MenuScene/lock_btn_selected.png");//确定按钮
+        if (lock_btn == nullptr) {
+            problemLoading("lock_btn_normal.png||lock_btn_selected.png");
+        }
         lock_btn->setPosition(Vec2(origin.x + visibleSize.width * 0.55,
             origin.y + visibleSize.height * 0.4));
         lock_btn->setCallback([this, black_layer](Ref* psender) {

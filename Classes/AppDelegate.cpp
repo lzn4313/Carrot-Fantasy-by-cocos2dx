@@ -82,10 +82,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
     register_all_packages();
+
+    //设置存档地址（存档相关请跳转至GameData.h）
     FileUtils::getInstance()->setWritablePath("D:/Carrot Fantasy/Carrot_Fantasy/proj.win32/");
-
+    //初始化存档数据
     init_data();
-
+    //如果背景音乐开，则播放背景音乐
     if (UserDefault::getInstance()->getIntegerForKey("bg_music") == 1) {
         AudioEngine::play2d("/sound/CarrotFantasy.mp3", true, 0.5f);
     }
