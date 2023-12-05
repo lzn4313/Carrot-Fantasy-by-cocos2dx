@@ -8,7 +8,7 @@ USING_NS_CC;
 //重置所有数据
 static void reset_data() {
 	UserDefault::getInstance()->setBoolForKey("have_init", true);
-	UserDefault::getInstance()->setIntegerForKey("adventure_statistics", 0);
+	UserDefault::getInstance()->setIntegerForKey("adventure_statistics", 1);
 	UserDefault::getInstance()->setIntegerForKey("hide_statistics", 0);
 	UserDefault::getInstance()->setIntegerForKey("bosspattern_statistics", 0);
 	UserDefault::getInstance()->setIntegerForKey("money_statistics", 0);

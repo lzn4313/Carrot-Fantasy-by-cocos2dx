@@ -1,3 +1,4 @@
+#include"GameScene.h"
 #include "GameSelectionScene.h"
 #include "MenuScene.h"
 #include "OptionsScene.h"
@@ -7,7 +8,7 @@
 #include"ui/CocosGUI.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
-
+extern int level_selection;
 /*******************************  错误处理  ************************************/
 static void problemLoading(const char* filename)
 {
@@ -887,7 +888,9 @@ void Level_1_Layer::level_1_1(Ref* psender, Widget::TouchEventType type)
             break;
         case Widget::TouchEventType::ENDED://当且仅当抬起时触发
             button_sound_effect();//播放音效
-            log("level_1_1");//待实现
+            level_selection = 1;
+            auto game_scene = GameScene::createScene();
+            Director::getInstance()->pushScene(game_scene);
             break;
     }
 }
