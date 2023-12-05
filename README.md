@@ -20,3 +20,6 @@
 
 /*再更新说明*/
 由于Classes文件中不断加入新的.cpp和.h文件，使用时需要在覆盖文件夹后，在项目的Calsses分类中手动添加已有项目，再运行。
+
+/*再再更新说明*/
+由于本游戏存档设置为D:/Carrot Fantasy/Carrot_Fantasy/proj.win32内，所以建议创建新项目时严格遵守路径创建。或在AppDelegate.cpp中，将文档路径设置为自己的对应的proj.win32内以实现对应功能。
