@@ -179,6 +179,17 @@ bool GameMenu::init()
         }
         });
     this->addChild(options_btn);
+    //触摸格点
+    Sprite* grid[7][12];
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 12; j++) {
+            grid[i][j] = Sprite::create("/GameScene/StartSprite.png");
+            grid[i][j]->setPosition(Vec2(40 + 80 * j, 40 + 80 * (6 - i)));
+            grid[i][j]->setTag(i * 100 + j);
+            grid[i][j]->setVisible(false);
+            this->addChild(grid[i][j], -1);
+        }
+    }
     //游戏开始的倒计时
     start();
     //游戏开始后的触摸事件
@@ -266,7 +277,7 @@ void GameMenu::options() {
         if (level_selection == 1) {
             auto level_1_1 = Level_1_1::createLayer();
             level_1_1->setName("PlayingLevel");
-            this->addChild(level_1_1, -1);
+            this->addChild(level_1_1, -3);
             start();
         }
         this->removeChild(black_layer);
@@ -326,14 +337,10 @@ void GameMenu::start()
     Sprite* grid[7][12];
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 12; j++) {
-            grid[i][j] = Sprite::create("/GameScene/StartSprite.png");
-            grid[i][j]->setPosition(Vec2(40 + 80 * j, 40 + 80 * (6 - i)));
-            grid[i][j]->setTag(i * 100 + j);
-            grid[i][j]->setVisible(false);
+            grid[i][j] = static_cast<Sprite*>(this->getChildByTag(i * 100 + j));
             if (game_map[i][j] == 0) {
                 grid[i][j]->runAction(Blink::create(3, 2));
             }
-            this->addChild(grid[i][j], -1);
         }
     }
     //三秒后把遮罩层删除
