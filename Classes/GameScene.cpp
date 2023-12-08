@@ -31,6 +31,8 @@ int if_pause;//是否暂停
 int game_money;//金钱
 int game_waves;//当前波数
 char game_map[7][12];//辅助地图数组
+Vector<int>tower_available;//可建造防御塔存储vector
+
 extern int level_1_1_waves;
 /**********************************  GameScene  ***********************************/
 Scene* GameScene::createScene()
@@ -194,7 +196,17 @@ bool GameMenu::init()
     start();
     //游戏开始后的触摸事件
     auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [](Touch* touch, Event* event) {
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = [=](Touch* touch, Event* event) {
+        if (touch->getLocation().y < 560) {
+            vec2 vec;
+            vec.x = touch->getLocation().x;
+            vec.y = touch->getLocation().y;
+            pos position = trans_xy_to_ij(vec);
+            if (game_map[position.i][position.j] == DISABLED) {
+                return false;
+            }
+        }
         return true;
     };
     listener->onTouchEnded = [=](Touch* touch, Event* event) {
@@ -203,15 +215,13 @@ bool GameMenu::init()
             vec.x = touch->getLocation().x;
             vec.y = touch->getLocation().y;
             pos position = trans_xy_to_ij(vec);
-            Node* node = this->getChildByTag(position.i * 100 + position.j);
-            Sprite* selection = static_cast<Sprite*>(node);
-            if (game_map[position.i][position.j] == 0) {
-                selection->setTexture("/GameScene/Grid.png");
-                selection->runAction(Sequence::create(Show::create(), DelayTime::create(1), Hide::create(), nullptr));
+            Node* node = this->getChildByTag(100 * position.i + position.j);
+            Sprite* grid = static_cast<Sprite*>(node);
+            if (game_map[position.i][position.j] == EMPTY) {
+                build(position, tower_available);
             }
-            else {
-                selection->setTexture("/GameScene/cantBuild.png");
-                selection->runAction(Blink::create(1, 3));
+            else if(game_map[position.i][position.j] == TOWER){
+                tower_operations(position);
             }
         }
     };
@@ -349,4 +359,9 @@ void GameMenu::start()
         });
     time_layer->runAction(Sequence::create(DelayTime::create(3.1), start_call_back, nullptr));
     if_pause = 0;
+}
+
+//建造
+void GameMenu::build(pos position, Vector<int> tower_available) {
+
 }
