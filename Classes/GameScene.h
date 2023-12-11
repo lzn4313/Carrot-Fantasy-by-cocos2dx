@@ -2,6 +2,7 @@
 #define __Game_SCENE_H__
 
 #include "cocos2d.h"
+#include<vector>
 
 #define EMPTY 0
 #define DISABLED 1
@@ -16,9 +17,19 @@ struct vec2 {
     float y;
 };
 //把每个格点的数组坐标转换为世界坐标
-static vec2 trans_ij_to_xy(pos position);
+static vec2 trans_ij_to_xy(pos position) {
+    vec2 vec;
+    vec.x = 40 + position.j * 80;
+    vec.y = 40 + (6 - position.i) * 80;
+    return vec;
+}
 //把每个世界坐标转换成对应的格点的数组坐标
-static pos trans_xy_to_ij(vec2 vec);
+static pos trans_xy_to_ij(vec2 vec) {
+    pos position;
+    position.j = static_cast<int>((vec.x) / 80);
+    position.i = 6 - static_cast<int>((vec.y) / 80);
+    return position;
+}
 //冒险模式游戏类
 class GameScene : public cocos2d::Scene
 {
@@ -41,7 +52,7 @@ public:
     //开始
     void start();
     //建造
-    void build(pos position, Vector<int> tower_available);
+    void build(pos position, int tower_available[]);
     //升级删除
     void tower_operations(pos position);
     //实时更新金币等数据

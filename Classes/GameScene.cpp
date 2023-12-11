@@ -4,6 +4,7 @@
 #include"GameData.h"
 #include"ui/CocosGUI.h"
 #include<string>
+#include<vector>
 USING_NS_CC;
 using namespace cocos2d::ui;
 /*******************************  错误处理  ************************************/
@@ -11,29 +12,15 @@ static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
 }
-/********************************  工具函数  *********************************/
-vec2 trans_ij_to_xy(pos position) {
-    vec2 vec;
-    vec.x = 40 + position.j * 80;
-    vec.y = 40 + (6 - position.i) * 80;
-    return vec;
-}
-pos trans_xy_to_ij(vec2 vec) {
-    pos position;
-    position.j = static_cast<int>((vec.x) / 80);
-    position.i = 6 - static_cast<int>((vec.y) / 80);
-    return position;
-}
 /**********************  全局变量  ***********************/
 int level_selection;//关卡选择
 int if_speed_up;//是否加速
 int if_pause;//是否暂停
 int game_money;//金钱
 int game_waves;//当前波数
+int max_waves;//总波数
 char game_map[7][12];//辅助地图数组
-Vector<int>tower_available;//可建造防御塔存储vector
-
-extern int level_1_1_waves;
+int tower_available[3];//可建造防御塔存储
 /**********************************  GameScene  ***********************************/
 Scene* GameScene::createScene()
 {
@@ -98,7 +85,7 @@ bool GameMenu::init()
     waves_label->setPosition(Vec2(origin.x + visibleSize.width * 0.4,
         origin.y + visibleSize.height * 0.94));
     this->addChild(waves_label);
-    auto waves_txt = Label::createWithTTF("/ " + to_string(level_1_1_waves) + " Waves", "/fonts/Marker Felt.ttf", 32);
+    auto waves_txt = Label::createWithTTF("/ " + to_string(max_waves) + " Waves", "/fonts/Marker Felt.ttf", 32);
     waves_txt->setPosition(Vec2(origin.x + visibleSize.width * 0.525,
         origin.y + visibleSize.height * 0.94));
     this->addChild(waves_txt);
@@ -349,6 +336,7 @@ void GameMenu::start()
         for (int j = 0; j < 12; j++) {
             grid[i][j] = static_cast<Sprite*>(this->getChildByTag(i * 100 + j));
             if (game_map[i][j] == 0) {
+                grid[i][j]->setTexture("/GameScene/StartSprite.png");
                 grid[i][j]->runAction(Blink::create(3, 2));
             }
         }
@@ -360,8 +348,209 @@ void GameMenu::start()
     time_layer->runAction(Sequence::create(DelayTime::create(3.1), start_call_back, nullptr));
     if_pause = 0;
 }
-
 //建造
-void GameMenu::build(pos position, Vector<int> tower_available) {
+void GameMenu::build(pos position, int tower_available[]) {
+    //创建遮罩层
+    auto touch_layer = Layer::create();
+    this->addChild(touch_layer);
+    //显示
+    Node* node = this->getChildByTag(100 * position.i + position.j);
+    Sprite* sprite = static_cast<Sprite*>(node);
+    sprite->setTexture("/GameScene/Grid.png");
+    sprite->setVisible(true);
+    //炮台建造
+    auto sprite_1 = Sprite::create();
+    auto sprite_2 = Sprite::create();
+    auto sprite_3 = Sprite::create();
+    if (tower_available[2] == -1) {
+        string str = "/GameScene/Tower/";
+        //第一个炮台
+        string str_1 = str + to_string(tower_available[0]) + "/";
+        if (game_money </*getMoney(tower_available[0])*/100) {
+            sprite_1->setTexture(str_1 + "CanClick0.PNG");
+        }
+        else {
+            sprite_1->setTexture(str_1 + "CanClick1.PNG");
+        }
+        vec2 vec = trans_ij_to_xy(position);
+        sprite_1->setPosition(Vec2(vec.x - sprite_1->getContentSize().width / 2,
+            vec.y + sprite_1->getContentSize().height));
+        touch_layer->addChild(sprite_1);
+        //第二个炮台
+        string str_2 = str + to_string(tower_available[1]) + "/";
+        if (game_money </*getMoney(tower_available[1])*/120) {
+            sprite_2->setTexture(str_2 + "CanClick0.PNG");
+        }
+        else {
+            sprite_2->setTexture(str_2 + "CanClick1.PNG");
+        }
+        vec = trans_ij_to_xy(position);
+        sprite_2->setPosition(Vec2(vec.x + sprite_2->getContentSize().width / 2,
+            vec.y + sprite_2->getContentSize().height));
+        touch_layer->addChild(sprite_2);
+    }
+    else if (tower_available[2] != -1) {
+        string str = "/GameScene/Tower/";
+        //第一个炮台
+        string str_1 = str + to_string(tower_available[0]) + "/";
+        if (game_money </*getMoney(tower_available[0])*/100) {
+            sprite_1->setTexture(str_1 + "CanClick0.PNG");
+        }
+        else {
+            sprite_1->setTexture(str_1 + "CanClick1.PNG");
+        }
+        vec2 vec = trans_ij_to_xy(position);
+        sprite_1->setPosition(Vec2(vec.x - sprite_1->getContentSize().width,
+            vec.y + sprite_1->getContentSize().height));
+        touch_layer->addChild(sprite_1);
+        //第二个炮台
+        string str_2 = str + to_string(tower_available[1]) + "/";
+        if (game_money </*getMoney(tower_available[1])*/120) {
+            sprite_2->setTexture(str_2 + "CanClick0.PNG");
+        }
+        else {
+            sprite_2->setTexture(str_2 + "CanClick1.PNG");
+        }
+        vec = trans_ij_to_xy(position);
+        sprite_2->setPosition(Vec2(vec.x,
+            vec.y + sprite_2->getContentSize().height));
+        touch_layer->addChild(sprite_2);
+        //第三个炮台
+        string str_3 = str + to_string(tower_available[2]) + "/";
+        if (game_money </*getMoney(tower_available[2])*/120) {
+            sprite_3->setTexture(str_3 + "CanClick0.PNG");
+        }
+        else {
+            sprite_3->setTexture(str_3 + "CanClick1.PNG");
+        }
+        vec = trans_ij_to_xy(position);
+        sprite_3->setPosition(Vec2(vec.x + sprite_3->getContentSize().width,
+            vec.y + sprite_3->getContentSize().height));
+        touch_layer->addChild(sprite_3);
+    }
+    //触摸层
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = [](Touch* touch, Event* event) {
+        return true;
+    };
+    listener->onTouchEnded = [this, sprite, sprite_1, sprite_2, sprite_3, touch_layer, position, tower_available](Touch* touch, Event* event) {
+        //若按下位置在第一个炮塔图标内
+        if (touch->getLocation().x >= sprite_1->getPosition().x - sprite_1->getContentSize().width / 2 &&
+            touch->getLocation().x <= sprite_1->getPosition().x + sprite_1->getContentSize().width / 2 &&
+            touch->getLocation().y >= sprite_1->getPosition().y - sprite_1->getContentSize().height / 2 &&
+            touch->getLocation().y <= sprite_1->getPosition().y + sprite_1->getContentSize().height / 2) {
+            if (game_money >=/*getMoney(tower_available[0])*/100) {//若钱够，则建造
+                // build_tower(position,tower_available[0]);
+                log("build_tower(position, tower_available[0])");
+                game_money -=/*getMoney(tower_available[0])*/100;
+                sprite->setVisible(false);
+                this->removeChild(touch_layer);
+                game_map[position.i][position.j] = TOWER;
+            }
+        }
+        else if (//若按下位置在第二个炮塔图标内
+            touch->getLocation().x >= sprite_2->getPosition().x - sprite_2->getContentSize().width / 2 &&
+            touch->getLocation().x <= sprite_2->getPosition().x + sprite_2->getContentSize().width / 2 &&
+            touch->getLocation().y >= sprite_2->getPosition().y - sprite_2->getContentSize().height / 2 &&
+            touch->getLocation().y <= sprite_2->getPosition().y + sprite_2->getContentSize().height / 2) {
+            if (game_money >=/*getMoney(tower_available[1])*/120) {//若钱够，则建造
+                // build_tower(position, tower_available[1]);
+                log("build_tower(position, tower_available[1])");
+                game_money -=/*getMoney(tower_available[1])*/120;
+                sprite->setVisible(false);
+                this->removeChild(touch_layer);
+                game_map[position.i][position.j] = TOWER;
+            }
+        }
+        else if (//若按下位置在第三个炮塔图标内
+            tower_available[2] != -1 &&
+            touch->getLocation().x >= sprite_3->getPosition().x - sprite_3->getContentSize().width / 2 &&
+            touch->getLocation().x <= sprite_3->getPosition().x + sprite_3->getContentSize().width / 2 &&
+            touch->getLocation().y >= sprite_3->getPosition().y - sprite_3->getContentSize().height / 2 &&
+            touch->getLocation().y <= sprite_3->getPosition().y + sprite_3->getContentSize().height / 2) {
+            if (game_money >=/*getMoney(tower_available[2])*/120) {//若钱够，则建造
+                // build_tower(position, tower_available[2]);
+                log("build_tower(position, tower_available[2])");
+                game_money -=/*getMoney(tower_available[2])*/120;
+                sprite->setVisible(false);
+                this->removeChild(touch_layer);
+                game_map[position.i][position.j] = TOWER;
+            }
+        }
+        else {
+            //若按下位置不在图标内
+            sprite->setVisible(false);
+            this->removeChild(touch_layer);
+        }
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, touch_layer);
+}
+//对防御塔的操作
+void GameMenu::tower_operations(pos position) {
+    float range_scale = 1;//getRange(position);
+    int level = 1;// getLevel(position);
+    int level_up_money = 100;// getLevelUpMoney(position);
+    int sell_money = 100;//getSellMoney(position);
+    vec2 vec = trans_ij_to_xy(position);
+    //遮罩层
+    auto touch_layer = Layer::create();
+    this->addChild(touch_layer);
+    //范围显示
+    auto range = Sprite::create("/GameScene/Tower/AttackRange.PNG");
+    range->setScale(range_scale);
+    range->setPosition(Vec2(vec.x,
+        vec.y));
+    touch_layer->addChild(range);
+    //升级显示
+    auto level_up = Sprite::create("/GameScene/Tower/Btn_CanUpLevel.png");
+    if (game_money < level_up_money) {
+        level_up->setTexture("/GameScene/Tower/Btn_CantUpLevel.png");
+    }
+    if (level == 3) {
+        level_up->setTexture("/GameScene/Tower/Btn_ReachHighestLevel.PNG");
+    }
+    level_up->setPosition(Vec2(vec.x,
+        vec.y + range->getContentSize().height/2));
+    touch_layer->addChild(level_up);
+    //出售显示
+    auto sell = Sprite::create("/GameScene/Tower/Btn_SellTower.png");
+    sell->setPosition(Vec2(vec.x,
+        vec.y - range->getContentSize().height/2));
+    touch_layer->addChild(sell);
 
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = [](Touch* touch, Event* event) {
+        return true;
+    };
+    listener->onTouchEnded = [=](Touch* touch, Event* event) {
+        //若点击升级按钮
+        if (touch->getLocation().x >= level_up->getPosition().x - level_up->getContentSize().width / 2 &&
+            touch->getLocation().x <= level_up->getPosition().x + level_up->getContentSize().width / 2 &&
+            touch->getLocation().y >= level_up->getPosition().y - level_up->getContentSize().height / 2 &&
+            touch->getLocation().y <= level_up->getPosition().y + level_up->getContentSize().height / 2) {
+            if (level < 3 && game_money >= level_up_money) {
+                //UpLevel(position);
+                log("UpLevel(position)");
+                game_money -= level_up_money;
+                this->removeChild(touch_layer);
+            }
+        }
+        else if (//若点击出售按钮
+            touch->getLocation().x >= sell->getPosition().x - sell->getContentSize().width / 2 &&
+            touch->getLocation().x <= sell->getPosition().x + sell->getContentSize().width / 2 &&
+            touch->getLocation().y >= sell->getPosition().y - sell->getContentSize().height / 2 &&
+            touch->getLocation().y <= sell->getPosition().y + sell->getContentSize().height / 2) {
+            //SellTower(position)
+            log("SellTower(position)");
+            game_money += sell_money;
+            game_map[position.i][position.j] = EMPTY;
+            this->removeChild(touch_layer);
+        }
+        else {
+            this->removeChild(touch_layer);
+        }
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, touch_layer);
 }
