@@ -17,14 +17,10 @@ using namespace std;
 #define Max_Level 3
 
 const static int Tower_Value[4] = { 100,120,160,160 };
-const static int Tower_Attack[4] = { 100,120,160,160 };
-const static int Tower_Attack_Speed[4] = { 100,120,160,160 };
-const static int Tower_Attack_Range[4] = { 100,120,160,160 };
-const static int Tower_Attack_Special[4] = { 100,120,160,160 };
+const static int Tower_Attack[4] = { 50,20,60,80 };
+const static int Tower_Attack_Speed[4] = { 12,4,4,3 };
 
-/*炮台类*/
-class Tower {
-private:
+struct Tower_information {
 	int name_tag;//记录名称标签
 	int value;//记录当前价值
 	int attack;//记录单次攻击力
@@ -32,6 +28,12 @@ private:
 	int attack_range;//记录攻击范围
 	int attack_special;//记录特殊攻击效果（穿透、减速、分裂等）
 	int level;//记录等级
+};
+
+/*炮台类*/
+class Tower {
+private:
+	Tower_information tower;
 public:
 	int get_now_money(int tag);//获得当前价值
 	void build_tower(pos position, int tag, cocos2d::Layer* this_layer);//根据名称标签在指定位置建造一个炮台
