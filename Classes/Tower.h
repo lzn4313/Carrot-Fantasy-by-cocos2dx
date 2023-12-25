@@ -25,9 +25,18 @@ struct Tower_information {
 	int value;//记录当前价值
 	int attack;//记录单次攻击力
 	int attack_speed;//记录攻击速度
-	int attack_range;//记录攻击范围
+	float attack_range;//记录攻击范围
 	int attack_special;//记录特殊攻击效果（穿透、减速、分裂等）
 	int level;//记录等级
+	cocos2d::Sprite* tower_base;//炮台底座
+	cocos2d::Sprite* tower_body;//炮台主体
+
+	Tower_information(int t = 0, int v = 0, int atk = 0, int atk_speed = 0, float atk_r = 1, int atk_special = 0, int L = 1)
+		:name_tag(t), value(v), attack(atk), attack_speed(atk_speed), attack_range(atk_r), attack_special(atk_special), level(L)
+	{
+		tower_base = nullptr;
+		tower_body = nullptr;
+	}//构造函数
 };
 
 /*炮台类*/
@@ -35,8 +44,13 @@ class Tower {
 private:
 	Tower_information tower;
 public:
-	int get_now_money(int tag);//获得当前价值
 	void build_tower(pos position, int tag, cocos2d::Layer* this_layer);//根据名称标签在指定位置建造一个炮台
+	void up_level_tower(pos position);//升级炮台
+	void sell_tower(pos position);//出售炮台
+	float get_attack_range(pos position);//获得攻击范围
+	int get_level(pos position);//获得等级
+	int get_level_up_money(pos position);//获得升级所需金币
+	int get_sell_money(pos position);//获得出售价格
 };
 
 int getMoney(int tag);//根据名称标签获得初始价值

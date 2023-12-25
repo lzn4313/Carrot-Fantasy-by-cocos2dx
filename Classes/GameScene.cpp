@@ -3,6 +3,7 @@
 #include"sound&music.h"
 #include"GameData.h"
 #include"ui/CocosGUI.h"
+#include"Tower.h"
 #include<string>
 #include<vector>
 USING_NS_CC;
@@ -21,6 +22,7 @@ int game_waves;//当前波数
 int max_waves;//总波数
 char game_map[7][12];//辅助地图数组
 int tower_available[3];//可建造防御塔存储
+Tower_information tower_map[7][12];//储存防御塔信息的数组
 /**********************************  GameScene  ***********************************/
 Scene* GameScene::createScene()
 {
@@ -366,7 +368,7 @@ void GameMenu::build(pos position, int tower_available[]) {
         string str = "/GameScene/Tower/";
         //第一个炮台
         string str_1 = str + to_string(tower_available[0]) + "/";
-        if (game_money </*getMoney(tower_available[0])*/100) {
+        if (game_money <getMoney(tower_available[0])) {
             sprite_1->setTexture(str_1 + "CanClick0.PNG");
         }
         else {
@@ -378,7 +380,7 @@ void GameMenu::build(pos position, int tower_available[]) {
         touch_layer->addChild(sprite_1);
         //第二个炮台
         string str_2 = str + to_string(tower_available[1]) + "/";
-        if (game_money </*getMoney(tower_available[1])*/120) {
+        if (game_money <getMoney(tower_available[1])) {
             sprite_2->setTexture(str_2 + "CanClick0.PNG");
         }
         else {
@@ -393,7 +395,7 @@ void GameMenu::build(pos position, int tower_available[]) {
         string str = "/GameScene/Tower/";
         //第一个炮台
         string str_1 = str + to_string(tower_available[0]) + "/";
-        if (game_money </*getMoney(tower_available[0])*/100) {
+        if (game_money <getMoney(tower_available[0])) {
             sprite_1->setTexture(str_1 + "CanClick0.PNG");
         }
         else {
@@ -405,7 +407,7 @@ void GameMenu::build(pos position, int tower_available[]) {
         touch_layer->addChild(sprite_1);
         //第二个炮台
         string str_2 = str + to_string(tower_available[1]) + "/";
-        if (game_money </*getMoney(tower_available[1])*/120) {
+        if (game_money <getMoney(tower_available[1])) {
             sprite_2->setTexture(str_2 + "CanClick0.PNG");
         }
         else {
@@ -417,7 +419,7 @@ void GameMenu::build(pos position, int tower_available[]) {
         touch_layer->addChild(sprite_2);
         //第三个炮台
         string str_3 = str + to_string(tower_available[2]) + "/";
-        if (game_money </*getMoney(tower_available[2])*/120) {
+        if (game_money <getMoney(tower_available[2])) {
             sprite_3->setTexture(str_3 + "CanClick0.PNG");
         }
         else {
@@ -440,10 +442,11 @@ void GameMenu::build(pos position, int tower_available[]) {
             touch->getLocation().x <= sprite_1->getPosition().x + sprite_1->getContentSize().width / 2 &&
             touch->getLocation().y >= sprite_1->getPosition().y - sprite_1->getContentSize().height / 2 &&
             touch->getLocation().y <= sprite_1->getPosition().y + sprite_1->getContentSize().height / 2) {
-            if (game_money >=/*getMoney(tower_available[0])*/100) {//若钱够，则建造
-                // build_tower(position,tower_available[0]);
+            if (game_money >=getMoney(tower_available[0])) {//若钱够，则建造
+                Tower newtower;
+                newtower.build_tower(position, tower_available[0], this);
                 log("build_tower(position, tower_available[0])");
-                game_money -=/*getMoney(tower_available[0])*/100;
+                game_money -=getMoney(tower_available[0]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
                 game_map[position.i][position.j] = TOWER;
@@ -454,10 +457,11 @@ void GameMenu::build(pos position, int tower_available[]) {
             touch->getLocation().x <= sprite_2->getPosition().x + sprite_2->getContentSize().width / 2 &&
             touch->getLocation().y >= sprite_2->getPosition().y - sprite_2->getContentSize().height / 2 &&
             touch->getLocation().y <= sprite_2->getPosition().y + sprite_2->getContentSize().height / 2) {
-            if (game_money >=/*getMoney(tower_available[1])*/120) {//若钱够，则建造
-                // build_tower(position, tower_available[1]);
+            if (game_money >=getMoney(tower_available[1])) {//若钱够，则建造
+                Tower newtower;
+                newtower.build_tower(position, tower_available[1], this);
                 log("build_tower(position, tower_available[1])");
-                game_money -=/*getMoney(tower_available[1])*/120;
+                game_money -=getMoney(tower_available[1]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
                 game_map[position.i][position.j] = TOWER;
@@ -469,10 +473,11 @@ void GameMenu::build(pos position, int tower_available[]) {
             touch->getLocation().x <= sprite_3->getPosition().x + sprite_3->getContentSize().width / 2 &&
             touch->getLocation().y >= sprite_3->getPosition().y - sprite_3->getContentSize().height / 2 &&
             touch->getLocation().y <= sprite_3->getPosition().y + sprite_3->getContentSize().height / 2) {
-            if (game_money >=/*getMoney(tower_available[2])*/120) {//若钱够，则建造
-                // build_tower(position, tower_available[2]);
+            if (game_money >=getMoney(tower_available[2])) {//若钱够，则建造
+                Tower newtower;
+                newtower.build_tower(position, tower_available[2], this);
                 log("build_tower(position, tower_available[2])");
-                game_money -=/*getMoney(tower_available[2])*/120;
+                game_money -=getMoney(tower_available[2]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
                 game_map[position.i][position.j] = TOWER;
