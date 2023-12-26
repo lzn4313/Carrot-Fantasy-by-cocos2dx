@@ -1,4 +1,5 @@
 #include "Tower.h"
+#include"sound&music.h"
 #include <string>
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -8,23 +9,15 @@ extern Tower_information tower_map[7][12];
 /*建造炮台*/
 void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 {
+	build_sound_effect();
+
 	string str[5] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" ,"/Tower/Build/" };
 	vec2 vec = trans_ij_to_xy(position);
-
-	//利用帧动画完成建造特效
-	auto Effect = Sprite::create();
-	Vector<SpriteFrame*> frame;
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_1.PNG", Rect(0, 0, 40, 40)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_2.PNG", Rect(0, 0, 40, 40)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_3.PNG", Rect(0, 0, 40, 40)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_4.PNG", Rect(0, 0, 40, 40)));
-	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.1)), FadeOut::create(0.1), nullptr));
-	Effect->setPosition(vec.x, vec.y);
-	this_layer->addChild(Effect);
 
 	Tower_information tower(tag, Tower_Value[tag - 1], Tower_Attack[tag - 1], Tower_Attack_Speed[tag - 1], 1, tag - 1, 1);
 	tower.tower_base = Sprite::create();
 	tower.tower_body = Sprite::create();
+
 	switch (tag) {
 		case 1:
 			tower.tower_base->setTexture(str[tag - 1] + "ID1_11.PNG");
@@ -47,22 +40,36 @@ void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 		default:
 			break;
 	}
+
 	tower.tower_base->setPosition(vec.x, vec.y);
 	this_layer->addChild(tower.tower_base);
 	tower.tower_body->setPosition(vec.x, vec.y);
 	this_layer->addChild(tower.tower_body);
 	tower_map[position.i][position.j] = tower;
+
+	//利用帧动画完成建造特效
+	auto Effect = Sprite::create();
+	Vector<SpriteFrame*> frame;
+	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_1.PNG", Rect(0, 0, 161, 133)));
+	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
+	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
+	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
+	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), FadeOut::create(0.1), nullptr));
+	Effect->setPosition(vec.x, vec.y);
+	this_layer->addChild(Effect);
 }
 
 /*升级炮台*/
 void Tower::up_level_tower(pos position, cocos2d::Layer* this_layer)
 {
+	uplevel_sound_effect();
+
 	/*删掉旧炮台*/
 	this_layer->removeChild(tower_map[position.i][position.j].tower_base);
 	this_layer->removeChild(tower_map[position.i][position.j].tower_body);
 
 	string str[4] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" };
-	
+
 	if (tower_map[position.i][position.j].level < Max_Level) {
 		/*更新基本信息*/
 		tower_map[position.i][position.j].level++;
@@ -134,6 +141,8 @@ void Tower::up_level_tower(pos position, cocos2d::Layer* this_layer)
 /*出售炮台*/
 void Tower::sell_tower(pos position, cocos2d::Layer* this_layer)
 {
+	sell_sound_effect();
+
 	/*重置基本信息*/
 	tower_map[position.i][position.j].name_tag = 0;
 	tower_map[position.i][position.j].attack_special = 0;
@@ -148,6 +157,18 @@ void Tower::sell_tower(pos position, cocos2d::Layer* this_layer)
 
 	tower_map[position.i][position.j].tower_base = nullptr;
 	tower_map[position.i][position.j].tower_body = nullptr;
+
+	//利用帧动画完成删除特效
+	vec2 vec = trans_ij_to_xy(position);
+	auto Effect = Sprite::create();
+	Vector<SpriteFrame*> frame;
+	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_1.PNG", Rect(0, 0, 161, 133)));
+	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
+	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
+	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
+	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), FadeOut::create(0), nullptr));
+	Effect->setPosition(vec.x, vec.y);
+	this_layer->addChild(Effect);
 }
 
 /*获得出售价格*/
