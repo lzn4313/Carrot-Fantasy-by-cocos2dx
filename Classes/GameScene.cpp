@@ -493,10 +493,11 @@ void GameMenu::build(pos position, int tower_available[]) {
 }
 //¶Ô·ÀÓùËþµÄ²Ù×÷
 void GameMenu::tower_operations(pos position) {
-    float range_scale = 1;//getRange(position);
-    int level = 1;// getLevel(position);
-    int level_up_money = 100;// getLevelUpMoney(position);
-    int sell_money = 100;//getSellMoney(position);
+    Tower newtower;
+    float range_scale = newtower.get_attack_range(position);//getRange(position);
+    int level = newtower.get_level(position);// getLevel(position);
+    int level_up_money = newtower.get_level_up_money(position);// getLevelUpMoney(position);
+    int sell_money = newtower.get_sell_money(position);//getSellMoney(position);
     vec2 vec = trans_ij_to_xy(position);
     //ÕÚÕÖ²ã
     auto touch_layer = Layer::create();
@@ -536,7 +537,8 @@ void GameMenu::tower_operations(pos position) {
             touch->getLocation().y >= level_up->getPosition().y - level_up->getContentSize().height / 2 &&
             touch->getLocation().y <= level_up->getPosition().y + level_up->getContentSize().height / 2) {
             if (level < 3 && game_money >= level_up_money) {
-                //UpLevel(position);
+                Tower newtower;
+                newtower.up_level_tower(position, this);
                 log("UpLevel(position)");
                 game_money -= level_up_money;
                 this->removeChild(touch_layer);
@@ -547,7 +549,8 @@ void GameMenu::tower_operations(pos position) {
             touch->getLocation().x <= sell->getPosition().x + sell->getContentSize().width / 2 &&
             touch->getLocation().y >= sell->getPosition().y - sell->getContentSize().height / 2 &&
             touch->getLocation().y <= sell->getPosition().y + sell->getContentSize().height / 2) {
-            //SellTower(position)
+            Tower newtower;
+            newtower.sell_tower(position, this);
             log("SellTower(position)");
             game_money += sell_money;
             game_map[position.i][position.j] = EMPTY;
