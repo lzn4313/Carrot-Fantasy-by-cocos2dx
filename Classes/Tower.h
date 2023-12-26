@@ -51,6 +51,8 @@ public:
 	int get_level(pos position);//获得等级
 	int get_level_up_money(pos position);//获得升级所需金币
 	int get_sell_money(pos position);//获得出售价格
+	void bullet_fly(Tower_information tower, cocos2d::Vec2 start, cocos2d::Vec2 end, cocos2d::Layer* this_layer);//子弹飞行动画
+	void attack_once(Tower_information tower, cocos2d::Vec2 start, cocos2d::Vec2 end, cocos2d::Layer* this_layer);//单次攻击动画
 };
 
 int getMoney(int tag);//根据名称标签获得初始价值

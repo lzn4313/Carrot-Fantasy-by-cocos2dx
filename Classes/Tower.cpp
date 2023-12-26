@@ -1,10 +1,13 @@
 #include "Tower.h"
 #include"sound&music.h"
 #include <string>
+#include <cmath>
 USING_NS_CC;
 using namespace cocos2d::ui;
 
 extern Tower_information tower_map[7][12];
+extern int if_speed_up;
+extern int if_pause;
 
 /*建造炮台*/
 void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
@@ -34,7 +37,7 @@ void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 			break;
 		case 4:
 			tower.tower_base->setTexture(str[tag - 1] + "ID3_56.PNG");
-			tower.tower_body->setTexture(str[tag - 1] + "ID3_97.PNG");
+			tower.tower_body->setTexture(str[tag - 1] + "ID3_99.PNG");
 			tower.tower_body->setRotation(0);
 			break;
 		default:
@@ -54,9 +57,16 @@ void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
 	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
 	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
-	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), FadeOut::create(0.1), nullptr));
+	auto remove_effect = CallFunc::create([=]() {
+		this_layer->removeChild(Effect);
+		});
+	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), remove_effect, nullptr));
 	Effect->setPosition(vec.x, vec.y);
 	this_layer->addChild(Effect);
+
+	//Vec2 Start = { vec.x,vec.y };
+	//Vec2 End = { vec.x + 200,vec.y + 200 };
+	//bullet_fly(tower, Start, End, this_layer);
 }
 
 /*升级炮台*/
@@ -72,11 +82,11 @@ void Tower::up_level_tower(pos position, cocos2d::Layer* this_layer)
 
 	if (tower_map[position.i][position.j].level < Max_Level) {
 		/*更新基本信息*/
+		tower_map[position.i][position.j].value += get_level_up_money(position);
 		tower_map[position.i][position.j].level++;
 		tower_map[position.i][position.j].attack *= 2;
 		tower_map[position.i][position.j].attack_range++;
 		tower_map[position.i][position.j].attack_speed *= 1.5;
-		tower_map[position.i][position.j].value += get_level_up_money(position);
 
 		tower_map[position.i][position.j].tower_base = Sprite::create();
 		tower_map[position.i][position.j].tower_body = Sprite::create();
@@ -166,9 +176,12 @@ void Tower::sell_tower(pos position, cocos2d::Layer* this_layer)
 	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
 	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
 	frame.pushBack(SpriteFrame::create("/Tower/Build/Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
-	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), FadeOut::create(0), nullptr));
 	Effect->setPosition(vec.x, vec.y);
 	this_layer->addChild(Effect);
+	auto remove_effect = CallFunc::create([=]() {
+		this_layer->removeChild(Effect);
+		});
+	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), remove_effect, nullptr));
 }
 
 /*获得出售价格*/
@@ -192,10 +205,71 @@ int Tower::get_level(pos position)
 /*获得升级所需金币*/
 int Tower::get_level_up_money(pos position)
 {
-	return (tower_map[position.i][position.j].value + (tower_map[position.i][position.j].level) * 40);
+	if (tower_map[position.i][position.j].name_tag == Tower_Bottle)
+		return (100 + tower_map[position.i][position.j].level * 80);
+	else
+		return(tower_map[position.i][position.j].level == 1 ? 220 : 260);
 }
 
 /*获得初始建造金币*/
 int getMoney(int tag) {
 	return Tower_Value[tag - 1];
+}
+
+/*子弹飞行动画*/
+void Tower::bullet_fly(Tower_information tower, cocos2d::Vec2 start, cocos2d::Vec2 end, cocos2d::Layer* this_layer)
+{
+	float dx, dy, r;
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	r = -atan2f(dy, dx) / 3.14159 * 180;
+	string str[4] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" };
+
+	auto bullet = Sprite::create();
+	switch (tower.level)
+	{
+		case 1:
+			bullet->setTexture(str[tower.name_tag - 1] + "bullet1.PNG");
+			break;
+		case 2:
+			bullet->setTexture(str[tower.name_tag - 1] + "bullet2.PNG");
+			break;
+		case 3:
+			bullet->setTexture(str[tower.name_tag - 1] + "bullet3.PNG");
+			break;
+		default:
+			break;
+	}
+	bullet->setPosition(start);
+
+	auto remove_bullet = CallFunc::create([=]() {
+		this_layer->removeChild(bullet);
+		});
+
+	if (tower.name_tag == Tower_Bottle || tower.name_tag == Tower_Shit) {
+		bullet->setRotation(r);
+		auto bullet_move_to = cocos2d::MoveTo::create(if_speed_up == 0 ? 0.33 : 0.33 / 2, end);
+		bullet->runAction(Sequence::create(bullet_move_to, DelayTime::create(0), remove_bullet, DelayTime::create(0), nullptr));
+	}
+	else if (tower.name_tag == Tower_Star || tower.name_tag == Tower_Fan) {
+		auto bullet_move_to = cocos2d::MoveTo::create(if_speed_up == 0 ? 1.5 : 1.5 / 2, end);
+		auto rotate = Spawn::create(bullet_move_to, Repeat::create(RotateBy::create(if_speed_up == 0 ? 0.5 : 0.5 / 2, 360), 3), nullptr);
+		bullet->runAction(Sequence::create(rotate, DelayTime::create(0), remove_bullet, DelayTime::create(0), nullptr));
+	}
+
+	this_layer->addChild(bullet);
+}
+
+/*单次攻击动画*/
+void Tower::attack_once(Tower_information tower, cocos2d::Vec2 start, cocos2d::Vec2 end, cocos2d::Layer* this_layer)
+{
+	float dx, dy, r;
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	r = -atan2f(dy, dx) / 3.14159 * 180;
+	string str[4] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" };
+
+	if (tower.name_tag == Tower_Bottle || tower.name_tag == Tower_Shit) {
+
+	}
 }
