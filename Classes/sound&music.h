@@ -21,3 +21,59 @@ static void page_sound_effect() {
 		AudioEngine::play2d("/sound/page.mp3", false, 0.2f);
 	}
 }
+//播放建造音效
+static void build_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放建造音效
+		AudioEngine::play2d("/sound/build_tower.mp3", false, 1.0f);
+	}
+}
+//播放出售音效
+static void sell_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放出售音效
+		AudioEngine::play2d("/sound/sell_tower.mp3", false, 1.0f);
+	}
+}
+//播放升级音效
+static void uplevel_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放升级音效
+		AudioEngine::play2d("/sound/uplevel_tower.mp3", false, 1.0f);
+	}
+}
+//播放星星攻击音效
+static void star_atk_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放星星攻击音效
+		AudioEngine::play2d("/sound/star_atk.mp3", false, 1.0f);
+	}
+}
+//播放瓶子攻击音效
+static void bottle_atk_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放瓶子攻击音效
+		AudioEngine::play2d("/sound/bottle_atk.mp3", false, 1.0f);
+	}
+}
+//播放风扇攻击音效
+static void fan_atk_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放风扇攻击音效
+		AudioEngine::play2d("/sound/fan_atk.mp3", false, 1.0f);
+	}
+}
+//播放大便攻击音效
+static void shit_atk_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放大便攻击音效
+		AudioEngine::play2d("/sound/shit_atk.mp3", false, 1.0f);
+	}
+}
+//播放萝卜被吃音效
+static void carrot_eaten_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放萝卜被吃音效
+		AudioEngine::play2d("/sound/carrot_eaten.mp3", false, 1.0f);
+	}
+}
