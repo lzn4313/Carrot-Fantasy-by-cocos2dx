@@ -6,7 +6,6 @@
 #include"Tower.h"
 #include<string>
 #include<vector>
-#include"enemy.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 /*******************************  错误处理  ************************************/
@@ -22,6 +21,8 @@ int game_money;//金钱
 int game_waves;//当前波数
 int max_waves;//总波数
 char game_map[7][12];//辅助地图数组
+int carrot_hp;//记录萝卜血量
+pos carrot_position;//记录萝卜位置
 int tower_available[3];//可建造防御塔存储
 Tower_information tower_map[7][12];//储存防御塔信息的数组
 /**********************************  GameScene  ***********************************/
@@ -113,12 +114,6 @@ bool GameMenu::init()
         origin.y + visibleSize.height * 0.94));
     menu->addChild(speed_toggle);
     //暂停开关
-    //暂停界面的纯色层
-    auto black_layer = LayerColor::create(Color4B::BLACK);
-    black_layer->setPosition(Vec2::ZERO);
-    black_layer->setOpacity(85);
-    black_layer->setVisible(false);
-    this->addChild(black_layer, -1);
     //暂停界面提示
     auto paused = Sprite::create("/GameScene/paused.png");
     paused->setScale(1.4);
@@ -134,7 +129,6 @@ bool GameMenu::init()
         button_sound_effect();//播放音效
         if (if_pause == 0) {//若勾选，则表示暂停
             if_pause = 1;
-            black_layer->setVisible(true);
             paused->setVisible(true);
             waves_image->setVisible(false);
             waves_label->setVisible(false);
@@ -142,7 +136,6 @@ bool GameMenu::init()
         }
         else {
             if_pause = 0;
-            black_layer->setVisible(false);
             paused->setVisible(false);
             waves_image->setVisible(true);
             waves_label->setVisible(true);
@@ -182,6 +175,31 @@ bool GameMenu::init()
             this->addChild(grid[i][j], -1);
         }
     }
+
+    //萝卜
+    carrot_hp = 10;
+    vec2 carrot_pos = trans_ij_to_xy(carrot_position);
+    auto carrot = Sprite::create();
+    carrot->setName("Carrot");
+    carrot->setTexture("/Carrot/HP_MAX.PNG");
+    carrot->setPosition(carrot_pos.x, carrot_pos.y);
+    carrot->setAnchorPoint(Vec2{ 0.3, 0.2 });
+    tower_map[carrot_position.i][carrot_position.j] = { CARROT, 0, 0, 0, 1, 0, 1 };
+    this->addChild(carrot);
+    //萝卜血量
+    auto carrot_hp_image = Sprite::create();
+    carrot_hp_image->setTexture("/Carrot/Hp.png");
+    carrot_hp_image->setAnchorPoint(Vec2{ 0,0.5 });
+    carrot_hp_image->setPosition(carrot_pos.x + carrot->getContentSize().width * 0.5, carrot_pos.y + carrot->getContentSize().height * 0.3);
+    this->addChild(carrot_hp_image);
+    auto hp_label = Label::createWithTTF(to_string(carrot_hp), "/fonts/Marker Felt.ttf", 20);
+    hp_label->setTextColor(Color4B::WHITE);
+    hp_label->setName("HpLabel");
+    hp_label->setAnchorPoint(Vec2(0, 0.5));
+    hp_label->setPosition(Vec2(carrot_pos.x + carrot->getContentSize().width * 0.5 + carrot_hp_image->getContentSize().width * 0.5,
+        carrot_pos.y + carrot->getContentSize().height * 0.3));
+    this->addChild(hp_label);
+
     //游戏开始的倒计时
     start();
     //游戏开始后的触摸事件
@@ -208,9 +226,11 @@ bool GameMenu::init()
             Node* node = this->getChildByTag(100 * position.i + position.j);
             Sprite* grid = static_cast<Sprite*>(node);
             if (game_map[position.i][position.j] == EMPTY) {
+                button_sound_effect();
                 build(position, tower_available);
             }
-            else if(game_map[position.i][position.j] == TOWER){
+            else if (game_map[position.i][position.j] == TOWER || game_map[position.i][position.j] == CARROT) {
+                button_sound_effect();
                 tower_operations(position);
             }
         }
@@ -218,7 +238,6 @@ bool GameMenu::init()
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
 
-    
     this->scheduleUpdate();
     return true;
 }
@@ -232,7 +251,52 @@ void GameMenu::update(float dt) {
     Node* waves_node = this->getChildByName("WavesLabel");
     Label* waves_label = static_cast<Label*>(waves_node);
     waves_label->setString(to_string(game_waves / 10 % 10) + "   " + to_string(game_waves % 10));
+    //实时更新萝卜生命值
+    Node* hp_node = this->getChildByName("HpLabel");
+    Label* hp_label = static_cast<Label*>(hp_node);
+    hp_label->setString(to_string(carrot_hp));
+    //根据萝卜生命值更新萝卜外观
+    Node* carrot_node = this->getChildByName("Carrot");
+    Sprite* carrot_image = static_cast<Sprite*>(carrot_node);
+    switch (carrot_hp) {
+        case 0:
+        case 1:
+            carrot_image->setAnchorPoint(Vec2{ 0.5, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_1.PNG");
+            break;
+        case 2:
+            carrot_image->setAnchorPoint(Vec2{ 0.5, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_2.PNG");
+            break;
+        case 3:
+            carrot_image->setAnchorPoint(Vec2{ 0.5, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_3.PNG");
+            break;
+        case 4:
+            carrot_image->setAnchorPoint(Vec2{ 0.3, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_4.PNG");
+            break;
+        case 5:
+        case 6:
+            carrot_image->setAnchorPoint(Vec2{ 0.3, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_5-6.PNG");
+            break;
+        case 7:
+        case 8:
+            carrot_image->setAnchorPoint(Vec2{ 0.3, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_7-8.PNG");
+            break;
+        case 9:
+            carrot_image->setAnchorPoint(Vec2{ 0.3, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_9.PNG");
+            break;
+        default:
+            carrot_image->setAnchorPoint(Vec2{ 0.3, 0.2 });
+            carrot_image->setTexture("/Carrot/HP_MAX.PNG");
+            break;
+    }
 }
+
 //设置界面
 void GameMenu::options() {
     button_sound_effect();//播放音效
@@ -495,10 +559,11 @@ void GameMenu::build(pos position, int tower_available[]) {
 }
 //对防御塔的操作
 void GameMenu::tower_operations(pos position) {
-    float range_scale = 1;//getRange(position);
-    int level = 1;// getLevel(position);
-    int level_up_money = 100;// getLevelUpMoney(position);
-    int sell_money = 100;//getSellMoney(position);
+    Tower newtower;
+    float range_scale = newtower.get_attack_range(position);//getRange(position);
+    int level = newtower.get_level(position);// getLevel(position);
+    int level_up_money = newtower.get_level_up_money(position);// getLevelUpMoney(position);
+    int sell_money = newtower.get_sell_money(position);//getSellMoney(position);
     vec2 vec = trans_ij_to_xy(position);
     //遮罩层
     auto touch_layer = Layer::create();
@@ -518,46 +583,91 @@ void GameMenu::tower_operations(pos position) {
         level_up->setTexture("/GameScene/Tower/Btn_ReachHighestLevel.PNG");
     }
     level_up->setPosition(Vec2(vec.x,
-        vec.y + range->getContentSize().height/2));
+        vec.y + range->getContentSize().height / 2));
     touch_layer->addChild(level_up);
-    //出售显示
-    auto sell = Sprite::create("/GameScene/Tower/Btn_SellTower.png");
-    sell->setPosition(Vec2(vec.x,
-        vec.y - range->getContentSize().height/2));
-    touch_layer->addChild(sell);
 
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->setSwallowTouches(true);
-    listener->onTouchBegan = [](Touch* touch, Event* event) {
-        return true;
-    };
-    listener->onTouchEnded = [=](Touch* touch, Event* event) {
-        //若点击升级按钮
-        if (touch->getLocation().x >= level_up->getPosition().x - level_up->getContentSize().width / 2 &&
-            touch->getLocation().x <= level_up->getPosition().x + level_up->getContentSize().width / 2 &&
-            touch->getLocation().y >= level_up->getPosition().y - level_up->getContentSize().height / 2 &&
-            touch->getLocation().y <= level_up->getPosition().y + level_up->getContentSize().height / 2) {
-            if (level < 3 && game_money >= level_up_money) {
-                //UpLevel(position);
-                log("UpLevel(position)");
-                game_money -= level_up_money;
+    if (level != 3) {
+        auto level_up_label = Label::createWithTTF(to_string(level_up_money), "/fonts/Marker Felt.ttf", 22);
+        level_up_label->setPosition(Vec2(vec.x + range->getContentSize().width * 0.04,
+            vec.y + range->getContentSize().height * 0.38));
+        level_up_label->setTextColor(Color4B::BLACK);
+        touch_layer->addChild(level_up_label);
+    }
+
+    if (game_map[position.i][position.j] == TOWER) {
+        //出售显示
+        auto sell = Sprite::create("/GameScene/Tower/Btn_SellTower.png");
+        sell->setPosition(Vec2(vec.x,
+            vec.y - range->getContentSize().height / 2));
+        touch_layer->addChild(sell);
+
+        auto  sell_label = Label::createWithTTF(to_string(sell_money), "/fonts/Marker Felt.ttf", 22);
+        sell_label->setPosition(Vec2(vec.x + range->getContentSize().width * 0.04,
+            vec.y - range->getContentSize().height * 0.62));
+        sell_label->setTextColor(Color4B::BLACK);
+        touch_layer->addChild(sell_label);
+
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [](Touch* touch, Event* event) {
+            return true;
+            };
+        listener->onTouchEnded = [=](Touch* touch, Event* event) {
+            //若点击升级按钮
+            if (touch->getLocation().x >= level_up->getPosition().x - level_up->getContentSize().width / 2 &&
+                touch->getLocation().x <= level_up->getPosition().x + level_up->getContentSize().width / 2 &&
+                touch->getLocation().y >= level_up->getPosition().y - level_up->getContentSize().height / 2 &&
+                touch->getLocation().y <= level_up->getPosition().y + level_up->getContentSize().height / 2) {
+                if (level < 3 && game_money >= level_up_money) {
+                    Tower newtower;
+                    newtower.up_level_tower(position, this);
+                    log("UpLevel(position)");
+                    game_money -= level_up_money;
+                    this->removeChild(touch_layer);
+                }
+            }
+            else if (//若点击出售按钮
+                touch->getLocation().x >= sell->getPosition().x - sell->getContentSize().width / 2 &&
+                touch->getLocation().x <= sell->getPosition().x + sell->getContentSize().width / 2 &&
+                touch->getLocation().y >= sell->getPosition().y - sell->getContentSize().height / 2 &&
+                touch->getLocation().y <= sell->getPosition().y + sell->getContentSize().height / 2) {
+                Tower newtower;
+                newtower.sell_tower(position, this);
+                log("SellTower(position)");
+                game_money += sell_money;
+                game_map[position.i][position.j] = EMPTY;
                 this->removeChild(touch_layer);
             }
-        }
-        else if (//若点击出售按钮
-            touch->getLocation().x >= sell->getPosition().x - sell->getContentSize().width / 2 &&
-            touch->getLocation().x <= sell->getPosition().x + sell->getContentSize().width / 2 &&
-            touch->getLocation().y >= sell->getPosition().y - sell->getContentSize().height / 2 &&
-            touch->getLocation().y <= sell->getPosition().y + sell->getContentSize().height / 2) {
-            //SellTower(position)
-            log("SellTower(position)");
-            game_money += sell_money;
-            game_map[position.i][position.j] = EMPTY;
-            this->removeChild(touch_layer);
-        }
-        else {
-            this->removeChild(touch_layer);
-        }
-    };
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, touch_layer);
+            else {
+                this->removeChild(touch_layer);
+            }
+            };
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, touch_layer);
+    }
+    else if (game_map[position.i][position.j] == CARROT) {
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [](Touch* touch, Event* event) {
+            return true;
+            };
+        listener->onTouchEnded = [=](Touch* touch, Event* event) {
+            //若点击升级按钮
+            if (touch->getLocation().x >= level_up->getPosition().x - level_up->getContentSize().width / 2 &&
+                touch->getLocation().x <= level_up->getPosition().x + level_up->getContentSize().width / 2 &&
+                touch->getLocation().y >= level_up->getPosition().y - level_up->getContentSize().height / 2 &&
+                touch->getLocation().y <= level_up->getPosition().y + level_up->getContentSize().height / 2) {
+                if (level < 3 && game_money >= level_up_money) {
+                    Tower newtower;
+                    newtower.up_level_tower(position, this);
+                    log("UpLevel(position)");
+                    game_money -= level_up_money;
+                    this->removeChild(touch_layer);
+                }
+            }
+            else {
+                this->removeChild(touch_layer);
+            }
+            };
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, touch_layer);
+    }
 }

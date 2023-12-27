@@ -8,66 +8,66 @@ using namespace cocos2d::ui;
 extern Tower_information tower_map[7][12];
 extern int if_speed_up;
 extern int if_pause;
+extern int carrot_hp;
 
 /*建造炮台*/
 void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 {
-	build_sound_effect();
+	if (tag <= 4) {
+		build_sound_effect();
 
-	string str[5] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" ,"/Tower/Build/" };
-	vec2 vec = trans_ij_to_xy(position);
+		string str[5] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" ,"/Tower/Build/" };
+		vec2 vec = trans_ij_to_xy(position);
 
-	Tower_information tower(tag, Tower_Value[tag - 1], Tower_Attack[tag - 1], Tower_Attack_Speed[tag - 1], 1, tag - 1, 1);
-	tower.tower_base = Sprite::create();
-	tower.tower_body = Sprite::create();
+		Tower_information tower(tag, Tower_Value[tag - 1], Tower_Attack[tag - 1], Tower_Attack_Speed[tag - 1], 1, tag - 1, 1);
+		tower.tower_base = Sprite::create();
+		tower.tower_body = Sprite::create();
 
-	switch (tag) {
-		case 1:
-			tower.tower_base->setTexture(str[tag - 1] + "ID1_11.PNG");
-			tower.tower_body->setTexture(str[tag - 1] + "ID1_22.PNG");
-			tower.tower_body->setRotation(-90);
-			break;
-		case 2:
-			tower.tower_base->setTexture(str[tag - 1] + "ID2_29.PNG");
-			tower.tower_body->setTexture(str[tag - 1] + "ID2_4.PNG");
-			break;
-		case 3:
-			tower.tower_base->setTexture(str[tag - 1] + "ID4_0.PNG");
-			tower.tower_body->setTexture(str[tag - 1] + "ID4_16.PNG");
-			break;
-		case 4:
-			tower.tower_base->setTexture(str[tag - 1] + "ID3_56.PNG");
-			tower.tower_body->setTexture(str[tag - 1] + "ID3_99.PNG");
-			tower.tower_body->setRotation(0);
-			break;
-		default:
-			break;
+		switch (tag) {
+			case 1:
+				tower.tower_base->setTexture(str[tag - 1] + "ID1_11.PNG");
+				tower.tower_body->setTexture(str[tag - 1] + "ID1_22.PNG");
+				tower.tower_body->setRotation(-90);
+				break;
+			case 2:
+				tower.tower_base->setTexture(str[tag - 1] + "ID2_29.PNG");
+				tower.tower_body->setTexture(str[tag - 1] + "ID2_4.PNG");
+				break;
+			case 3:
+				tower.tower_base->setTexture(str[tag - 1] + "ID4_0.PNG");
+				tower.tower_body->setTexture(str[tag - 1] + "ID4_16.PNG");
+				break;
+			case 4:
+				tower.tower_base->setTexture(str[tag - 1] + "ID3_56.PNG");
+				tower.tower_body->setTexture(str[tag - 1] + "ID3_99.PNG");
+				tower.tower_body->setRotation(0);
+				break;
+			default:
+				break;
+		}
+
+		tower.tower_base->setPosition(vec.x, vec.y);
+		this_layer->addChild(tower.tower_base);
+		tower.tower_body->setPosition(vec.x, vec.y);
+		this_layer->addChild(tower.tower_body);
+		tower_map[position.i][position.j] = tower;
+
+		//利用帧动画完成建造特效
+		auto Effect = Sprite::create();
+		Vector<SpriteFrame*> frame;
+		frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_1.PNG", Rect(0, 0, 161, 133)));
+		frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
+		frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
+		frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
+		auto remove_effect = CallFunc::create([=]() {
+			this_layer->removeChild(Effect);
+			});
+		Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), remove_effect, nullptr));
+		Effect->setPosition(vec.x, vec.y);
+		this_layer->addChild(Effect);
+
+		carrot_hp--;
 	}
-
-	tower.tower_base->setPosition(vec.x, vec.y);
-	this_layer->addChild(tower.tower_base);
-	tower.tower_body->setPosition(vec.x, vec.y);
-	this_layer->addChild(tower.tower_body);
-	tower_map[position.i][position.j] = tower;
-
-	//利用帧动画完成建造特效
-	auto Effect = Sprite::create();
-	Vector<SpriteFrame*> frame;
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_1.PNG", Rect(0, 0, 161, 133)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_2.PNG", Rect(0, 0, 169, 175)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_3.PNG", Rect(0, 0, 199, 224)));
-	frame.pushBack(SpriteFrame::create(str[4] + "Items02-hd_4.PNG", Rect(0, 0, 242, 243)));
-	auto remove_effect = CallFunc::create([=]() {
-		this_layer->removeChild(Effect);
-		});
-	Effect->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), remove_effect, nullptr));
-	Effect->setPosition(vec.x, vec.y);
-	this_layer->addChild(Effect);
-
-	Vec2 Start = { vec.x,vec.y };
-	Vec2 End = { vec.x + 200,vec.y + 200 };
-	attack_once(tower, Start, End, this_layer);
-	//bullet_fly(tower, Start, End, this_layer);
 }
 
 /*升级炮台*/
@@ -75,80 +75,111 @@ void Tower::up_level_tower(pos position, cocos2d::Layer* this_layer)
 {
 	uplevel_sound_effect();
 
-	/*删掉旧炮台*/
-	this_layer->removeChild(tower_map[position.i][position.j].tower_base);
-	this_layer->removeChild(tower_map[position.i][position.j].tower_body);
-
-	string str[4] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" };
-
 	if (tower_map[position.i][position.j].level < Max_Level) {
-		/*更新基本信息*/
-		tower_map[position.i][position.j].value += get_level_up_money(position);
-		tower_map[position.i][position.j].level++;
-		tower_map[position.i][position.j].attack *= 2;
-		tower_map[position.i][position.j].attack_range++;
-		tower_map[position.i][position.j].attack_speed *= 1.5;
-
-		tower_map[position.i][position.j].tower_base = Sprite::create();
-		tower_map[position.i][position.j].tower_body = Sprite::create();
-
-		/*更新画面*/
-		switch (tower_map[position.i][position.j].name_tag) {
-			case 1:
-				tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_11.PNG");
-				if (tower_map[position.i][position.j].level == 2) {
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_15.PNG");
-				}
-				else if (tower_map[position.i][position.j].level == 3) {
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_5.PNG");
-				}
-				tower_map[position.i][position.j].tower_body->setRotation(-90);
-				break;
-			case 2:
-				if (tower_map[position.i][position.j].level == 2) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_9.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_21.PNG");
-				}
-				else if (tower_map[position.i][position.j].level == 3) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_7.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_22.PNG");
-				}
-				break;
-			case 3:
-				if (tower_map[position.i][position.j].level == 2) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_1.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_8.PNG");
-				}
-				else if (tower_map[position.i][position.j].level == 3) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_2.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_11.PNG");
-				}
-				break;
-			case 4:
-				if (tower_map[position.i][position.j].level == 2) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_56.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_98.PNG");
-				}
-				else if (tower_map[position.i][position.j].level == 3) {
-					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_84.PNG");
-					tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_46.PNG");
-				}
-				tower_map[position.i][position.j].tower_body->setRotation(0);
-				break;
-			default:
-				break;
-		}
-
 		vec2 vec = trans_ij_to_xy(position);
-		tower_map[position.i][position.j].tower_base->setPosition(vec.x, vec.y);
-		tower_map[position.i][position.j].tower_body->setPosition(vec.x, vec.y);
+		if (tower_map[position.i][position.j].name_tag != CARROT) {
+			/*删掉旧炮台*/
+			this_layer->removeChild(tower_map[position.i][position.j].tower_base);
+			this_layer->removeChild(tower_map[position.i][position.j].tower_body);
 
-		this_layer->addChild(tower_map[position.i][position.j].tower_base);
-		this_layer->addChild(tower_map[position.i][position.j].tower_body);
+			string str[4] = { "/Tower/Bottle/" ,"/Tower/Shit/", "/Tower/Fan/","/Tower/Star/" };
 
-		Vec2 Start = { vec.x,vec.y };
-		Vec2 End = { vec.x + 200,vec.y + 200 };
-		attack_once(tower_map[position.i][position.j], Start, End, this_layer);
+			/*更新基本信息*/
+			tower_map[position.i][position.j].value += get_level_up_money(position);
+			tower_map[position.i][position.j].level++;
+			tower_map[position.i][position.j].attack *= 2;
+			tower_map[position.i][position.j].attack_range += 0.5;
+			tower_map[position.i][position.j].attack_speed *= 1.5;
+
+			tower_map[position.i][position.j].tower_base = Sprite::create();
+			tower_map[position.i][position.j].tower_body = Sprite::create();
+
+			/*更新画面*/
+			switch (tower_map[position.i][position.j].name_tag) {
+				case 1:
+					tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_11.PNG");
+					if (tower_map[position.i][position.j].level == 2) {
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_15.PNG");
+					}
+					else if (tower_map[position.i][position.j].level == 3) {
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID1_5.PNG");
+					}
+					tower_map[position.i][position.j].tower_body->setRotation(-90);
+					break;
+				case 2:
+					if (tower_map[position.i][position.j].level == 2) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_9.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_21.PNG");
+					}
+					else if (tower_map[position.i][position.j].level == 3) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_7.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID2_22.PNG");
+					}
+					break;
+				case 3:
+					if (tower_map[position.i][position.j].level == 2) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_1.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_8.PNG");
+					}
+					else if (tower_map[position.i][position.j].level == 3) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_2.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID4_11.PNG");
+					}
+					break;
+				case 4:
+					if (tower_map[position.i][position.j].level == 2) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_56.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_98.PNG");
+					}
+					else if (tower_map[position.i][position.j].level == 3) {
+						tower_map[position.i][position.j].tower_base->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_84.PNG");
+						tower_map[position.i][position.j].tower_body->setTexture(str[tower_map[position.i][position.j].name_tag - 1] + "ID3_46.PNG");
+					}
+					tower_map[position.i][position.j].tower_body->setRotation(0);
+					break;
+				default:
+					break;
+			}
+
+			tower_map[position.i][position.j].tower_base->setPosition(vec.x, vec.y);
+			tower_map[position.i][position.j].tower_body->setPosition(vec.x, vec.y);
+
+			this_layer->addChild(tower_map[position.i][position.j].tower_base);
+			this_layer->addChild(tower_map[position.i][position.j].tower_body);
+
+			Vec2 Start = { vec.x,vec.y };
+			Vec2 End = { vec.x + 200,vec.y + 200 };
+			attack_once(tower_map[position.i][position.j], Start, End, this_layer);
+		}
+		else {
+			tower_map[position.i][position.j].level++;
+			carrot_hp += 2;
+		}
+		//利用帧动画完成升级特效
+		auto Effect_1 = Sprite::create();
+		Vector<SpriteFrame*> frame;
+		frame.pushBack(SpriteFrame::create("/Tower/Build/up1.png", Rect(0, 0, 77, 62)));
+		frame.pushBack(SpriteFrame::create("/Tower/Build/up2.png", Rect(0, 0, 86, 69)));
+		frame.pushBack(SpriteFrame::create("/Tower/Build/up3.png", Rect(0, 0, 95, 69)));
+		frame.pushBack(SpriteFrame::create("/Tower/Build/up4.png", Rect(0, 0, 120, 80)));
+		Effect_1->setScale(2);
+		auto remove_effect_1 = CallFunc::create([=]() {
+			this_layer->removeChild(Effect_1);
+			});
+		Effect_1->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.05)), remove_effect_1, nullptr));
+		Effect_1->setPosition(vec.x, vec.y);
+		this_layer->addChild(Effect_1, -1);
+
+		auto Effect_2 = Sprite::create();
+		Effect_2->setPosition(vec.x, vec.y);
+		Effect_2->setTexture("/Tower/Build/up5.png");
+		auto effect_move = cocos2d::MoveTo::create(0.2, Vec2{ vec.x,vec.y + 300 });
+		Effect_2->setScale(2);
+		auto remove_effect_2 = CallFunc::create([=]() {
+			this_layer->removeChild(Effect_2);
+			});
+		Effect_2->runAction(Sequence::create(effect_move, remove_effect_2, nullptr));
+		this_layer->addChild(Effect_2);
 	}
 
 }
@@ -212,8 +243,10 @@ int Tower::get_level_up_money(pos position)
 {
 	if (tower_map[position.i][position.j].name_tag == Tower_Bottle)
 		return (100 + tower_map[position.i][position.j].level * 80);
+	else if (tower_map[position.i][position.j].name_tag == CARROT)
+		return (tower_map[position.i][position.j].level == 1 ? 500 : 1000);
 	else
-		return(tower_map[position.i][position.j].level == 1 ? 220 : 260);
+		return (tower_map[position.i][position.j].level == 1 ? 220 : 260);
 }
 
 /*获得初始建造金币*/
@@ -313,10 +346,81 @@ void Tower::attack_once(Tower_information tower, cocos2d::Vec2 start, cocos2d::V
 		atk_Effect->runAction(Sequence::create(
 			hide_body, Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), unhide_body, remove_atk_Effect, nullptr));
 		bullet_fly(tower, start, end, this_layer);
-
 	}
 	else if (tower.name_tag == Tower_Shit) {
-		//auto seq = Sequence::create(
-			//hide_body, Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), nullptr);
+		//利用帧动画完成攻击动画
+		auto atk_Effect = Sprite::create();
+		Vector<SpriteFrame*> frame;
+		switch (tower.level) {
+			case 1:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_5.PNG", Rect(0, 0, 43,46)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_28.PNG", Rect(0, 0, 55, 46)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_4.PNG", Rect(0, 0, 47, 41)));
+				break;
+			case 2:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_37.PNG", Rect(0, 0, 48, 60)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_23.PNG", Rect(0, 0, 59, 57)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_21.PNG", Rect(0, 0, 52, 53)));
+				break;
+			case 3:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_19.PNG", Rect(0, 0, 56, 68)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_14.PNG", Rect(0, 0, 70, 66)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID2_22.PNG", Rect(0, 0, 61, 65)));
+				break;
+			default:
+				break;
+		}
+		atk_Effect->setPosition(start.x, start.y);
+		this_layer->addChild(atk_Effect);
+		auto hide_body = CallFunc::create([=]() {
+			tower.tower_body->setVisible(0);
+			});
+		auto unhide_body = CallFunc::create([=]() {
+			tower.tower_body->setVisible(1);
+			});
+		auto remove_atk_Effect = CallFunc::create([=]() {
+			atk_Effect->removeFromParent();
+			});
+		atk_Effect->runAction(Sequence::create(
+			hide_body, Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), unhide_body, remove_atk_Effect, nullptr));
+		bullet_fly(tower, start, end, this_layer);
+	}
+	else if (tower.name_tag == Tower_Fan) {
+		//利用帧动画完成攻击动画
+		auto atk_Effect = Sprite::create();
+		Vector<SpriteFrame*> frame;
+		switch (tower.level) {
+			case 1:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk11.PNG", Rect(0, 0, 59, 59)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk12.PNG", Rect(0, 0, 61, 58)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID4_16.PNG", Rect(0, 0, 53, 54)));
+				break;
+			case 2:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk21.PNG", Rect(0, 0, 60, 60)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk22.PNG", Rect(0, 0, 70, 69)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID4_8.PNG", Rect(0, 0, 57, 56)));
+				break;
+			case 3:
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk32.PNG", Rect(0, 0, 72, 73)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "atk32.PNG", Rect(0, 0, 73, 74)));
+				frame.pushBack(SpriteFrame::create(str[tower.name_tag - 1] + "ID4_11.PNG", Rect(0, 0, 68, 70)));
+				break;
+			default:
+				break;
+		}
+		atk_Effect->setPosition(start.x, start.y);
+		this_layer->addChild(atk_Effect);
+		auto hide_body = CallFunc::create([=]() {
+			tower.tower_body->setVisible(0);
+			});
+		auto unhide_body = CallFunc::create([=]() {
+			tower.tower_body->setVisible(1);
+			});
+		auto remove_atk_Effect = CallFunc::create([=]() {
+			atk_Effect->removeFromParent();
+			});
+		atk_Effect->runAction(Sequence::create(
+			hide_body, Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), unhide_body, remove_atk_Effect, nullptr));
+		bullet_fly(tower, start, end, this_layer);
 	}
 }
