@@ -55,7 +55,7 @@ bool Level_1_1::init()
     }
     //¸üĞÂ·ÀÓùËş
     tower_available[0] = 1;
-    tower_available[1] = 3;
+    tower_available[1] = 2;
     tower_available[2] = -1;
     /***********************  ±³¾°  ************************/
     auto bg_image = Sprite::create("/Level_1_1/Level_1_1_bg.png");

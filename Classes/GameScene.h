@@ -57,6 +57,10 @@ public:
     void build(pos position, int tower_available[]);
     //升级删除
     void tower_operations(pos position);
+    //游戏失败
+    void lose();
+    //游戏获胜
+    void win();
     //实时更新金币等数据
     virtual void update(float dt);
 };

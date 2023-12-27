@@ -1,5 +1,6 @@
 #include"Level_1_1.h"
 #include"GameScene.h"
+#include"GameSelectionScene.h"
 #include"sound&music.h"
 #include"GameData.h"
 #include"ui/CocosGUI.h"
@@ -241,6 +242,157 @@ bool GameMenu::init()
     this->scheduleUpdate();
     return true;
 }
+//失败
+void GameMenu::lose() {
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    /************************  纯色层  *****************************/
+    auto black_layer = LayerColor::create(Color4B::BLACK);
+    black_layer->setPosition(Vec2::ZERO);
+    black_layer->setOpacity(90);
+    this->addChild(black_layer, 1);
+    /************************  事件监听器  *****************************/
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);//设置吞没，以确保必须按按钮才能返回上一页
+    listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+        return true;
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, black_layer);
+
+    /******************  背景  ***************************/
+    auto lose_bg = Sprite::create("/GameScene/lose.png");
+    lose_bg->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        origin.y + visibleSize.height / 2));
+    lose_bg->setScale(1.7);
+    black_layer->addChild(lose_bg);
+    //当前波数显示
+    auto waves_label = Label::createWithTTF(to_string(game_waves / 10 % 10) + "   " + to_string(game_waves % 10), "/fonts/Marker Felt.ttf", 32);
+    waves_label->setColor(Color3B::YELLOW);
+    waves_label->setPosition(Vec2(origin.x + visibleSize.width * 0.475,
+        origin.y + visibleSize.height * 0.52));
+    black_layer->addChild(waves_label);
+    //波数显示
+    auto waves_txt = Label::createWithTTF(to_string(max_waves), "/fonts/Marker Felt.ttf", 32);
+    waves_txt->setPosition(Vec2(origin.x + visibleSize.width * 0.58,
+        origin.y + visibleSize.height * 0.52));
+    black_layer->addChild(waves_txt);
+    //关卡显示
+    auto level_txt = Label::createWithTTF("0" + to_string(level_selection), "/fonts/Marker Felt.ttf", 32);
+    level_txt->setPosition(Vec2(origin.x + visibleSize.width * 0.4,
+        origin.y + visibleSize.height * 0.43));
+    black_layer->addChild(level_txt);
+    /*******************  菜单  **************************/
+    auto options_menu = Menu::create();
+    options_menu->setPosition(Vec2::ZERO);
+    black_layer->addChild(options_menu);
+    //重新开始
+    auto again_btn = MenuItemImage::create("/GameScene/again_normal.png", "/GameScene/again_selected.png");
+    again_btn->setPosition(Vec2(visibleSize.width * 0.6, visibleSize.height * 0.3));
+    again_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
+        button_sound_effect();
+        this->removeChildByName("PlayingLevel");
+        if (level_selection == 1) {
+            auto level_1_1 = Level_1_1::createLayer();
+            level_1_1->setName("PlayingLevel");
+            this->addChild(level_1_1, -3);
+            carrot_hp = 10;
+            start();
+        }
+        this->scheduleUpdate();
+        this->removeChild(black_layer);
+        });
+    options_menu->addChild(again_btn);
+    //选择关卡
+    auto return_btn = MenuItemImage::create("/GameScene/return_normal.png", "/GameScene/return_selected.png");
+    return_btn->setPosition(Vec2(visibleSize.width * 0.35, visibleSize.height * 0.3));
+    return_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
+        button_sound_effect();
+        Director::getInstance()->popScene();
+        });
+    options_menu->addChild(return_btn);
+
+}
+//胜利
+void GameMenu::win() {
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    /************************  获胜  ******************************/
+    UserDefault::getInstance()->setIntegerForKey("adventure_statistics", UserDefault::getInstance()->getIntegerForKey("adventure_statistics") + 1);
+    UserDefault::getInstance()->setIntegerForKey("level_1", UserDefault::getInstance()->getIntegerForKey("level_1") + 1);
+    /************************  纯色层  *****************************/
+    auto black_layer = LayerColor::create(Color4B::BLACK);
+    black_layer->setPosition(Vec2::ZERO);
+    black_layer->setOpacity(90);
+    this->addChild(black_layer, 1);
+    /************************  事件监听器  *****************************/
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);//设置吞没，以确保必须按按钮才能返回上一页
+    listener->onTouchBegan = [black_layer](Touch* touch, Event* event) {
+        return true;
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, black_layer);
+
+    /******************  背景  ***************************/
+    auto win_bg = Sprite::create("/GameScene/win.png");
+    win_bg->setPosition(Vec2(origin.x + visibleSize.width / 2,
+        origin.y + visibleSize.height / 2));
+    win_bg->setScale(1.7);
+    black_layer->addChild(win_bg);
+    //当前波数显示
+    auto waves_label = Label::createWithTTF(to_string(game_waves / 10 % 10) + "   " + to_string(game_waves % 10), "/fonts/Marker Felt.ttf", 32);
+    waves_label->setColor(Color3B::YELLOW);
+    waves_label->setPosition(Vec2(origin.x + visibleSize.width * 0.475,
+        origin.y + visibleSize.height * 0.51));
+    black_layer->addChild(waves_label);
+    //波数显示
+    auto waves_txt = Label::createWithTTF(to_string(max_waves), "/fonts/Marker Felt.ttf", 32);
+    waves_txt->setPosition(Vec2(origin.x + visibleSize.width * 0.58,
+        origin.y + visibleSize.height * 0.51));
+    black_layer->addChild(waves_txt);
+    //关卡显示
+    auto level_txt = Label::createWithTTF("0" + to_string(level_selection), "/fonts/Marker Felt.ttf", 32);
+    level_txt->setPosition(Vec2(origin.x + visibleSize.width * 0.4,
+        origin.y + visibleSize.height * 0.42));
+    level_txt->setColor(Color3B::YELLOW);
+    black_layer->addChild(level_txt);
+    /*******************  菜单  **************************/
+    auto options_menu = Menu::create();
+    options_menu->setPosition(Vec2::ZERO);
+    black_layer->addChild(options_menu);
+    //继续游戏
+    auto resume_btn = MenuItemImage::create("/GameScene/resume_normal.png", "/GameScene/resume_selected.png");
+    resume_btn->setPosition(Vec2(visibleSize.width * 0.6, visibleSize.height * 0.3));
+    resume_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
+        button_sound_effect();
+        this->removeChildByName("PlayingLevel");
+        /*if (level_selection == 1) {
+            auto level_1_2 = Level_1_2::createLayer();
+            level_1_2->setName("PlayingLevel");
+            this->addChild(level_1_2, -3);
+            this->scheduleUpdate();
+            carrot_hp = 10;
+            start();
+        }
+        else if (level_selection == 2) {
+            log("To be continued");
+            Director::getInstance()->popScene();
+        }*/
+        this->removeChild(black_layer);
+        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(GameSelectionScene::createScene());
+        });
+    options_menu->addChild(resume_btn);
+    //选择关卡
+    auto return_btn = MenuItemImage::create("/GameScene/return_normal.png", "/GameScene/return_selected.png");
+    return_btn->setPosition(Vec2(visibleSize.width * 0.35, visibleSize.height * 0.3));
+    return_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
+        button_sound_effect();
+        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(GameSelectionScene::createScene());
+        });
+    options_menu->addChild(return_btn);
+
+}
 //重写update函数
 void GameMenu::update(float dt) {
     //实时更新金钱数据
@@ -295,8 +447,16 @@ void GameMenu::update(float dt) {
             carrot_image->setTexture("/Carrot/HP_MAX.PNG");
             break;
     }
+    //判断胜利失败
+    if (carrot_hp == 0) {
+        this->unscheduleUpdate();
+        lose();
+    }
+    if (game_waves == max_waves/*&&monster数组为空*/) {
+        this->unscheduleUpdate();
+        win();
+    }
 }
-
 //设置界面
 void GameMenu::options() {
     button_sound_effect();//播放音效
