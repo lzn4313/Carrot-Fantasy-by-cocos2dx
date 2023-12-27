@@ -7,8 +7,6 @@
 #define EMPTY 0
 #define DISABLED 1
 #define TOWER 2
-#define CARROT 3
-
 //¹¤¾ßº¯Êý
 struct pos {
     int i;
