@@ -40,6 +40,8 @@ public:
     static cocos2d::Scene* createScene();
     virtual bool init();
     CREATE_FUNC(GameScene);
+    //重置菜单界面
+    void reset_menu();
 };
 //游戏菜单类
 class GameMenu :public cocos2d::Layer 

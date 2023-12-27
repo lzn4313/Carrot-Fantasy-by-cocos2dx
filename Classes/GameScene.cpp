@@ -53,6 +53,20 @@ bool GameScene::init()
 
     return true;
 }
+/*重置菜单界面*/
+void GameScene::reset_menu() {
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 12; j++) {
+            if (game_map[i][j] == 0) {
+                tower_map[i][j] = { None };
+            }
+        }
+    }
+    this->removeChildByName("GameMenu");
+    auto menu_layer = GameMenu::createLayer();
+    menu_layer->setName("GameMenu");
+    this->addChild(menu_layer, 1);
+}
 /**********************************  GameMenu  ********************************/
 Layer* GameMenu::createLayer()
 {
@@ -205,7 +219,7 @@ bool GameMenu::init()
     start();
     //游戏开始后的触摸事件
     auto listener = EventListenerTouchOneByOne::create();
-    listener->setSwallowTouches(true);
+    listener->setSwallowTouches(false);
     listener->onTouchBegan = [=](Touch* touch, Event* event) {
         if (touch->getLocation().y < 560) {
             vec2 vec;
@@ -238,7 +252,64 @@ bool GameMenu::init()
     };
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
+    /*****************************************
+    *********************
+    ************
+    *********
+    ********
+    *****调试*/
+    auto get_money = Label::createWithTTF("getMoney", "/fonts/Marker Felt.ttf", 30);
+    get_money->setTextColor(Color4B::YELLOW);
+    get_money->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
+        origin.y + visibleSize.height * 0.95));
+    this->addChild(get_money);
 
+    auto waves_up = Label::createWithTTF("WavesUp", "/fonts/Marker Felt.ttf", 30);
+    waves_up->setTextColor(Color4B::YELLOW);
+    waves_up->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
+        origin.y + visibleSize.height * 0.9));
+    this->addChild(waves_up);
+
+    auto hp_down = Label::createWithTTF("HpDown", "/fonts/Marker Felt.ttf", 30);
+    hp_down->setTextColor(Color4B::YELLOW);
+    hp_down->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
+        origin.y + visibleSize.height * 0.85));
+    this->addChild(hp_down);
+
+    auto listener2 = EventListenerTouchOneByOne::create();
+    listener2->onTouchBegan = [=](Touch* touch, Event* event) {
+        return true;
+    };
+    listener2->onTouchEnded = [=](Touch* touch, Event* event) {
+        if (touch->getLocation().x >= get_money->getPosition().x - get_money->getContentSize().width / 2 &&
+            touch->getLocation().x <= get_money->getPosition().x + get_money->getContentSize().width / 2 &&
+            touch->getLocation().y >= get_money->getPosition().y - get_money->getContentSize().height / 2 &&
+            touch->getLocation().y <= get_money->getPosition().y + get_money->getContentSize().height / 2) {
+            game_money += 1000;
+        }
+
+        if (touch->getLocation().x >= waves_up->getPosition().x - waves_up->getContentSize().width / 2 &&
+            touch->getLocation().x <= waves_up->getPosition().x + waves_up->getContentSize().width / 2 &&
+            touch->getLocation().y >= waves_up->getPosition().y - waves_up->getContentSize().height / 2 &&
+            touch->getLocation().y <= waves_up->getPosition().y + waves_up->getContentSize().height / 2) {
+            game_waves += 1;
+        }
+
+        if (touch->getLocation().x >= hp_down->getPosition().x - hp_down->getContentSize().width / 2 &&
+            touch->getLocation().x <= hp_down->getPosition().x + hp_down->getContentSize().width / 2 &&
+            touch->getLocation().y >= hp_down->getPosition().y - hp_down->getContentSize().height / 2 &&
+            touch->getLocation().y <= hp_down->getPosition().y + hp_down->getContentSize().height / 2) {
+            carrot_hp -= 1;
+        }
+    };
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
+    /*****
+    *************
+    **********************
+    **************************
+    ********************************
+    ************************************ *****调试*/
+    //调用调度器
     this->scheduleUpdate();
     return true;
 }
@@ -295,11 +366,9 @@ void GameMenu::lose() {
             auto level_1_1 = Level_1_1::createLayer();
             level_1_1->setName("PlayingLevel");
             this->addChild(level_1_1, -3);
-            carrot_hp = 10;
             start();
         }
-        this->scheduleUpdate();
-        this->removeChild(black_layer);
+        static_cast<GameScene*>(this->getParent())->reset_menu();
         });
     options_menu->addChild(again_btn);
     //选择关卡
@@ -317,8 +386,8 @@ void GameMenu::win() {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     /************************  获胜  ******************************/
-    UserDefault::getInstance()->setIntegerForKey("adventure_statistics", UserDefault::getInstance()->getIntegerForKey("adventure_statistics") + 1);
-    UserDefault::getInstance()->setIntegerForKey("level_1", UserDefault::getInstance()->getIntegerForKey("level_1") + 1);
+    UserDefault::getInstance()->setIntegerForKey("adventure_statistics", level_selection + 1);
+    UserDefault::getInstance()->setIntegerForKey("level_1", level_selection + 1);
     /************************  纯色层  *****************************/
     auto black_layer = LayerColor::create(Color4B::BLACK);
     black_layer->setPosition(Vec2::ZERO);
@@ -370,14 +439,13 @@ void GameMenu::win() {
             level_1_2->setName("PlayingLevel");
             this->addChild(level_1_2, -3);
             this->scheduleUpdate();
-            carrot_hp = 10;
             start();
+            static_cast<GameScene*>(this->getParent())->reset_menu();
         }
         else if (level_selection == 2) {
             log("To be continued");
             Director::getInstance()->popScene();
         }*/
-        this->removeChild(black_layer);
         Director::getInstance()->popScene();
         Director::getInstance()->replaceScene(GameSelectionScene::createScene());
         });
@@ -503,9 +571,8 @@ void GameMenu::options() {
             auto level_1_1 = Level_1_1::createLayer();
             level_1_1->setName("PlayingLevel");
             this->addChild(level_1_1, -3);
-            start();
         }
-        this->removeChild(black_layer);
+        static_cast<GameScene*>(this->getParent())->reset_menu();
         });
     options_menu->addChild(restart_btn);
     //选择关卡
@@ -671,7 +738,6 @@ void GameMenu::build(pos position, int tower_available[]) {
             if (game_money >=getMoney(tower_available[0])) {//若钱够，则建造
                 Tower newtower;
                 newtower.build_tower(position, tower_available[0], this);
-                log("build_tower(position, tower_available[0])");
                 game_money -=getMoney(tower_available[0]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
@@ -686,7 +752,6 @@ void GameMenu::build(pos position, int tower_available[]) {
             if (game_money >=getMoney(tower_available[1])) {//若钱够，则建造
                 Tower newtower;
                 newtower.build_tower(position, tower_available[1], this);
-                log("build_tower(position, tower_available[1])");
                 game_money -=getMoney(tower_available[1]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
@@ -702,7 +767,6 @@ void GameMenu::build(pos position, int tower_available[]) {
             if (game_money >=getMoney(tower_available[2])) {//若钱够，则建造
                 Tower newtower;
                 newtower.build_tower(position, tower_available[2], this);
-                log("build_tower(position, tower_available[2])");
                 game_money -=getMoney(tower_available[2]);
                 sprite->setVisible(false);
                 this->removeChild(touch_layer);
@@ -719,11 +783,12 @@ void GameMenu::build(pos position, int tower_available[]) {
 }
 //对防御塔的操作
 void GameMenu::tower_operations(pos position) {
+    //获取防御塔信息
     Tower newtower;
-    float range_scale = newtower.get_attack_range(position);//getRange(position);
-    int level = newtower.get_level(position);// getLevel(position);
-    int level_up_money = newtower.get_level_up_money(position);// getLevelUpMoney(position);
-    int sell_money = newtower.get_sell_money(position);//getSellMoney(position);
+    float range_scale = newtower.get_attack_range(position);
+    int level = newtower.get_level(position);
+    int level_up_money = newtower.get_level_up_money(position);
+    int sell_money = newtower.get_sell_money(position);
     vec2 vec = trans_ij_to_xy(position);
     //遮罩层
     auto touch_layer = Layer::create();
