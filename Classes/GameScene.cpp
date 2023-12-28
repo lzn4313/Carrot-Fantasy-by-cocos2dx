@@ -1,10 +1,12 @@
 #include"Level_1_1.h"
+#include"Level_1_2.h"
 #include"GameScene.h"
 #include"GameSelectionScene.h"
 #include"sound&music.h"
 #include"GameData.h"
 #include"ui/CocosGUI.h"
 #include"Tower.h"
+#include"Enemy.h"
 #include<string>
 #include<vector>
 USING_NS_CC;
@@ -15,9 +17,11 @@ static void problemLoading(const char* filename)
     printf("Error while loading: %s\n", filename);
 }
 /**********************  全局变量  ***********************/
+//关卡选项
 int level_selection;//关卡选择
 int if_speed_up;//是否加速
 int if_pause;//是否暂停
+//游戏内数据
 int game_money;//金钱
 int game_waves;//当前波数
 int max_waves;//总波数
@@ -26,6 +30,15 @@ int carrot_hp;//记录萝卜血量
 pos carrot_position;//记录萝卜位置
 int tower_available[3];//可建造防御塔存储
 Tower_information tower_map[7][12];//储存防御塔信息的数组
+Enemy* destination;
+vector<LevelPath> levelPath;
+vector<Enemy*> barrier;
+vector<Enemy*> monster;
+//游戏统计数据
+int money_total;//击杀获得金钱总数
+int monster_total;//击杀怪物总数
+int boss_total;//击杀boss总数
+int barrier_total;//摧毁障碍总数
 /**********************************  GameScene  ***********************************/
 Scene* GameScene::createScene()
 {
@@ -40,11 +53,22 @@ bool GameScene::init()
     /**********************  部分全局变量初始化  **********************/
     if_speed_up = 0;//默认不加速
     if_pause = 0;//默认不暂停
+    carrot_hp = 10;//默认萝卜血量10
+    //默认统计为0
+    money_total = 0;
+    monster_total = 0;
+    boss_total = 0;
+    barrier_total = 0;
     /**********************  选关  ******************************/
     if (level_selection == 1) {
         auto level_1_1 = Level_1_1::createLayer();
         level_1_1->setName("PlayingLevel");
         this->addChild(level_1_1, -1);
+    }
+    else if (level_selection == 2) {
+        auto level_1_2 = Level_1_2::createLayer();
+        level_1_2->setName("PlayingLevel");
+        this->addChild(level_1_2, -1);
     }
     /***********************  菜单层  ***************************/
     auto menu_layer = GameMenu::createLayer();
@@ -55,6 +79,7 @@ bool GameScene::init()
 }
 /*重置菜单界面*/
 void GameScene::reset_menu() {
+    //tower_map重置
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 12; j++) {
             if (game_map[i][j] == 0) {
@@ -62,10 +87,21 @@ void GameScene::reset_menu() {
             }
         }
     }
+    //GameMenu重置
     this->removeChildByName("GameMenu");
     auto menu_layer = GameMenu::createLayer();
     menu_layer->setName("GameMenu");
     this->addChild(menu_layer, 1);
+    //全局变量重置
+    carrot_hp = 10;
+    money_total = 0;
+    monster_total = 0;
+    boss_total = 0;
+    barrier_total = 0;
+    if_speed_up = 0;
+    if_pause = 0;
+
+    this->scheduleUpdate();
 }
 /**********************************  GameMenu  ********************************/
 Layer* GameMenu::createLayer()
@@ -192,7 +228,6 @@ bool GameMenu::init()
     }
 
     //萝卜
-    carrot_hp = 10;
     vec2 carrot_pos = trans_ij_to_xy(carrot_position);
     auto carrot = Sprite::create();
     carrot->setName("Carrot");
@@ -219,7 +254,7 @@ bool GameMenu::init()
     start();
     //游戏开始后的触摸事件
     auto listener = EventListenerTouchOneByOne::create();
-    listener->setSwallowTouches(false);
+    listener->setSwallowTouches(true);
     listener->onTouchBegan = [=](Touch* touch, Event* event) {
         if (touch->getLocation().y < 560) {
             vec2 vec;
@@ -229,8 +264,9 @@ bool GameMenu::init()
             if (game_map[position.i][position.j] == DISABLED) {
                 return false;
             }
+            return true;
         }
-        return true;
+        return false;
     };
     listener->onTouchEnded = [=](Touch* touch, Event* event) {
         if (touch->getLocation().y < 560) {
@@ -238,15 +274,54 @@ bool GameMenu::init()
             vec.x = touch->getLocation().x;
             vec.y = touch->getLocation().y;
             pos position = trans_xy_to_ij(vec);
-            Node* node = this->getChildByTag(100 * position.i + position.j);
-            Sprite* grid = static_cast<Sprite*>(node);
-            if (game_map[position.i][position.j] == EMPTY) {
-                button_sound_effect();
-                build(position, tower_available);
+            if (game_map[position.i][position.j] != DISABLED) {
+                Node* node = this->getChildByTag(100 * position.i + position.j);
+                Sprite* grid = static_cast<Sprite*>(node);
+                if (game_map[position.i][position.j] == EMPTY) {
+                    button_sound_effect();
+                    build(position, tower_available);
+                }
+                else if (game_map[position.i][position.j] == TOWER || game_map[position.i][position.j] == CARROT) {
+                    button_sound_effect();
+                    tower_operations(position);
+                }
             }
-            else if (game_map[position.i][position.j] == TOWER || game_map[position.i][position.j] == CARROT) {
-                button_sound_effect();
-                tower_operations(position);
+            else {
+                int flag = 0;
+                for (int i = 0; i < monster.size(); i++) {
+                    if (vec.x >= monster[i]->getPositionX() - monster[i]->getContentSize().width / 2 &&
+                        vec.x <= monster[i]->getPositionX() + monster[i]->getContentSize().width / 2 &&
+                        vec.y >= monster[i]->getPositionY() - monster[i]->getContentSize().height / 2 &&
+                        vec.y <= monster[i]->getPositionY() + monster[i]->getContentSize().height / 2) {
+                        destination = monster[i];
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0) {
+                    for (int i = 0; i < barrier.size(); i++) {
+                        if (vec.x >= barrier[i]->getPositionX() - barrier[i]->getContentSize().width / 2 &&
+                            vec.x <= barrier[i]->getPositionX() + barrier[i]->getContentSize().width / 2 &&
+                            vec.y >= barrier[i]->getPositionY() - barrier[i]->getContentSize().height / 2 &&
+                            vec.y <= barrier[i]->getPositionY() + barrier[i]->getContentSize().height / 2) {
+                            destination = barrier[i];
+                            flag = 1;
+                            break;
+                        }
+                    }
+                }
+                if (flag == 0) {
+                    Node* node = this->getChildByTag(100 * position.i + position.j);
+                    Sprite* grid = static_cast<Sprite*>(node);
+                    button_sound_effect();
+                    auto image_change = CallFunc::create([=]() {
+                        grid->setTexture("/GameScene/cantBuild.png");
+                        });
+                    auto image_invisible = CallFunc::create([=]() {
+                        grid->setVisible(false);
+                        });
+                    grid->runAction(Sequence::create(image_change, Blink::create(1, 3), image_invisible, nullptr));
+                }
             }
         }
     };
@@ -315,6 +390,12 @@ bool GameMenu::init()
 }
 //失败
 void GameMenu::lose() {
+    /*******************************  数据更新  *****************************/
+    UserDefault::getInstance()->setIntegerForKey("money_statistics", UserDefault::getInstance()->getIntegerForKey("money_statistics") + money_total);
+    UserDefault::getInstance()->setIntegerForKey("monster_statistics", UserDefault::getInstance()->getIntegerForKey("monster_statistics") + monster_total);
+    UserDefault::getInstance()->setIntegerForKey("boss_statistics", UserDefault::getInstance()->getIntegerForKey("boss_statistics") + boss_total);
+    UserDefault::getInstance()->setIntegerForKey("damage_statistics", UserDefault::getInstance()->getIntegerForKey("damage_statistics") + barrier_total);
+    /********************************  显示  ******************************/
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     /************************  纯色层  *****************************/
@@ -383,6 +464,12 @@ void GameMenu::lose() {
 }
 //胜利
 void GameMenu::win() {
+    /*******************************  数据更新  *****************************/
+    UserDefault::getInstance()->setIntegerForKey("money_statistics", UserDefault::getInstance()->getIntegerForKey("money_statistics") + money_total);
+    UserDefault::getInstance()->setIntegerForKey("monster_statistics", UserDefault::getInstance()->getIntegerForKey("monster_statistics") + monster_total);
+    UserDefault::getInstance()->setIntegerForKey("boss_statistics", UserDefault::getInstance()->getIntegerForKey("boss_statistics") + boss_total);
+    UserDefault::getInstance()->setIntegerForKey("damage_statistics", UserDefault::getInstance()->getIntegerForKey("damage_statistics") + barrier_total);
+    /********************************  显示  ******************************/
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     /************************  获胜  ******************************/
@@ -433,21 +520,18 @@ void GameMenu::win() {
     resume_btn->setPosition(Vec2(visibleSize.width * 0.6, visibleSize.height * 0.3));
     resume_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
         button_sound_effect();
-        this->removeChildByName("PlayingLevel");
-        /*if (level_selection == 1) {
+        this->getParent()->removeChildByName("PlayingLevel");
+        if (level_selection == 1) {
             auto level_1_2 = Level_1_2::createLayer();
             level_1_2->setName("PlayingLevel");
-            this->addChild(level_1_2, -3);
-            this->scheduleUpdate();
-            start();
+            this->getParent()->addChild(level_1_2, -3);
             static_cast<GameScene*>(this->getParent())->reset_menu();
         }
         else if (level_selection == 2) {
             log("To be continued");
             Director::getInstance()->popScene();
-        }*/
-        Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(GameSelectionScene::createScene());
+            Director::getInstance()->replaceScene(GameSelectionScene::createScene());
+        }
         });
     options_menu->addChild(resume_btn);
     //选择关卡
@@ -520,7 +604,7 @@ void GameMenu::update(float dt) {
         this->unscheduleUpdate();
         lose();
     }
-    if (game_waves == max_waves/*&&monster数组为空*/) {
+    if (game_waves == max_waves && monster.size() == 0) {
         this->unscheduleUpdate();
         win();
     }
@@ -571,6 +655,11 @@ void GameMenu::options() {
             auto level_1_1 = Level_1_1::createLayer();
             level_1_1->setName("PlayingLevel");
             this->addChild(level_1_1, -3);
+        }
+        else if (level_selection == 2) {
+            auto level_1_2 = Level_1_2::createLayer();
+            level_1_2->setName("PlayingLevel");
+            this->addChild(level_1_2, -3);
         }
         static_cast<GameScene*>(this->getParent())->reset_menu();
         });

@@ -41,28 +41,47 @@ struct Enemy_information {
 	int damage;                                   //对萝卜造成的伤害
 	cocos2d::Sprite* enemy_picture;               //障碍贴图
 	int count;                                    //走过的格子数
-	 //怪物图片
-	Enemy_information(int originalHp = 0, int originalSpeed = 0, int defeatedCoin = 0, int realDamage = 0,int n=0)
-		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage),count(n)
+	//怪物图片
+	Enemy_information(int originalHp = 0, int originalSpeed = 500, int defeatedCoin = 0, int realDamage = 0, int n = 0)
+		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage), count(n)
 	{
 		enemy_picture = nullptr;
-	
+
 	}
 
 };
 
-class Enemy {
+class Enemy : public cocos2d::Sprite
+{
 private:
 	Enemy_information enemy;
 public:
-	void appear(int species,int model, int picture, pos position, cocos2d::Layer* this_layer);                            //怪物(含出场特效)或障碍上场以类别直接设定初始值
-	/*void appear(int species, int picture, int hp, int speed, int coin, int damage, pos position, cocos2d::Layer* this_layer); *///怪物或障碍上场   自行设定初始值
-	void selfAction();//怪物贴图自身的变化
-	void move();     //怪物的基本移动(移动速度+特殊debuff)
-	void attacked(); //怪物受到攻击(移除攻击特效？)
-	void showHpRate();  //实时更新血条
-	void defeated(); //怪物被打败(音效+金币更新+清除)
-	void eatCarrot();      //怪物触碰到萝卜(萝卜掉血(交互)+移除+死亡音效)
+	//void appear(int species, int model, int picture, pos position, cocos2d::Layer* this_layer);                            //怪物(含出场特效)或障碍上场以类别直接设定初始值
+	///*void appear(int species, int picture, int hp, int speed, int coin, int damage, pos position, cocos2d::Layer* this_layer); *///怪物或障碍上场   自行设定初始值
+	////void selfAction();//怪物贴图自身的变化
+	//void move();     //怪物的基本移动(移动速度+特殊debuff)
+	//void attacked(); //怪物受到攻击(移除攻击特效？)
+	//void showHpRate();  //实时更新血条
+	//void defeated(); //怪物被打败(音效+金币更新+清除)
+	//void eatCarrot();      //怪物触碰到萝卜(萝卜掉血(交互)+移除+死亡音效)
+    static cocos2d::Sprite* createSprite();
+	virtual bool init();
+	CREATE_FUNC(Enemy);
 	virtual void update(float dt);
 };
 
+
+/*update() {
+	static x = start.x;
+	static y = start.y;
+
+	this->setposition(Vec2(x + 10 * dx, y + 10 * dy));
+
+}*/
+
+void enemy_appear(int x,int y,cocos2d::Layer*this_layer);
+
+/*appear() {
+	auto new_enemy = Enemy::create();
+	this_layer->Addchild(new_enemy);
+}*/

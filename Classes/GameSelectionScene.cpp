@@ -945,7 +945,9 @@ void Level_1_Layer::level_1_2(Ref* psender, Widget::TouchEventType type)
                 this->addChild(black_layer, 2);
             }
             else {
-                ;//level_1_2´ý¿ª·¢
+                level_selection = 2;
+                auto game_scene = GameScene::createScene();
+                Director::getInstance()->pushScene(game_scene);
             }
             break;
     }
