@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "GameScene.h"
 
+
 #define BARRIER 0
 #define MONSTER 1
 
@@ -25,7 +26,7 @@
 #define MONSTER_NORMAL_HP     3 * MONSTER_FAST_HP    //普通怪血量
 #define MONSTER_HUGE_HP       3 * MONSTER_NORMAL_HP  //巨型怪血量
 
-#define MONSTER_HUGE_SPEED    1                        //巨型怪移动速度，蜗牛爬，待改动！！！！
+#define MONSTER_HUGE_SPEED    100                        //巨型怪移动速度，蜗牛爬，待改动！！！！
 #define MONSTER_NORMAL_SPEED  2*MONSTER_HUGE_SPEED     //正常怪移速
 #define MONSTER_FAST_SPEED    2*MONSTER_NORMAL_SPEED   //高速怪移速
 
@@ -34,6 +35,9 @@
 
 #define BARRIER_BASE_PICTURE  "/Enemy/barrier/0/"        //障碍路径
 #define MONSTER_BASE_PICTURE  "/Enemy/monster/0/"
+
+
+extern struct Tower_information;
 struct Enemy_information {
 	int hp;                                       //记录怪物血量
 	int speed;                                    //记录怪物移动速度
@@ -41,9 +45,11 @@ struct Enemy_information {
 	int damage;                                   //对萝卜造成的伤害
 	cocos2d::Sprite* enemy_picture;               //障碍贴图
 	int count;                                    //走过的格子数
-	//怪物图片
-	Enemy_information(int originalHp = 0, int originalSpeed = 500, int defeatedCoin = 0, int realDamage = 0, int n = 0)
-		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage), count(n)
+	int time = 0;                                 //记录生效时间
+	int origin_speed;                             //记录常态化速度
+	int full_hp;                                  //记录满血血量
+	Enemy_information(int originalHp = 0, int originalSpeed = 200, int defeatedCoin = 0, int realDamage = 0, int n = 0,int currentTime=0)
+		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage), count(n),origin_speed(originalSpeed),time(currentTime),full_hp(originalHp)
 	{
 		enemy_picture = nullptr;
 
@@ -68,6 +74,8 @@ public:
 	virtual bool init();
 	CREATE_FUNC(Enemy);
 	virtual void update(float dt);
+	void setType(int selection);
+	void declineHp(Tower_information tower);
 };
 
 
@@ -79,7 +87,7 @@ public:
 
 }*/
 
-void enemy_appear(int x,int y,cocos2d::Layer*this_layer);
+void enemy_appear(int species, int model, int picture,int x,int y,cocos2d::Layer*this_layer);
 
 /*appear() {
 	auto new_enemy = Enemy::create();
