@@ -22,6 +22,9 @@ public:
 
 	void SetLevel(int level_selection);
 	void monster_appear(int Type);
+	void barrier_appear(int Type, pos position);
+	void barrier_appear(int Type, pos position_l, pos position_r);
+	void barrier_appear(int Type, pos position_l, pos position_r, pos position_u);
 	void start();
 	void create_waves();
 };

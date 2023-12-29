@@ -71,11 +71,11 @@ bool GameScene::init()
         level_1_2->setName("PlayingLevel");
         this->addChild(level_1_2, -1);
     }
-   /* auto enemycreate = EnemyCreate::create();
+    auto enemycreate = EnemyCreate::create();
     enemycreate->setName("EnemyCreate");
     this->addChild(enemycreate);
     static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
-    static_cast<EnemyCreate*>(enemycreate)->start();*/
+    static_cast<EnemyCreate*>(enemycreate)->start();
     /***********************  菜单层  ***************************/
     auto menu_layer = GameMenu::createLayer();
     menu_layer->setName("GameMenu");
@@ -106,7 +106,6 @@ void GameScene::reset_menu() {
     barrier_total = 0;
     if_speed_up = 0;
     if_pause = 0;
-
     this->scheduleUpdate();
 }
 /**********************************  GameMenu  ********************************/
@@ -267,9 +266,9 @@ bool GameMenu::init()
             vec.x = touch->getLocation().x;
             vec.y = touch->getLocation().y;
             pos position = trans_xy_to_ij(vec);
-            if (game_map[position.i][position.j] == DISABLED) {
-                return false;
-            }
+            //if (game_map[position.i][position.j] == DISABLED) {
+            //    return false;
+            //}
             return true;
         }
         return false;
@@ -390,14 +389,6 @@ bool GameMenu::init()
     **************************
     ********************************
     ************************************ *****调试*/
-
-    auto enemy = Enemy::createSprite();
-    static_cast<Enemy*>(enemy)->setType(NORMAL);
-    vec2 start = trans_ij_to_xy({ 1,1 });
-    enemy->setPosition(Vec2(start.x, start.y));
-    this->addChild(enemy);
-    monster.push_back(static_cast<Enemy*>(enemy));//加入索敌数组
-
     //调用调度器
     this->scheduleUpdate();
     return true;
@@ -469,10 +460,10 @@ void GameMenu::lose() {
             this->addChild(level_1_2, -3);
             start();
         }
-        this->removeChildByName("EnemyCreate");
+        this->getParent()->removeChildByName("EnemyCreate");
         auto enemycreate = EnemyCreate::create();
         enemycreate->setName("EnemyCreate");
-        this->addChild(enemycreate);
+        this->getParent()->addChild(enemycreate);
         static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
         static_cast<EnemyCreate*>(enemycreate)->start();
         static_cast<GameScene*>(this->getParent())->reset_menu();
@@ -552,12 +543,13 @@ void GameMenu::win() {
             level_1_2->setName("PlayingLevel");
             this->getParent()->addChild(level_1_2, -3);
             static_cast<GameScene*>(this->getParent())->reset_menu();
-            this->removeChildByName("EnemyCreate");
+            this->getParent()->removeChildByName("EnemyCreate");
             auto enemycreate = EnemyCreate::create();
             enemycreate->setName("EnemyCreate");
-            this->addChild(enemycreate);
-            static_cast<EnemyCreate*>(enemycreate)->SetLevel(2);
+            this->getParent()->addChild(enemycreate);
+            static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
             static_cast<EnemyCreate*>(enemycreate)->start();
+            static_cast<GameScene*>(this->getParent())->reset_menu();
         }
         else if (level_selection == 2) {
             log("To be continued");
@@ -632,7 +624,7 @@ void GameMenu::update(float dt) {
             break;
     }
     //判断胜利失败
-    if (carrot_hp == 0) {
+    if (carrot_hp <= 0) {
         this->unscheduleUpdate();
         lose();
     }
@@ -648,6 +640,7 @@ void GameMenu::options() {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     /************************  纯色层  *****************************/
+    if_pause = 1;
     auto black_layer = LayerColor::create(Color4B::BLACK);
     black_layer->setPosition(Vec2::ZERO);
     black_layer->setOpacity(90);
@@ -675,6 +668,7 @@ void GameMenu::options() {
     resume_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
         button_sound_effect();
         this->removeChild(black_layer);
+        if_pause = 0;
         });
     options_menu->addChild(resume_btn);
     //重新开始
@@ -693,13 +687,14 @@ void GameMenu::options() {
             level_1_2->setName("PlayingLevel");
             this->addChild(level_1_2, -3);
         }
-        this->removeChildByName("EnemyCreate");
+        this->getParent()->removeChildByName("EnemyCreate");
         auto enemycreate = EnemyCreate::create();
         enemycreate->setName("EnemyCreate");
-        this->addChild(enemycreate);
+        this->getParent()->addChild(enemycreate);
         static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
         static_cast<EnemyCreate*>(enemycreate)->start();
         static_cast<GameScene*>(this->getParent())->reset_menu();
+        if_pause = 0;
         });
     options_menu->addChild(restart_btn);
     //选择关卡

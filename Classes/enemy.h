@@ -26,9 +26,9 @@
 #define MONSTER_NORMAL_HP     3 * MONSTER_FAST_HP    //普通怪血量
 #define MONSTER_HUGE_HP       3 * MONSTER_NORMAL_HP  //巨型怪血量
 
-#define MONSTER_HUGE_SPEED    100                        //巨型怪移动速度，蜗牛爬，待改动！！！！
+#define MONSTER_HUGE_SPEED    70                      //巨型怪移动速度，蜗牛爬，待改动！！！！
 #define MONSTER_NORMAL_SPEED  2*MONSTER_HUGE_SPEED     //正常怪移速
-#define MONSTER_FAST_SPEED    2*MONSTER_NORMAL_SPEED   //高速怪移速
+#define MONSTER_FAST_SPEED    1.5*MONSTER_NORMAL_SPEED   //高速怪移速
 
 #define MONSTER_COIN_NORMAL   18                       //正常怪和高速怪掉落金币
 #define MONSTER_COIN_HUGE     188                      //巨型怪掉落金币
@@ -40,16 +40,17 @@
 #define NORMAL 0
 #define FLY 1
 #define BOSS 2
-#define BARRIAR_1 3
-#define BARRIAR_2 4
-#define BARRIAR_3 5
-#define BARRIAR_4 6
-#define BARRIAR_5 7
-#define BARRIAR_6 8
+#define BARRIER_1 3
+#define BARRIER_2 4
+#define BARRIER_3 5
+#define BARRIER_4 6
+#define BARRIER_5 7
+#define BARRIER_6 8
 
 
 extern struct Tower_information;
 struct Enemy_information {
+	int type;                                     //记录怪物种类
 	int hp;                                       //记录怪物血量
 	int speed;                                    //记录怪物移动速度
 	int coin;                                     //携带萝卜币
@@ -59,13 +60,14 @@ struct Enemy_information {
 	int time = 0;                                 //记录生效时间
 	int origin_speed;                             //记录常态化速度
 	int full_hp;                                  //记录满血血量
-	Enemy_information(int originalHp = 0, int originalSpeed = 200, int defeatedCoin = 0, int realDamage = 0, int n = 0,int currentTime=0)
+	float total_length = 0;                           //记录走过的路程长度
+		Enemy_information(int originalHp = 0, int originalSpeed = 200, int defeatedCoin = 0, int realDamage = 0, int n = 0,int currentTime=0)
 		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage), count(n),origin_speed(originalSpeed),time(currentTime),full_hp(originalHp)
 	{
 		enemy_picture = nullptr;
 
 	}
-
+		float get_length() { return total_length; }
 };
 
 class Enemy : public cocos2d::Sprite
@@ -97,8 +99,6 @@ public:
 	this->setposition(Vec2(x + 10 * dx, y + 10 * dy));
 
 }*/
-
-void enemy_appear(int species, int model, int picture,int x,int y,cocos2d::Layer*this_layer);
 
 /*appear() {
 	auto new_enemy = Enemy::create();

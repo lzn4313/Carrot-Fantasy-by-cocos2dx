@@ -4,6 +4,7 @@
 #include"GameScene.h"
 #include"Level_1_1.h"
 #include <vector>
+#include<algorithm>
 #include <math.h>
 #include "Tower.h"
 USING_NS_CC;
@@ -15,6 +16,11 @@ extern vector<LevelPath>levelPath;
 extern int carrot_hp;
 extern int money_total;
 extern int game_money;//金钱
+extern int monster_total;//击杀怪物总数
+extern int boss_total;//击杀boss总数
+extern int barrier_total;//摧毁障碍总数
+extern vector<Enemy*>monster;
+extern Enemy* destination;
 using namespace cocos2d::ui;
 //不是cocos自带
 
@@ -36,7 +42,9 @@ bool Enemy::init()
 }
 
 void Enemy::setType(int selection)
-{//0-8 0为普通怪 1为高速怪 2为巨型怪 34为一格贴图 56为二格贴图 78为四格贴图
+{
+	enemy.type = selection;
+	//0-8 0为普通怪 1为高速怪 2为巨型怪 34为一格贴图 56为二格贴图 78为四格贴图
 	string picture[] = { "normal01-2.PNG","fast01-2.PNG","huge01-2.PNG","One1.PNG","One2.PNG","Two1.PNG","Two2.PNG","Four1.PNG","Four2.PNG" };
 	string pic[] = { "normal01-1.PNG","fast01-1.PNG","huge01-1.PNG" };
 	string road1 = BARRIER_BASE_PICTURE;
@@ -50,33 +58,33 @@ void Enemy::setType(int selection)
 		monster.pushBack(SpriteFrame::create(road2 + picture[0], Rect(0, 0, 68, 87)));
 		monster.pushBack(SpriteFrame::create(road2 + pic[0], Rect(0, 0, 75, 74)));
 		
-		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1 / (1 + if_speed_up))), nullptr)));
+		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_NORMAL;
 		this->enemy.damage = 1;
-		this->enemy.hp = MONSTER_NORMAL_HP * game_waves / 2;
-		this->enemy.full_hp = MONSTER_NORMAL_HP * game_waves / 2;
+		this->enemy.hp = MONSTER_NORMAL_HP * (game_waves + 1) / 2;
+		this->enemy.full_hp = MONSTER_NORMAL_HP * (game_waves + 1) / 2;
 		this->enemy.speed = MONSTER_NORMAL_SPEED;
 		this->enemy.origin_speed = MONSTER_NORMAL_SPEED;
 		break;
 	case 1:
 		monster.pushBack(SpriteFrame::create(road2 + picture[1], Rect(0, 0, 148, 84)));
 		monster.pushBack(SpriteFrame::create(road2 + pic[1], Rect(0, 0, 154, 84)));
-		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1 / (1 + if_speed_up))), nullptr)));
+		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_NORMAL;
 		this->enemy.damage = 1;
-		this->enemy.hp = MONSTER_FAST_HP * game_waves / 2;
-		this->enemy.full_hp = MONSTER_FAST_HP * game_waves / 2;
+		this->enemy.hp = MONSTER_FAST_HP * (game_waves + 1) / 2;
+		this->enemy.full_hp = MONSTER_FAST_HP * (game_waves + 1) / 2;
 		this->enemy.speed = MONSTER_FAST_SPEED;
 		this->enemy.origin_speed = MONSTER_FAST_SPEED;
 		break;
 	case 2:
 		monster.pushBack(SpriteFrame::create(road2 + picture[2], Rect(0, 0, 144, 135)));
 		monster.pushBack(SpriteFrame::create(road2 + pic[2], Rect(0, 0, 183, 148)));
-		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1 / (1 + if_speed_up))), nullptr)));
+		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_HUGE;
 		this->enemy.damage = 2;
-		this->enemy.hp = MONSTER_HUGE_HP * game_waves / 2;
-		this->enemy.full_hp = MONSTER_HUGE_HP * game_waves / 2;
+		this->enemy.hp = MONSTER_HUGE_HP * (game_waves + 1) / 2;
+		this->enemy.full_hp = MONSTER_HUGE_HP * (game_waves + 1) / 2;
 		this->enemy.speed = MONSTER_HUGE_SPEED;
 		this->enemy.origin_speed = MONSTER_HUGE_SPEED;
 		break;
@@ -119,10 +127,35 @@ void Enemy::setType(int selection)
 	if (selection <= 2) {
 		this->setAnchorPoint(Vec2(0.5, 0.25));
 	}
+
+	auto selected = Sprite::create("/Enemy/selected.PNG");
+	selected->setName("Selected");
+	this->addChild(selected);
+	if (selection <= 2) {
+		if (selection == 0) {
+			selected->setPosition(Vec2(selected->getContentSize().width * 1.3, selected->getContentSize().height * 3));
+		}
+		else {
+			selected->setPosition(Vec2(selected->getContentSize().width * 3, selected->getContentSize().height * 3));
+		}
+	}
+	else {
+		selected->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height + 20));
+	}
+	selected->setVisible(false);
+	selected->runAction(RepeatForever::create(Sequence::create(MoveBy::create(0.2, Vec2(0, selected->getContentSize().height / 5)), MoveBy::create(0.2, Vec2(0, -selected->getContentSize().height / 5)), nullptr)));
 }
 
 void Enemy::update(float dt)
 {
+	sort(monster.begin(), monster.end(), [](Enemy* a, Enemy* b) {return  a->enemy.get_length() > b->enemy.get_length(); });
+	if (destination == this) {
+		this->getChildByName("Selected")->setVisible(true);
+	}
+	else {
+		this->getChildByName("Selected")->setVisible(false);
+	}
+
 	static int appear_waves = game_waves;
 	//减速状态时间累计判断
 	if (enemy.origin_speed > enemy.speed) {
@@ -153,16 +186,6 @@ void Enemy::update(float dt)
 		int y = this->getPositionY();
 		static vec2 startPosition = trans_ij_to_xy(levelPath[0].point);
 		//出场动画
-		/*if (fabs(x - startPosition.x) < 3 && fabs(y - startPosition.y) < 3) {
-			Vector<SpriteFrame*> apperance;
-			apperance.pushBack(SpriteFrame::create("/Enemy/monster/appear1.PNG", Rect(0, 0, 88, 93)));
-			apperance.pushBack(SpriteFrame::create("/Enemy/monster/appear2.PNG", Rect(0, 0, 66, 65)));
-			auto sprite = Sprite::create();
-			sprite->runAction(Repeat::create(Sequence::create(Spawn::create(Animate::create(Animation::createWithSpriteFrames(apperance, 0.5)), RotateBy::create(1, 360), nullptr), FadeOut::create(1), nullptr), 1));
-			//sprite->setPosition(Vec2(startPosition.x, startPosition.y));
-			this->addChild(sprite,0);
-			//疑似优先级有问题
-		}*/
 		int ix=0, iy=0;
 		if (levelPath[enemy.count].direction == 's') {
 			ix = 0;
@@ -191,6 +214,7 @@ void Enemy::update(float dt)
 		if (enemy.count + 1!=levelPath.size()) {
 			vec2 nextPosition;
 			nextPosition = trans_ij_to_xy(levelPath[enemy.count + 1].point);
+			enemy.total_length = enemy.total_length + fabs(this_x) + fabs(this_y);
 			if (((fabs(x + this_x - nextPosition.x) < 4)||ix==0) && ((fabs(y + this_y - nextPosition.y) < 4)||iy==0))
 				enemy.count++;
 		}
@@ -212,9 +236,10 @@ void Enemy::update(float dt)
 			death.pushBack(SpriteFrame::create("/Enemy/monster/6.PNG", Rect(0, 0, 275, 277)));
 			auto sprite = Sprite::create();
 			vec2 nextPosition = trans_ij_to_xy(levelPath[levelPath.size()-1].point);
-			sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05/(1+if_speed_up))), FadeOut::create(0.2/(1+if_speed_up)),nullptr),1));
+			sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), CallFunc::create([sprite]() {sprite->removeFromParent(); }), nullptr), 1));
 			sprite->setPosition(Vec2(nextPosition.x, nextPosition.y));
 			this->getParent()->addChild(sprite);
+			monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 			this->removeFromParent();
 		}
 
@@ -255,15 +280,24 @@ void Enemy::update(float dt)
 		death.pushBack(SpriteFrame::create("/Enemy/monster/5.PNG", Rect(0, 0, 154, 163)));
 		death.pushBack(SpriteFrame::create("/Enemy/monster/6.PNG", Rect(0, 0, 275, 277)));
 		auto sprite = Sprite::create();
-		sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), nullptr), 1));
+		sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), CallFunc::create([sprite]() {sprite->removeFromParent(); }), nullptr), 1));
 		sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height /2));
 		this->getParent()->addChild(sprite);
 		money_total += enemy.coin;
 		game_money += enemy.coin;
+		if (enemy.type <= 1) {
+			monster_total++;
+		}
+		else if (enemy.type == 2) {
+			boss_total++;
+		}
+		else {
+			barrier_total++;
+		}
+		monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 		this->removeFromParent();
 		
 	}
-
 }
 
 void Enemy::declineHp(Tower_information tower)

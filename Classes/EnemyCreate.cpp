@@ -3,10 +3,13 @@
 #include"enemy.h"
 #include"EnemyCreate.h"
 #include<vector>
+#include<algorithm>
 using namespace std;
 USING_NS_CC;
 
 extern int game_waves;
+extern int if_speed_up;
+extern int if_pause;
 extern vector<Enemy*> monster;
 extern vector<Enemy*> barrier;
 /************************************  初始化  ********************************/
@@ -22,6 +25,8 @@ bool EnemyCreate::init() {
 /**********************************  成员函数实现  ****************************/
 /*设置关卡*/
 void EnemyCreate::SetLevel(int level_selection) {
+	monster.clear();
+	barrier.clear();
 	level = level_selection;
 	all_clear = 1;
 	vector<int>waves;
@@ -32,6 +37,7 @@ void EnemyCreate::SetLevel(int level_selection) {
 		max_waves = 15;
 		//每一波怪物存储
 		//前七波全是普通怪
+		waves.clear();
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 10; j++) {
 				waves.push_back(NORMAL);
@@ -50,14 +56,24 @@ void EnemyCreate::SetLevel(int level_selection) {
 			monster_data.push_back(waves);
 			waves.clear();
 		}
+		//障碍物
+		barrier_appear(BARRIER_2, { 3,2 });
+		barrier_appear(BARRIER_1, { 2,4 });
+		barrier_appear(BARRIER_1, { 2,7 });
+		barrier_appear(BARRIER_2, { 3,9 });
+		barrier_appear(BARRIER_3, { 4,5 }, { 4,6 });
+		barrier_appear(BARRIER_6, { 1,3 }, { 1,4 },{ 0,3 });
+		barrier_appear(BARRIER_6, { 1,7 }, { 1,8 }, { 0,7 });
+		barrier_appear(BARRIER_5, { 1,5 }, { 1,6 }, { 0,5 });
 	}
 	else if (level == 2) {
-		//第一关
+		//第二关
 		start_position = { 1,4 };
 		current_waves = 1;
 		max_waves = 15;
 		//每一波怪物存储
 		//前七波全是普通怪
+		waves.clear();
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 10; j++) {
 				waves.push_back(NORMAL);
@@ -81,6 +97,16 @@ void EnemyCreate::SetLevel(int level_selection) {
 			}
 		}
 
+		//障碍物
+		barrier_appear(BARRIER_2, { 4,5 });
+		barrier_appear(BARRIER_1, { 2,4 });
+		barrier_appear(BARRIER_1, { 2,8 });
+		barrier_appear(BARRIER_1, { 1,11 });
+		barrier_appear(BARRIER_1, { 4,3 });
+		barrier_appear(BARRIER_3, { 4,0 }, { 4,1 });
+		barrier_appear(BARRIER_4, { 4,8 }, { 4,9 });
+		barrier_appear(BARRIER_6, { 1,1 }, { 1,2 }, { 0,1 });
+		barrier_appear(BARRIER_5, { 3,10 }, { 3,11 }, { 2,10 });
 	}
 }
 /*出怪*/
@@ -96,9 +122,45 @@ void EnemyCreate::monster_appear(int Type) {
 	if (Type < 3) {
 		auto effect = Sprite::create("/EnemyCreate/Items02-hd_0.PNG");
 		effect->setPosition(Vec2(start.x, start.y));
-		this->addChild(enemy);
-		effect->runAction(Sequence::create(ScaleTo::create(0.5, 1.5), CallFunc::create([effect]() {effect->removeFromParent(); }), nullptr));
+		this->addChild(effect);
+		effect->runAction(Sequence::create(ScaleTo::create(0.2, 3), CallFunc::create([effect]() {effect->removeFromParent(); }), nullptr));
 	}
+}
+/*障碍物*/
+//一格障碍物
+void EnemyCreate::barrier_appear(int Type, pos position) {
+	vec2 vec;
+	auto barrier_1 = Enemy::createSprite();
+	static_cast<Enemy*>(barrier_1)->setType(Type);
+	vec = trans_ij_to_xy(position);
+	barrier_1->setPosition(Vec2(vec.x, vec.y));
+	this->addChild(barrier_1);
+	barrier.push_back(static_cast<Enemy*>(barrier_1));
+}
+//两格障碍物
+void EnemyCreate::barrier_appear(int Type, pos position_l,pos position_r) {
+	vec2 vec_l, vec_r, vec;
+	auto barrier_1 = Enemy::createSprite();
+	static_cast<Enemy*>(barrier_1)->setType(Type);
+	vec_l = trans_ij_to_xy(position_l);
+	vec_r = trans_ij_to_xy(position_r);
+	vec = { (vec_l.x + vec_r.x) / 2,(vec_l.y + vec_r.y) / 2 };
+	barrier_1->setPosition(Vec2(vec.x, vec.y));
+	this->addChild(barrier_1);
+	barrier.push_back(static_cast<Enemy*>(barrier_1));
+}
+//三格障碍物
+void EnemyCreate::barrier_appear(int Type, pos position_l, pos position_r,pos position_u) {
+	vec2 vec_l, vec_r,vec_u, vec;
+	auto barrier_1 = Enemy::createSprite();
+	static_cast<Enemy*>(barrier_1)->setType(Type);
+	vec_l = trans_ij_to_xy(position_l);
+	vec_r = trans_ij_to_xy(position_r);
+	vec_u = trans_ij_to_xy(position_u);
+	vec = { (vec_l.x + vec_r.x) / 2,(vec_l.y + vec_u.y) / 2 };
+	barrier_1->setPosition(Vec2(vec.x, vec.y));
+	this->addChild(barrier_1);
+	barrier.push_back(static_cast<Enemy*>(barrier_1));
 }
 /*开始游戏*/
 void EnemyCreate::start() {
@@ -107,33 +169,37 @@ void EnemyCreate::start() {
 	//三秒倒计时后开始出怪
 	this->runAction(Sequence::create(DelayTime::create(3), create_monster, nullptr));
 }
-/*一波怪物的生成*/
-void EnemyCreate::create_waves() {
-	auto create_func = CallFunc::create([=]() {
-		monster_appear(monster_data[current_waves - 1][0]);
-		for (int i = 0; i < monster_data[current_waves - 1].size() - 1; i++) {
-			int temp = monster_data[current_waves - 1][i];
-			monster_data[current_waves - 1][i] = monster_data[current_waves - 1][i + 1];
-			monster_data[current_waves - 1][i + 1] = temp;
-		}
-		});
-	//每一波开始时有一秒空挡，出怪每0.5s一个
-	this->runAction(Sequence::create(DelayTime::create(1), Repeat::create(Sequence::create(DelayTime::create(0.5), create_func, nullptr), monster_data[current_waves - 1].size()), nullptr));
-	all_clear = 0;
-	current_waves += 1;
-}
 /*update函数*/
 void EnemyCreate::update(float dt) {
-	//如果当前怪物数组为0，则说明怪物全清
-	if (monster.size() == 0) {
-		all_clear = 1;
-	}
-	//如果当前怪物全清，且还有怪物没出
-	if (all_clear = 1 && current_waves <= max_waves) {
-		create_waves();
-		/*if (game_waves < max_waves) {
-			game_waves += 1;
-		}*/
+	static float time = 1;
+	static int n = 0;
+	static int flag = 0;
+	if (if_pause == 0) {
+		if (flag == 0) {
+			if (time >= 1 && monster.size() == 0) {
+				flag = 1;
+				time = 0;
+				game_waves += 1;
+			}
+		}
+		//如果当前怪物全清，且还有怪物没出
+		if (((monster.size() == 0 && flag == 0) || flag == 1) && current_waves <= max_waves) {
+			if (n == 0) {
+				monster_appear(monster_data[current_waves - 1][n]);
+				n++;
+			}
+			else if (time >= 1) {
+				monster_appear(monster_data[current_waves - 1][n]);
+				n++;
+				time = 0;
+			}
+			if (n == monster_data[current_waves - 1].size()) {
+				flag = 0;
+				n = 0;
+				current_waves += 1;
+			}
+		}
+		time += dt * (if_speed_up + 1);
 	}
 }
 

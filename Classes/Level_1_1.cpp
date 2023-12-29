@@ -42,7 +42,7 @@ bool Level_1_1::init()
     //更新金钱显示
     game_money = 450;
     //更新波数显示
-    game_waves = 1; 
+    game_waves = 0; 
     max_waves = 15;
     //更新地图
     const char level_1_1_map[7][12] = {
@@ -83,21 +83,8 @@ bool Level_1_1::init()
     vec2 vec = trans_ij_to_xy(start_position);
     start_point->setPosition(Vec2(vec.x, vec.y));
     this->addChild(start_point);
-    
-   // Enemy barrier[8];
-    //pos position[8] = {3,2,2,4,2,7,3,9,4,5,0,3,0,5,0,7};
-    //barrier[0].appear(BARRIER, BARRIER_ONE, 1, position[0], this);
-   // barrier[1].appear(BARRIER, BARRIER_ONE, 0, position[1], this);
-   // barrier[2].appear(BARRIER, BARRIER_ONE, 0, position[2], this);
-   // barrier[3].appear(BARRIER, BARRIER_ONE, 1, position[3], this);
-   // barrier[4].appear(BARRIER, BARRIER_TWO, 0, position[4], this);
-   // barrier[5].appear(BARRIER, BARRIER_FOUR, 1, position[5], this);
-   // barrier[6].appear(BARRIER, BARRIER_FOUR, 0, position[6], this);
-   // barrier[7].appear(BARRIER, BARRIER_FOUR, 1, position[7], this);
-    
-
     //记录路径
-    
+    levelPath.clear();
     LevelPath temp;
     {
         temp = { {1,1},'s' };levelPath.push_back(temp);
