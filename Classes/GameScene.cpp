@@ -7,6 +7,7 @@
 #include"ui/CocosGUI.h"
 #include"Tower.h"
 #include"Enemy.h"
+#include"EnemyCreate.h"
 #include<string>
 #include<vector>
 USING_NS_CC;
@@ -70,6 +71,11 @@ bool GameScene::init()
         level_1_2->setName("PlayingLevel");
         this->addChild(level_1_2, -1);
     }
+   /* auto enemycreate = EnemyCreate::create();
+    enemycreate->setName("EnemyCreate");
+    this->addChild(enemycreate);
+    static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
+    static_cast<EnemyCreate*>(enemycreate)->start();*/
     /***********************  菜单层  ***************************/
     auto menu_layer = GameMenu::createLayer();
     menu_layer->setName("GameMenu");
@@ -384,6 +390,14 @@ bool GameMenu::init()
     **************************
     ********************************
     ************************************ *****调试*/
+
+    auto enemy = Enemy::createSprite();
+    static_cast<Enemy*>(enemy)->setType(NORMAL);
+    vec2 start = trans_ij_to_xy({ 1,1 });
+    enemy->setPosition(Vec2(start.x, start.y));
+    this->addChild(enemy);
+    monster.push_back(static_cast<Enemy*>(enemy));//加入索敌数组
+
     //调用调度器
     this->scheduleUpdate();
     return true;
@@ -449,6 +463,18 @@ void GameMenu::lose() {
             this->addChild(level_1_1, -3);
             start();
         }
+        else if (level_selection == 2) {
+            auto level_1_2 = Level_1_2::createLayer();
+            level_1_2->setName("PlayingLevel");
+            this->addChild(level_1_2, -3);
+            start();
+        }
+        this->removeChildByName("EnemyCreate");
+        auto enemycreate = EnemyCreate::create();
+        enemycreate->setName("EnemyCreate");
+        this->addChild(enemycreate);
+        static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
+        static_cast<EnemyCreate*>(enemycreate)->start();
         static_cast<GameScene*>(this->getParent())->reset_menu();
         });
     options_menu->addChild(again_btn);
@@ -526,6 +552,12 @@ void GameMenu::win() {
             level_1_2->setName("PlayingLevel");
             this->getParent()->addChild(level_1_2, -3);
             static_cast<GameScene*>(this->getParent())->reset_menu();
+            this->removeChildByName("EnemyCreate");
+            auto enemycreate = EnemyCreate::create();
+            enemycreate->setName("EnemyCreate");
+            this->addChild(enemycreate);
+            static_cast<EnemyCreate*>(enemycreate)->SetLevel(2);
+            static_cast<EnemyCreate*>(enemycreate)->start();
         }
         else if (level_selection == 2) {
             log("To be continued");
@@ -661,6 +693,12 @@ void GameMenu::options() {
             level_1_2->setName("PlayingLevel");
             this->addChild(level_1_2, -3);
         }
+        this->removeChildByName("EnemyCreate");
+        auto enemycreate = EnemyCreate::create();
+        enemycreate->setName("EnemyCreate");
+        this->addChild(enemycreate);
+        static_cast<EnemyCreate*>(enemycreate)->SetLevel(level_selection);
+        static_cast<EnemyCreate*>(enemycreate)->start();
         static_cast<GameScene*>(this->getParent())->reset_menu();
         });
     options_menu->addChild(restart_btn);
@@ -731,6 +769,7 @@ void GameMenu::start()
         });
     time_layer->runAction(Sequence::create(DelayTime::create(3.1), start_call_back, nullptr));
     if_pause = 0;
+
 }
 //建造
 void GameMenu::build(pos position, int tower_available[]) {

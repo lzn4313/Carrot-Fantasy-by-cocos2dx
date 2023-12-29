@@ -119,12 +119,6 @@ bool Level_1_1::init()
         temp = { {2,10},'w' }; levelPath.push_back(temp);
         temp = { {1,10},'o' }; levelPath.push_back(temp);
     }
-    
-    pos ab = { 1,1 };
-    vec2 cd = trans_ij_to_xy(ab);
-    enemy_appear(cd.x, cd.y, this);
-
-
     return true;
 }
 

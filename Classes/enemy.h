@@ -36,6 +36,17 @@
 #define BARRIER_BASE_PICTURE  "/Enemy/barrier/0/"        //障碍路径
 #define MONSTER_BASE_PICTURE  "/Enemy/monster/0/"
 
+//0-8 0为普通怪 1为高速怪 2为巨型怪 34为一格贴图 56为二格贴图 78为四格贴图
+#define NORMAL 0
+#define FLY 1
+#define BOSS 2
+#define BARRIAR_1 3
+#define BARRIAR_2 4
+#define BARRIAR_3 5
+#define BARRIAR_4 6
+#define BARRIAR_5 7
+#define BARRIAR_6 8
+
 
 extern struct Tower_information;
 struct Enemy_information {
