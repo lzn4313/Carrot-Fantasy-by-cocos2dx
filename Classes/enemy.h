@@ -60,7 +60,8 @@ struct Enemy_information {
 	int time = 0;                                 //记录生效时间
 	int origin_speed;                             //记录常态化速度
 	int full_hp;                                  //记录满血血量
-	float total_length = 0;                           //记录走过的路程长度
+	float total_length = 0;						  //记录走过的路程长度
+	pos position;                                 //记录障碍物位置
 		Enemy_information(int originalHp = 0, int originalSpeed = 200, int defeatedCoin = 0, int realDamage = 0, int n = 0,int currentTime=0)
 		:hp(originalHp), speed(originalSpeed), coin(defeatedCoin), damage(realDamage), count(n),origin_speed(originalSpeed),time(currentTime),full_hp(originalHp)
 	{
@@ -88,6 +89,8 @@ public:
 	CREATE_FUNC(Enemy);
 	virtual void update(float dt);
 	void setType(int selection);
+	void set_position(pos _position) { enemy.position = _position; }
+	pos get_position() { return enemy.position; }
 	void declineHp(Tower_information tower);
 };
 

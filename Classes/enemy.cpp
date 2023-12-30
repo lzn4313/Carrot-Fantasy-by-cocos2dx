@@ -14,6 +14,7 @@ extern int if_pause;
 extern const char level_1_1_map[7][12];
 extern vector<LevelPath>levelPath;
 extern int carrot_hp;
+extern char game_map[7][12];
 extern int money_total;
 extern int game_money;//金钱
 extern int monster_total;//击杀怪物总数
@@ -239,6 +240,9 @@ void Enemy::update(float dt)
 			sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), CallFunc::create([sprite]() {sprite->removeFromParent(); }), nullptr), 1));
 			sprite->setPosition(Vec2(nextPosition.x, nextPosition.y));
 			this->getParent()->addChild(sprite);
+			if (destination == this) {
+				destination = nullptr;
+			}
 			monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 			this->removeFromParent();
 		}
@@ -281,10 +285,14 @@ void Enemy::update(float dt)
 		death.pushBack(SpriteFrame::create("/Enemy/monster/6.PNG", Rect(0, 0, 275, 277)));
 		auto sprite = Sprite::create();
 		sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(death, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), CallFunc::create([sprite]() {sprite->removeFromParent(); }), nullptr), 1));
-		sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height /2));
+		sprite->setPosition(Vec2(this->getPositionX(), this->getPositionY()));
 		this->getParent()->addChild(sprite);
 		money_total += enemy.coin;
 		game_money += enemy.coin;
+		if (destination == this) {
+			destination = nullptr;
+		}
+
 		if (enemy.type <= 1) {
 			monster_total++;
 		}
@@ -293,6 +301,19 @@ void Enemy::update(float dt)
 		}
 		else {
 			barrier_total++;
+			if (enemy.type == 3 || enemy.type == 4) {
+				game_map[enemy.position.i][enemy.position.j] = 0;
+			}
+			else if (enemy.type == 5 || enemy.type == 6) {
+				game_map[enemy.position.i][enemy.position.j] = 0;
+				game_map[enemy.position.i][enemy.position.j + 1] = 0;
+			}
+			else if (enemy.type == 7 || enemy.type == 8) {
+				game_map[enemy.position.i][enemy.position.j] = 0;
+				game_map[enemy.position.i][enemy.position.j + 1] = 0;
+				game_map[enemy.position.i - 1][enemy.position.j] = 0;
+				game_map[enemy.position.i - 1][enemy.position.j + 1] = 0;
+			}
 		}
 		monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 		this->removeFromParent();
