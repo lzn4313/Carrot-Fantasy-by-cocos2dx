@@ -104,11 +104,10 @@ void Tower_body::update(float dt)
 		}
 
 		if (target != nullptr) {
-			if (time >= (4 / tower_information.attack_speed)) {
+			if (time >= (if_speed_up == 0 ? (4 / tower_information.attack_speed) : (2 / tower_information.attack_speed))) {
 				time = 0;
 				Node* this_layer = this->getParent();
 				Layer* ThisLayer = static_cast<Layer*>(this_layer);
-
 				/*¹¥»÷Ç°Ò¡¶¯»­*/
 				float dx, dy, r;
 				dx = target->getPosition().x - my_position.x;
@@ -277,14 +276,15 @@ void Tower_body::update(float dt)
 					auto attacked = CallFunc::create([=]() {
 						if (target != nullptr) {
 							Vec2 devided;
-							target->declineHp(tower_information, 0);
-							for (Enemy* enemy : monster) {
-								devided = enemy->getPosition();
-								if (((target->getPositionX() - devided.x) * (target->getPositionX() - devided.x) +
-									(target->getPositionY() - devided.y) * (target->getPositionY() - devided.y))
-									<= (160 * 160) * (tower_information.attack_range + 1) / 2)
-								{
-									enemy->declineHp(tower_information, 1);
+							if (target->declineHp(tower_information, 0)) {
+								for (Enemy* enemy : monster) {
+									devided = enemy->getPosition();
+									if (((target->getPositionX() - devided.x) * (target->getPositionX() - devided.x) +
+										(target->getPositionY() - devided.y) * (target->getPositionY() - devided.y))
+										<= (160 * 160) * (tower_information.attack_range + 1) / 2)
+									{
+										enemy->declineHp(tower_information, 1);
+									}
 								}
 							}
 						}
@@ -311,7 +311,7 @@ void Tower::build_tower(pos position, int tag, cocos2d::Layer* this_layer)
 
 		TowerBase = Sprite::create();
 		TowerBody = Tower_body::create();
-		TowerBody->tower_information = { tag, Tower_Value[tag - 1], Tower_Attack[tag - 1], Tower_Attack_Speed[tag - 1], 1, tag - 1, 1 };
+		TowerBody->tower_information = { tag, Tower_Value[tag - 1], Tower_Attack[tag - 1], Tower_Attack_Speed[tag - 1], 1.2, tag - 1, 1 };
 
 		switch (tag) {
 			case 1:

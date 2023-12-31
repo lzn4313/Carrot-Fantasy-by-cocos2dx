@@ -73,6 +73,7 @@ struct Enemy_information {
 
 class Enemy : public cocos2d::Sprite
 {
+	friend class Tower_body;
 private:
 	Enemy_information enemy;
 public:
@@ -91,7 +92,7 @@ public:
 	void setType(int selection);
 	void set_position(pos _position) { enemy.position = _position; }
 	pos get_position() { return enemy.position; }
-	void declineHp(Tower_information tower, int op);
+	bool declineHp(Tower_information tower, int op);
 };
 
 

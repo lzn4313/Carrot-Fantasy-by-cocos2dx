@@ -322,7 +322,7 @@ void Enemy::update(float dt)
 	}
 }
 
-void Enemy::declineHp(Tower_information tower, int op)
+bool Enemy::declineHp(Tower_information tower, int op)
 {
 	if (enemy.hp > 0) {
 		if (op == 0) {
@@ -396,7 +396,14 @@ void Enemy::declineHp(Tower_information tower, int op)
 			sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 			this->addChild(sprite);
 		}
+		/*
+		if (enemy.hp > 0)
+			return true;
+		else
+			return false;*/
+		return true;
 	}
+	return false;
 }
 
 void enemy_appear(int species, int model, int picture,int x, int y, Layer* this_layer)
