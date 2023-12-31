@@ -21,6 +21,7 @@ extern int monster_total;//击杀怪物总数
 extern int boss_total;//击杀boss总数
 extern int barrier_total;//摧毁障碍总数
 extern vector<Enemy*>monster;
+extern vector<Enemy*>barrier;
 extern Enemy* destination;
 using namespace cocos2d::ui;
 //不是cocos自带
@@ -62,8 +63,8 @@ void Enemy::setType(int selection)
 		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_NORMAL;
 		this->enemy.damage = 1;
-		this->enemy.hp = MONSTER_NORMAL_HP * (game_waves + 1) / 2;
-		this->enemy.full_hp = MONSTER_NORMAL_HP * (game_waves + 1) / 2;
+		this->enemy.hp = MONSTER_NORMAL_HP * (game_waves + 1)/2;
+		this->enemy.full_hp = MONSTER_NORMAL_HP * (game_waves + 1)/2;
 		this->enemy.speed = MONSTER_NORMAL_SPEED;
 		this->enemy.origin_speed = MONSTER_NORMAL_SPEED;
 		break;
@@ -73,8 +74,8 @@ void Enemy::setType(int selection)
 		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_NORMAL;
 		this->enemy.damage = 1;
-		this->enemy.hp = MONSTER_FAST_HP * (game_waves + 1) / 2;
-		this->enemy.full_hp = MONSTER_FAST_HP * (game_waves + 1) / 2;
+		this->enemy.hp = MONSTER_FAST_HP * (game_waves + 1)/2;
+		this->enemy.full_hp = MONSTER_FAST_HP  * (game_waves + 1)/2;
 		this->enemy.speed = MONSTER_FAST_SPEED;
 		this->enemy.origin_speed = MONSTER_FAST_SPEED;
 		break;
@@ -84,8 +85,8 @@ void Enemy::setType(int selection)
 		this->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster, 0.1)), nullptr)));
 		this->enemy.coin = MONSTER_COIN_HUGE;
 		this->enemy.damage = 2;
-		this->enemy.hp = MONSTER_HUGE_HP * (game_waves + 1) / 2;
-		this->enemy.full_hp = MONSTER_HUGE_HP * (game_waves + 1) / 2;
+		this->enemy.hp = MONSTER_HUGE_HP * (game_waves + 1);
+		this->enemy.full_hp = MONSTER_HUGE_HP * (game_waves + 1);
 		this->enemy.speed = MONSTER_HUGE_SPEED;
 		this->enemy.origin_speed = MONSTER_HUGE_SPEED;
 		break;
@@ -95,6 +96,7 @@ void Enemy::setType(int selection)
 		this->enemy.coin = BARRIER_COIN_ONE;
 		this->enemy.damage = 0;
 		this->enemy.hp = BARRIER_HP_ONE;
+		this->enemy.full_hp = BARRIER_HP_ONE;
 		this->enemy.speed = 0;
 		this->enemy.origin_speed = 0;
 		break;
@@ -103,6 +105,7 @@ void Enemy::setType(int selection)
 		this->enemy.coin = BARRIER_COIN_TWO;
 		this->enemy.damage = 0;
 		this->enemy.hp = BARRIER_HP_TWO;
+		this->enemy.full_hp = BARRIER_HP_TWO;
 		this->enemy.speed = 0;
 		this->enemy.origin_speed = 0;
 		break;
@@ -111,6 +114,7 @@ void Enemy::setType(int selection)
 		this->enemy.coin = BARRIER_COIN_TWO;
 		this->enemy.damage = 0;
 		this->enemy.hp = BARRIER_HP_TWO;
+		this->enemy.full_hp = BARRIER_HP_TWO;
 		this->enemy.speed = 0;
 		this->setScaleY(80 / this->getContentSize().height);
 		this->enemy.origin_speed = 0;
@@ -121,6 +125,7 @@ void Enemy::setType(int selection)
 		this->enemy.coin = BARRIER_COIN_FOUR;
 		this->enemy.damage = 0;
 		this->enemy.hp = BARRIER_HP_FOUR;
+		this->enemy.full_hp = BARRIER_HP_FOUR;
 		this->enemy.speed = 0;
 		this->enemy.origin_speed = 0;
 		break;
@@ -134,14 +139,14 @@ void Enemy::setType(int selection)
 	this->addChild(selected);
 	if (selection <= 2) {
 		if (selection == 0) {
-			selected->setPosition(Vec2(selected->getContentSize().width * 1.3, selected->getContentSize().height * 3));
+			selected->setPosition(Vec2(selected->getContentSize().width * 1.3, selected->getContentSize().height * 3.5));
 		}
 		else {
-			selected->setPosition(Vec2(selected->getContentSize().width * 3, selected->getContentSize().height * 3));
+			selected->setPosition(Vec2(selected->getContentSize().width * 3, selected->getContentSize().height * 3.5));
 		}
 	}
 	else {
-		selected->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height + 20));
+		selected->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height + 30));
 	}
 	selected->setVisible(false);
 	selected->runAction(RepeatForever::create(Sequence::create(MoveBy::create(0.2, Vec2(0, selected->getContentSize().height / 5)), MoveBy::create(0.2, Vec2(0, -selected->getContentSize().height / 5)), nullptr)));
@@ -160,8 +165,8 @@ void Enemy::update(float dt)
 	static int appear_waves = game_waves;
 	//减速状态时间累计判断
 	if (enemy.origin_speed > enemy.speed) {
-		enemy.time += dt * (1 + if_speed_up) * if_pause;
-		if (enemy.time > 3) {
+		enemy.time += dt * (1 + if_speed_up) * (1 - if_pause) * 100;
+		if (enemy.time > 300) {
 			enemy.time = 0;
 			this->removeChildByName("shit");
 			enemy.speed = enemy.origin_speed;
@@ -169,25 +174,11 @@ void Enemy::update(float dt)
 	}
 	//对于移动的判断
 	if (if_pause == 0&&enemy.speed>0) {//无暂停和速度大于0(即非障碍物)则动
-		//static double countx = 0;
-		//static double county = 0;
-		
-		/*Vec2 place;
-		vec2 place2;          //求得pos位置后转为格子中心位置
-	    place2.x = this->getPositionX();
-		place2.y = this->getPositionY();
-		vec2 currentPosition = trans_ij_to_xy(levelPath[enemy.count+1].point);
-		//place2 = trans_ij_to_xy(currentPosition);
-		bool flag;
-		flag = (place2.x == currentPosition.x)&&(place2.y==currentPosition.y);
-		//flag = (place2.x == place.x) && (place.y == place2.y)&& ((currentPosition.i != levelPath[0].point.i) || (currentPosition.j != levelPath[0].point.j));//是否到达下一点且不为起点
-		//if (flag)
-			//enemy.count++;*/
 		int x = this->getPositionX();
 		int y = this->getPositionY();
 		static vec2 startPosition = trans_ij_to_xy(levelPath[0].point);
 		//出场动画
-		int ix=0, iy=0;
+		int ix = 0, iy = 0;
 		if (levelPath[enemy.count].direction == 's') {
 			ix = 0;
 			iy = -1;
@@ -210,23 +201,21 @@ void Enemy::update(float dt)
 		}
 		double this_x = enemy.speed * (if_speed_up + 1) * dt * ix;
 		double this_y = enemy.speed * (if_speed_up + 1) * dt * iy;
-		//countx += this_x;
-		//county += this_y;
 		if (enemy.count + 1!=levelPath.size()) {
 			vec2 nextPosition;
 			nextPosition = trans_ij_to_xy(levelPath[enemy.count + 1].point);
 			enemy.total_length = enemy.total_length + fabs(this_x) + fabs(this_y);
-			if (((fabs(x + this_x - nextPosition.x) < 4)||ix==0) && ((fabs(y + this_y - nextPosition.y) < 4)||iy==0))
+			int range = 4;
+			if (enemy.type == FLY) {
+				range = 6;
+			}
+			if (((fabs(x + this_x - nextPosition.x) < range)||ix==0) && ((fabs(y + this_y - nextPosition.y) < range)||iy==0))
 				enemy.count++;
 		}
 		
-		/*if (((fabs(countx) > fabs(79 * ix) + 1) || (fabs(county) > fabs(79 * iy) + 1)) && levelPath[enemy.count].direction != 'o') {
-			enemy.count++;
-			countx = 0;
-			county = 0;
-		}*/
 		this->setPosition(Vec2(x + this_x, y + this_y));
 		if (levelPath[enemy.count].direction == 'o') {
+			carrot_eaten_sound_effect();
 			carrot_hp -= enemy.damage;
 			Vector<SpriteFrame*> death;
 			death.pushBack(SpriteFrame::create("/Enemy/monster/1.PNG",Rect(0,0,109,99)));
@@ -243,7 +232,12 @@ void Enemy::update(float dt)
 			if (destination == this) {
 				destination = nullptr;
 			}
-			monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
+			if (enemy.type <= 2) {
+				monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
+			}
+			else {
+				barrier.erase(find_if(barrier.begin(), barrier.end(), [this](const Enemy* enemy) {return enemy == this; }));
+			}
 			this->removeFromParent();
 			return;
 		}
@@ -277,6 +271,15 @@ void Enemy::update(float dt)
 	}
 	//没血了就消失
 	else if(enemy.hp<=0){
+		if (enemy.type == NORMAL) {
+			normal_dead_sound_effect();
+		}
+		else if (enemy.type == FLY) {
+			fly_dead_sound_effect();
+		}
+		else if (enemy.type == BOSS) {
+			boss_dead_sound_effect();
+		}
 		Vector<SpriteFrame*> death;
 		death.pushBack(SpriteFrame::create("/Enemy/monster/1.PNG", Rect(0, 0, 109, 99)));
 		death.pushBack(SpriteFrame::create("/Enemy/monster/2.PNG", Rect(0, 0, 111, 114)));
@@ -316,7 +319,12 @@ void Enemy::update(float dt)
 				game_map[enemy.position.i - 1][enemy.position.j + 1] = 0;
 			}
 		}
-		monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
+		if (enemy.type <= 2) {
+			monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
+		}
+		else {
+			barrier.erase(find_if(barrier.begin(), barrier.end(), [this](const Enemy* enemy) {return enemy == this; }));
+		}
 		this->removeFromParent();
 		return;
 	}
@@ -324,7 +332,7 @@ void Enemy::update(float dt)
 
 bool Enemy::declineHp(Tower_information tower, int op)
 {
-	if (enemy.hp > 0) {
+	if (enemy.hp > 0 && tower.attack > 0) {
 		if (op == 0) {
 			Vec2 currentPosition = this->getPosition();
 			Vector<SpriteFrame*> attacked;
@@ -359,10 +367,8 @@ bool Enemy::declineHp(Tower_information tower, int op)
 				if (tower.attack_special == Slow) {
 					if (tower.level == 1)
 						enemy.speed = enemy.origin_speed * 0.8;
-					else if (tower.level == 2)
+					else if (tower.level == 2||tower.level == 3)
 						enemy.speed = enemy.origin_speed * 0.6;
-					else if (tower.level == 3)
-						enemy.speed = enemy.origin_speed * 0.4;
 					if (tower.name_tag == Tower_Shit && enemy.time == 0) {
 						auto slowByShit = Sprite::create();
 						Vector<SpriteFrame*>shit;
@@ -396,181 +402,7 @@ bool Enemy::declineHp(Tower_information tower, int op)
 			sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 			this->addChild(sprite);
 		}
-		/*
-		if (enemy.hp > 0)
-			return true;
-		else
-			return false;*/
 		return true;
 	}
 	return false;
 }
-
-void enemy_appear(int species, int model, int picture,int x, int y, Layer* this_layer)
-{
-	auto test1 = Enemy::createSprite();
-	static_cast<Enemy*>(test1)->setType(2);
-	int hp = 0,damage = 0,speed = 0,coin = 0;
-	/*if (species == BARRIER) {
-		string pictureText[6] = { "One1.PNG","One2.PNG","Two1.PNG","Two2.PNG","Four1.PNG","Four2.PNG" };
-		string baseRoad = BARRIER_BASE_PICTURE;
-		switch (model) {
-		case BARRIER_ONE:
-			hp = BARRIER_HP_ONE;
-			coin = BARRIER_COIN_ONE;
-			break;
-		case BARRIER_TWO:
-			hp = BARRIER_HP_TWO;
-			coin = BARRIER_COIN_TWO;
-			picture += 2;
-			//test1->setScale(80 / test1->getContentSize().height);
-			break;
-		case BARRIER_FOUR:
-			hp = BARRIER_HP_FOUR;
-			coin = BARRIER_COIN_FOUR;
-			picture += 4;
-			
-			break;
-		}
-		test1->setTexture(baseRoad + pictureText[picture]);
-	    test1->setPosition(Vec2(x, y));//锚点在最下中心，请注意传进来的位置
-	}*/
-	//test1->setTexture("/Enemy/monster/0/fast01-1.PNG");
-	test1->setPosition(Vec2(x, y));
-	
-	this_layer->addChild(test1);
-}
-
-/*void Enemy::appear(int species, int model, int picture, pos position, cocos2d::Layer* this_layer)
-{
-
-	if (species == BARRIER) {
-		enemy.enemy_picture = Sprite::create();
-		enemy.damage = 0;
-		enemy.speed = 0;
-		string pictureText[6] = { "One1.PNG","One2.PNG","Two1.PNG","Two2.PNG","Four1.PNG","Four2.PNG" };
-		string baseRoad = BARRIER_BASE_PICTURE;
-		Vec2 change_position;
-		switch (model) {
-		case BARRIER_ONE:
-			enemy.hp = BARRIER_HP_ONE;
-			enemy.coin = BARRIER_COIN_ONE;
-			enemy.enemy_picture->setTexture(baseRoad + pictureText[picture]);
-			break;
-		case BARRIER_TWO:
-			enemy.hp = BARRIER_HP_TWO;
-			enemy.coin = BARRIER_COIN_TWO;
-			picture += 2;
-			enemy.enemy_picture->setTexture(baseRoad + pictureText[picture]);
-			change_position.x = 0.25;
-			change_position.y = 0.5;
-			enemy.enemy_picture->setScale(80 / enemy.enemy_picture->getContentSize().height);
-			enemy.enemy_picture->setAnchorPoint(change_position);
-
-			break;
-		case BARRIER_FOUR:
-			enemy.hp = BARRIER_HP_FOUR;
-			enemy.coin = BARRIER_COIN_FOUR;
-			picture += 4;
-			change_position.x = 0.25;
-			change_position.y = 0.75;
-			enemy.enemy_picture->setAnchorPoint(change_position);
-			enemy.enemy_picture->setTexture(baseRoad + pictureText[picture]);
-
-
-			break;
-		}
-		vec2 startPosition = trans_ij_to_xy(position);
-		enemy.enemy_picture->setPosition(startPosition.x, startPosition.y);
-		this_layer->addChild(enemy.enemy_picture);
-	}
-	else if (species == MONSTER) {
-
-
-		Vector<SpriteFrame*> monster_self_change;
-		enemy.enemy_picture = Sprite::create();
-		string baseRoad = MONSTER_BASE_PICTURE;
-		string pictureText[6] = { "normal01-1.PNG","normal01-2.PNG","fast01-1.PNG","fast01-2.PNG","huge01-1.PNG","huge01-2.PNG" };
-		vec2 startPosition = trans_ij_to_xy(position);
-
-		this->setTexture("/Enemy/barrier/0/One1.PNG");
-		this->setPosition(startPosition.x, startPosition.y);
-		this_layer->addChild(this);
-
-		switch (model) {
-
-		case MONSTER_NORMAL:
-			enemy.damage = 1;
-			enemy.coin = MONSTER_COIN_NORMAL;
-			enemy.hp = MONSTER_NORMAL_HP * game_waves;
-			enemy.speed = MONSTER_NORMAL_SPEED;
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[1], Rect(0, 0, 90, 90)));
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[0], Rect(0, 0, 90, 90)));
-
-			break;
-		case MONSTER_FAST:
-			enemy.damage = 1;
-			enemy.coin = MONSTER_COIN_NORMAL;
-			enemy.hp = MONSTER_FAST_HP * game_waves;
-			enemy.speed = MONSTER_FAST_SPEED;
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[2], Rect(0, 0, 154, 84)));
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[3], Rect(0, 0, 154, 84)));
-			break;
-		case MONSTER_HUGE:
-			enemy.damage = 1;
-			enemy.coin = MONSTER_COIN_HUGE;
-			enemy.hp = MONSTER_HUGE_HP * game_waves;
-			enemy.speed = MONSTER_HUGE_SPEED;
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[4], Rect(0, 0, 183, 148)));
-			monster_self_change.pushBack(SpriteFrame::create(baseRoad + pictureText[5], Rect(0, 0, 183, 148)));
-			break;
-		}
-
-
-		enemy.enemy_picture->setPosition(startPosition.x, startPosition.y);
-
-
-		enemy.enemy_picture->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(monster_self_change, 0.25 / (1 + if_speed_up))), nullptr)));
-
-		this_layer->addChild(enemy.enemy_picture);
-		this->scheduleUpdate();
-
-	}
-
-}*/
-
-/*void Enemy::move()
-{
-	Vec2 place;
-	vec2 place2;          //求得pos位置后转为格子中心位置
-	place2.x = place.x;
-	place2.y = place.y;
-	place = enemy.enemy_picture->getAnchorPoint();
-	pos currentPosition = trans_xy_to_ij(place2);
-	place2 = trans_ij_to_xy(currentPosition);
-	bool flag;
-	flag = (place2.x == place.x) && (place.y == place2.y) && ((currentPosition.i != levelPath[0].point.i) || (currentPosition.j != levelPath[0].point.j));//是否到达下一点且不为起点
-	if (flag)
-		enemy.count++;
-	if (enemy.count == levelPath.size())
-		return;
-	if (levelPath[enemy.count].direction == 's') {
-		enemy.enemy_picture->runAction(MoveBy::create(1, Vec2(0, -5)));
-	}
-	else if (levelPath[enemy.count].direction == 'd') {//向右
-		enemy.enemy_picture->runAction(MoveBy::create(1, Vec2(5,0)));
-	}
-	else if (levelPath[enemy.count].direction == 'w') {
-		enemy.enemy_picture->runAction(MoveBy::create(1, Vec2(0, 5)));
-	}
-	else if (levelPath[enemy.count].direction == 'a') {
-		enemy.enemy_picture->runAction(MoveBy::create(1, Vec2(-5,0)));
-	}
-}*/
-
-/*void Enemy::Update(float dt)
-{
-	log("update");
-	Enemy::move();
-
-}*/

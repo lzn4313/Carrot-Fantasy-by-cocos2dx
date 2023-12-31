@@ -36,6 +36,7 @@ Enemy* destination;
 vector<LevelPath> levelPath;
 vector<Enemy*> barrier;
 vector<Enemy*> monster;
+int all_clear;
 //游戏统计数据
 int money_total;//击杀获得金钱总数
 int monster_total;//击杀怪物总数
@@ -61,6 +62,8 @@ bool GameScene::init()
     monster_total = 0;
     boss_total = 0;
     barrier_total = 0;
+    destination = nullptr;
+    all_clear = 0;
     /**********************  选关  ******************************/
     if (level_selection == 1) {
         auto level_1_1 = Level_1_1::createLayer();
@@ -110,6 +113,8 @@ void GameScene::reset_menu() {
     barrier_total = 0;
     if_speed_up = 0;
     if_pause = 0;
+    destination = nullptr;
+    all_clear = 0;
     this->scheduleUpdate();
 }
 /**********************************  GameMenu  ********************************/
@@ -130,6 +135,7 @@ bool GameMenu::init()
     auto menu_image = Sprite::create("/GameScene/touming-hd.pvr_13.PNG");
     menu_image->setPosition(Vec2(origin.x + visibleSize.width / 2,
         origin.y + visibleSize.height - menu_image->getContentSize().height / 2));
+    menu_image->setOpacity(230);
     this->addChild(menu_image);
     //金钱显示
     auto money_label = Label::createWithTTF(to_string(game_money), "/fonts/Marker Felt.ttf", 32);
@@ -271,9 +277,6 @@ bool GameMenu::init()
             vec.x = touch->getLocation().x;
             vec.y = touch->getLocation().y;
             pos position = trans_xy_to_ij(vec);
-            //if (game_map[position.i][position.j] == DISABLED) {
-            //    return false;
-            //}
             return true;
         }
         return false;
@@ -303,7 +306,12 @@ bool GameMenu::init()
                         vec.x <= monster[i]->getPositionX() + monster[i]->getContentSize().width / 2 &&
                         vec.y >= monster[i]->getPositionY() - monster[i]->getContentSize().height / 2 &&
                         vec.y <= monster[i]->getPositionY() + monster[i]->getContentSize().height / 2) {
-                        destination = monster[i];
+                        if (destination == monster[i]) {
+                            destination = nullptr;
+                        }
+                        else { 
+                            destination = monster[i]; 
+                        }
                         flag = 1;
                         break;
                     }
@@ -314,7 +322,12 @@ bool GameMenu::init()
                             vec.x <= barrier[i]->getPositionX() + barrier[i]->getContentSize().width / 2 &&
                             vec.y >= barrier[i]->getPositionY() - barrier[i]->getContentSize().height / 2 &&
                             vec.y <= barrier[i]->getPositionY() + barrier[i]->getContentSize().height / 2) {
-                            destination = barrier[i];
+                            if (destination == barrier[i]) {
+                                destination = nullptr;
+                            }
+                            else {
+                                destination = barrier[i];
+                            }
                             flag = 1;
                             break;
                         }
@@ -336,64 +349,6 @@ bool GameMenu::init()
         }
     };
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-
-    /*****************************************
-    *********************
-    ************
-    *********
-    ********
-    *****调试*/
-    auto get_money = Label::createWithTTF("getMoney", "/fonts/Marker Felt.ttf", 30);
-    get_money->setTextColor(Color4B::YELLOW);
-    get_money->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
-        origin.y + visibleSize.height * 0.95));
-    this->addChild(get_money);
-
-    auto waves_up = Label::createWithTTF("WavesUp", "/fonts/Marker Felt.ttf", 30);
-    waves_up->setTextColor(Color4B::YELLOW);
-    waves_up->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
-        origin.y + visibleSize.height * 0.9));
-    this->addChild(waves_up);
-
-    auto hp_down = Label::createWithTTF("HpDown", "/fonts/Marker Felt.ttf", 30);
-    hp_down->setTextColor(Color4B::YELLOW);
-    hp_down->setPosition(Vec2(origin.x + visibleSize.width * 0.27,
-        origin.y + visibleSize.height * 0.85));
-    this->addChild(hp_down);
-
-    auto listener2 = EventListenerTouchOneByOne::create();
-    listener2->onTouchBegan = [=](Touch* touch, Event* event) {
-        return true;
-    };
-    listener2->onTouchEnded = [=](Touch* touch, Event* event) {
-        if (touch->getLocation().x >= get_money->getPosition().x - get_money->getContentSize().width / 2 &&
-            touch->getLocation().x <= get_money->getPosition().x + get_money->getContentSize().width / 2 &&
-            touch->getLocation().y >= get_money->getPosition().y - get_money->getContentSize().height / 2 &&
-            touch->getLocation().y <= get_money->getPosition().y + get_money->getContentSize().height / 2) {
-            game_money += 1000;
-        }
-
-        if (touch->getLocation().x >= waves_up->getPosition().x - waves_up->getContentSize().width / 2 &&
-            touch->getLocation().x <= waves_up->getPosition().x + waves_up->getContentSize().width / 2 &&
-            touch->getLocation().y >= waves_up->getPosition().y - waves_up->getContentSize().height / 2 &&
-            touch->getLocation().y <= waves_up->getPosition().y + waves_up->getContentSize().height / 2) {
-            game_waves += 1;
-        }
-
-        if (touch->getLocation().x >= hp_down->getPosition().x - hp_down->getContentSize().width / 2 &&
-            touch->getLocation().x <= hp_down->getPosition().x + hp_down->getContentSize().width / 2 &&
-            touch->getLocation().y >= hp_down->getPosition().y - hp_down->getContentSize().height / 2 &&
-            touch->getLocation().y <= hp_down->getPosition().y + hp_down->getContentSize().height / 2) {
-            carrot_hp -= 1;
-        }
-    };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
-    /*****
-    *************
-    **********************
-    **************************
-    ********************************
-    ************************************ *****调试*/
     //调用调度器
     this->scheduleUpdate();
     return true;
@@ -480,7 +435,7 @@ void GameMenu::lose() {
     return_btn->setPosition(Vec2(visibleSize.width * 0.35, visibleSize.height * 0.3));
     return_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
         button_sound_effect();
-        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(GameSelectionScene::createScene());
         });
     options_menu->addChild(return_btn);
 
@@ -546,10 +501,10 @@ void GameMenu::win() {
         button_sound_effect();
         this->getParent()->removeChildByName("PlayingLevel");
         if (level_selection == 1) {
+            level_selection++;
             auto level_1_2 = Level_1_2::createLayer();
             level_1_2->setName("PlayingLevel");
             this->getParent()->addChild(level_1_2, -3);
-            static_cast<GameScene*>(this->getParent())->reset_menu();
             this->getParent()->removeChildByName("EnemyCreate");
             auto enemycreate = EnemyCreate::create();
             enemycreate->setName("EnemyCreate");
@@ -560,7 +515,6 @@ void GameMenu::win() {
         }
         else if (level_selection == 2) {
             log("To be continued");
-            Director::getInstance()->popScene();
             Director::getInstance()->replaceScene(GameSelectionScene::createScene());
         }
         });
@@ -570,7 +524,6 @@ void GameMenu::win() {
     return_btn->setPosition(Vec2(visibleSize.width * 0.35, visibleSize.height * 0.3));
     return_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
         button_sound_effect();
-        Director::getInstance()->popScene();
         Director::getInstance()->replaceScene(GameSelectionScene::createScene());
         });
     options_menu->addChild(return_btn);
@@ -635,7 +588,7 @@ void GameMenu::update(float dt) {
         this->unscheduleUpdate();
         lose();
     }
-    if (game_waves == max_waves && monster.size() == 0) {
+    if (all_clear ==1 && monster.size() == 0) {
         this->unscheduleUpdate();
         win();
     }
@@ -709,7 +662,7 @@ void GameMenu::options() {
     return_btn->setPosition(Vec2(visibleSize.width *0.49, visibleSize.height * 0.37));
     return_btn->setCallback([this, black_layer](Ref* psender) {//按钮回调事件，返回上一级
         button_sound_effect();
-        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(GameSelectionScene::createScene());
         });
     options_menu->addChild(return_btn);
 

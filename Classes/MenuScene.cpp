@@ -52,7 +52,7 @@ bool MenuScene::init()
     {
         cloud1->setPosition(Vec2(origin.x - cloud1->getContentSize().width,
             origin.y + visibleSize.height * 0.85));
-        cloud1->setOpacity(95);
+        cloud1->setOpacity(230);
         //添加动画
         //从左向右飘
         auto cloud1_moveto_1 = MoveTo::create(20, Vec2(origin.x + visibleSize.width + cloud1->getContentSize().width, origin.y + visibleSize.height * 0.85));
@@ -75,7 +75,7 @@ bool MenuScene::init()
         cloud2->setPosition(Vec2(origin.x + visibleSize.width + cloud2->getContentSize().width,
             origin.y + visibleSize.height * 0.8));
         cloud2->setScale(2);
-        cloud2->setOpacity(95);
+        cloud2->setOpacity(230);
         //添加动画
         //从右向左
         auto cloud2_moveto_1 = MoveTo::create(20, Vec2(origin.x - cloud2->getContentSize().width, origin.y + visibleSize.height * 0.85));

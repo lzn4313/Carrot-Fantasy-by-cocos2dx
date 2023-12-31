@@ -28,7 +28,6 @@ void EnemyCreate::SetLevel(int level_selection) {
 	monster.clear();
 	barrier.clear();
 	level = level_selection;
-	all_clear = 1;
 	vector<int>waves;
 	if (level == 1) {
 		//第一关
@@ -36,17 +35,17 @@ void EnemyCreate::SetLevel(int level_selection) {
 		current_waves = 1;
 		max_waves = 15;
 		//每一波怪物存储
-		//前七波全是普通怪
+		//前三波全是普通怪
 		waves.clear();
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 10; j++) {
 				waves.push_back(NORMAL);
 			}
 			monster_data.push_back(waves);
 			waves.clear();
 		}
-		//后8波普通怪5个，飞行怪5个
-		for (int i = 6; i < 15; i++) {
+		//后12波普通怪5个，飞行怪5个
+		for (int i = 3; i < 15; i++) {
 			for (int j = 0; j < 5; j++) {
 				waves.push_back(NORMAL);
 			}
@@ -57,14 +56,15 @@ void EnemyCreate::SetLevel(int level_selection) {
 			waves.clear();
 		}
 		//障碍物
+		barrier_appear(BARRIER_6, { 1,3 }, { 1,4 }, { 0,3 });
+		barrier_appear(BARRIER_6, { 1,7 }, { 1,8 }, { 0,7 });
+		barrier_appear(BARRIER_5, { 1,5 }, { 1,6 }, { 0,5 });
+		barrier_appear(BARRIER_3, { 4,5 }, { 4,6 });
 		barrier_appear(BARRIER_2, { 3,2 });
 		barrier_appear(BARRIER_1, { 2,4 });
 		barrier_appear(BARRIER_1, { 2,7 });
 		barrier_appear(BARRIER_2, { 3,9 });
-		barrier_appear(BARRIER_3, { 4,5 }, { 4,6 });
-		barrier_appear(BARRIER_6, { 1,3 }, { 1,4 },{ 0,3 });
-		barrier_appear(BARRIER_6, { 1,7 }, { 1,8 }, { 0,7 });
-		barrier_appear(BARRIER_5, { 1,5 }, { 1,6 }, { 0,5 });
+
 	}
 	else if (level == 2) {
 		//第二关
@@ -72,18 +72,21 @@ void EnemyCreate::SetLevel(int level_selection) {
 		current_waves = 1;
 		max_waves = 15;
 		//每一波怪物存储
-		//前七波全是普通怪
+		//前两波全是普通怪
 		waves.clear();
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 10; j++) {
 				waves.push_back(NORMAL);
+			}
+			if (i == 1) {
+				waves.push_back(BOSS);
 			}
 			monster_data.push_back(waves);
 			waves.clear();
 		}
-		//后7波普通怪5个，飞行怪5个
+		//后13波普通怪5个，飞行怪5个
 		//最后一波加一个boss
-		for (int i = 6; i < 15; i++) {
+		for (int i = 2; i < 15; i++) {
 			for (int j = 0; j < 5; j++) {
 				waves.push_back(NORMAL);
 			}
@@ -92,9 +95,6 @@ void EnemyCreate::SetLevel(int level_selection) {
 			}
 			monster_data.push_back(waves);
 			waves.clear();
-			if (i == 14) {
-				monster_data[i].push_back(BOSS);
-			}
 		}
 
 		//障碍物
@@ -132,6 +132,7 @@ void EnemyCreate::barrier_appear(int Type, pos position) {
 	vec2 vec;
 	auto barrier_1 = Enemy::createSprite();
 	static_cast<Enemy*>(barrier_1)->setType(Type);
+	static_cast<Enemy*>(barrier_1)->set_position(position);
 	vec = trans_ij_to_xy(position);
 	barrier_1->setPosition(Vec2(vec.x, vec.y));
 	this->addChild(barrier_1);
@@ -142,6 +143,7 @@ void EnemyCreate::barrier_appear(int Type, pos position_l,pos position_r) {
 	vec2 vec_l, vec_r, vec;
 	auto barrier_1 = Enemy::createSprite();
 	static_cast<Enemy*>(barrier_1)->setType(Type);
+	static_cast<Enemy*>(barrier_1)->set_position(position_l);
 	vec_l = trans_ij_to_xy(position_l);
 	vec_r = trans_ij_to_xy(position_r);
 	vec = { (vec_l.x + vec_r.x) / 2,(vec_l.y + vec_r.y) / 2 };
@@ -154,6 +156,7 @@ void EnemyCreate::barrier_appear(int Type, pos position_l, pos position_r,pos po
 	vec2 vec_l, vec_r,vec_u, vec;
 	auto barrier_1 = Enemy::createSprite();
 	static_cast<Enemy*>(barrier_1)->setType(Type);
+	static_cast<Enemy*>(barrier_1)->set_position(position_l);
 	vec_l = trans_ij_to_xy(position_l);
 	vec_r = trans_ij_to_xy(position_r);
 	vec_u = trans_ij_to_xy(position_u);
@@ -172,21 +175,23 @@ void EnemyCreate::start() {
 /*update函数*/
 void EnemyCreate::update(float dt) {
 	static float time = 1;
+	static float clear_time = 0;
 	static int n = 0;
 	static int flag = 0;
 	if (if_pause == 0) {
 		if (flag == 0) {
-			if (time >= 1 && monster.size() == 0) {
+			if (monster.size() == 0 && clear_time >= 2) {
 				flag = 1;
-				time = 0;
+				clear_time = 0;
 				game_waves += 1;
 			}
 		}
 		//如果当前怪物全清，且还有怪物没出
-		if (((monster.size() == 0 && flag == 0) || flag == 1) && current_waves <= max_waves) {
+		if (flag == 1 && current_waves <= max_waves) {
 			if (n == 0) {
 				monster_appear(monster_data[current_waves - 1][n]);
 				n++;
+				time = 0;
 			}
 			else if (time >= 1) {
 				monster_appear(monster_data[current_waves - 1][n]);
@@ -197,7 +202,14 @@ void EnemyCreate::update(float dt) {
 				flag = 0;
 				n = 0;
 				current_waves += 1;
+				if (current_waves == max_waves + 1) {
+					extern int all_clear;
+					all_clear= 1;
+				}
 			}
+		}
+		if (monster.size() == 0 && n == 0 && flag == 0) {
+			clear_time += dt * (if_speed_up + 1);
 		}
 		time += dt * (if_speed_up + 1);
 	}

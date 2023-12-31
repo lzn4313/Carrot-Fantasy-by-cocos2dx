@@ -11,7 +11,6 @@ private:
 	int level;
 	int current_waves;
 	int max_waves;
-	int all_clear;
 	pos start_position;
 	vector<vector<int>> monster_data;
 public:

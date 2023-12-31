@@ -624,8 +624,8 @@ void Level_1_Layer::create_slide_layer()
     tower_2_2->setPosition(Vec2(origin.x + visibleSize.width *1.5,
         origin.y + visibleSize.height * 0.23));
     static_layer->addChild(tower_2_2);
-    //·çÉÈ
-    auto tower_2_3 = Sprite::create("/GameSelectionScene/Tower_3.PNG");
+    //ÐÇÐÇ
+    auto tower_2_3 = Sprite::create("/GameSelectionScene/Tower_4.PNG");
     tower_2_3->setPosition(Vec2(origin.x + visibleSize.width * 1.5 + tower_2_3->getContentSize().width,
         origin.y + visibleSize.height * 0.23));
     static_layer->addChild(tower_2_3);
@@ -673,8 +673,8 @@ void Level_1_Layer::create_slide_layer()
     tower_3_2->setPosition(Vec2(origin.x + visibleSize.width * 2.5,
         origin.y + visibleSize.height * 0.23));
     static_layer->addChild(tower_3_2);
-    //ÐÇÐÇ
-    auto tower_3_3 = Sprite::create("/GameSelectionScene/Tower_4.PNG");
+    //·çÉÈ
+    auto tower_3_3 = Sprite::create("/GameSelectionScene/Tower_3.PNG");
     tower_3_3->setPosition(Vec2(origin.x + visibleSize.width * 2.5 + tower_3_3->getContentSize().width,
         origin.y + visibleSize.height * 0.23));
     static_layer->addChild(tower_3_3);
@@ -890,7 +890,7 @@ void Level_1_Layer::level_1_1(Ref* psender, Widget::TouchEventType type)
             button_sound_effect();//²¥·ÅÒôÐ§
             level_selection = 1;
             auto game_scene = GameScene::createScene();
-            Director::getInstance()->pushScene(game_scene);
+            Director::getInstance()->replaceScene(game_scene);
             break;
     }
 }
@@ -947,7 +947,7 @@ void Level_1_Layer::level_1_2(Ref* psender, Widget::TouchEventType type)
             else {
                 level_selection = 2;
                 auto game_scene = GameScene::createScene();
-                Director::getInstance()->pushScene(game_scene);
+                Director::getInstance()->replaceScene(game_scene);
             }
             break;
     }

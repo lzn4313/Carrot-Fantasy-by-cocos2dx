@@ -77,3 +77,24 @@ static void carrot_eaten_sound_effect() {
 		AudioEngine::play2d("/sound/carrot_eaten.mp3", false, 1.0f);
 	}
 }
+//播放普通怪死亡音效
+static void normal_dead_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放普通怪死亡音效
+		AudioEngine::play2d("/sound/Land112.mp3", false, 1.0f);
+	}
+}
+//播放飞行怪死亡音效
+static void fly_dead_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放飞行怪死亡音效
+		AudioEngine::play2d("/sound/Fly162.mp3", false, 1.0f);
+	}
+}
+//播放boss死亡音效
+static void boss_dead_sound_effect() {
+	if (UserDefault::getInstance()->getIntegerForKey("sound_effect") == 1) {
+		//若音效打开，则播放boss死亡音效
+		AudioEngine::play2d("/sound/Fat141.mp3", false, 1.0f);
+	}
+}

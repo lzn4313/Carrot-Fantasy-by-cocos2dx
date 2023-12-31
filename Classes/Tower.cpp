@@ -84,9 +84,11 @@ void Tower_body::update(float dt)
 		if (destination != nullptr)
 			enemy_position = destination->getPosition();
 
-		if (((my_position.x - enemy_position.x) * (my_position.x - enemy_position.x) +
+		if (destination!=nullptr&&((my_position.x - enemy_position.x) * (my_position.x - enemy_position.x) +
 			(my_position.y - enemy_position.y) * (my_position.y - enemy_position.y))
-			<= (tower_information.attack_range * 80) * (tower_information.attack_range * 80))
+			<= ((tower_information.attack_range * 80 * 1.414) * (tower_information.attack_range * 80 * 1.414) +
+				(destination->getContentSize().width / 2) * (destination->getContentSize().width / 2) +
+				(destination->getContentSize().height / 2) * (destination->getContentSize().height / 2)))
 		{
 			target = destination;
 		}
@@ -95,7 +97,9 @@ void Tower_body::update(float dt)
 				enemy_position = enemy->getPosition();
 				if (((my_position.x - enemy_position.x) * (my_position.x - enemy_position.x) +
 					(my_position.y - enemy_position.y) * (my_position.y - enemy_position.y))
-					<= (tower_information.attack_range * 80) * (tower_information.attack_range * 80))
+					<= ((tower_information.attack_range * 80 * 1.414) * (tower_information.attack_range * 80 * 1.414) +
+						(enemy->getContentSize().width / 2) * (enemy->getContentSize().width / 2) +
+						(enemy->getContentSize().height / 2) * (enemy->getContentSize().height / 2)))
 				{
 					target = enemy;
 					break;
@@ -138,7 +142,7 @@ void Tower_body::update(float dt)
 						default:
 							break;
 					}
-					this->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), nullptr));
+					this->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.1)), nullptr));
 					auto bullet = Sprite::create();
 					switch (tower_information.level)
 					{
@@ -166,7 +170,7 @@ void Tower_body::update(float dt)
 						});
 
 					bullet->setRotation(r);
-					auto bullet_move_to = cocos2d::MoveTo::create(if_speed_up == 0 ? 0.33 : 0.33 / 2, target->getPosition());
+					auto bullet_move_to = cocos2d::MoveTo::create(if_speed_up == 0 ? 0.2 : 0.2 / 2, target->getPosition());
 					bullet->runAction(Sequence::create(bullet_move_to, DelayTime::create(0), remove_bullet, DelayTime::create(0), attacked, nullptr));
 					ThisLayer->addChild(bullet);
 				}
@@ -194,7 +198,7 @@ void Tower_body::update(float dt)
 						default:
 							break;
 					}
-					this->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.11)), nullptr));
+					this->runAction(Sequence::create(Animate::create(Animation::createWithSpriteFrames(frame, 0.1)), nullptr));
 					auto bullet = Sprite::create();
 					switch (tower_information.level)
 					{
@@ -222,7 +226,7 @@ void Tower_body::update(float dt)
 						});
 
 					bullet->setRotation(r);
-					auto bullet_move_to = cocos2d::MoveTo::create(if_speed_up == 0 ? 0.33 : 0.33 / 2, target->getPosition());
+					auto bullet_move_to = cocos2d::MoveTo::create((if_speed_up == 0 ? 0.25 : (0.25 / 2)), target->getPosition());
 					bullet->runAction(Sequence::create(bullet_move_to, DelayTime::create(0), remove_bullet, DelayTime::create(0), attacked, nullptr));
 					ThisLayer->addChild(bullet);
 				}
@@ -373,7 +377,10 @@ void Tower::up_level_tower(pos position, cocos2d::Layer* this_layer)
 			TowerBody->tower_information.level++;
 			TowerBody->tower_information.attack *= 2;
 			TowerBody->tower_information.attack_range += 0.5;
-			TowerBody->tower_information.attack_speed *= 1.5;
+			if (TowerBody->tower_information.name_tag == Tower_Bottle)
+				TowerBody->tower_information.attack_speed += 2;
+			else
+				TowerBody->tower_information.attack_speed *= 1.5;
 
 			//TowerBody->tower_information = tower_map[position.i][position.j];
 

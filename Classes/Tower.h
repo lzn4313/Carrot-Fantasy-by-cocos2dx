@@ -19,7 +19,7 @@ using namespace std;
 
 const int Tower_Value[4] = { 100,120,160,160 };
 const float Tower_Attack[4] = { 50,20,60,80 };
-const float Tower_Attack_Speed[4] = { 12,4,4,3 };
+const float Tower_Attack_Speed[4] = { 8,4,4,3 };
 
 class Tower_body;
 
