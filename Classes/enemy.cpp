@@ -160,7 +160,7 @@ void Enemy::update(float dt)
 	static int appear_waves = game_waves;
 	//减速状态时间累计判断
 	if (enemy.origin_speed > enemy.speed) {
-		enemy.time += dt;
+		enemy.time += dt * (1 + if_speed_up) * if_pause;
 		if (enemy.time > 3) {
 			enemy.time = 0;
 			this->removeChildByName("shit");
@@ -245,6 +245,7 @@ void Enemy::update(float dt)
 			}
 			monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 			this->removeFromParent();
+			return;
 		}
 
 
@@ -275,7 +276,7 @@ void Enemy::update(float dt)
 		this->addChild(hpSlider, 2);
 	}
 	//没血了就消失
-	else if(enemy.hp==0){
+	else if(enemy.hp<=0){
 		Vector<SpriteFrame*> death;
 		death.pushBack(SpriteFrame::create("/Enemy/monster/1.PNG", Rect(0, 0, 109, 99)));
 		death.pushBack(SpriteFrame::create("/Enemy/monster/2.PNG", Rect(0, 0, 111, 114)));
@@ -317,64 +318,85 @@ void Enemy::update(float dt)
 		}
 		monster.erase(find_if(monster.begin(), monster.end(), [this](const Enemy* enemy) {return enemy == this; }));
 		this->removeFromParent();
-		
+		return;
 	}
 }
 
-void Enemy::declineHp(Tower_information tower)
+void Enemy::declineHp(Tower_information tower, int op)
 {
-	Vec2 currentPosition = this->getPosition();
-	Vector<SpriteFrame*> attacked;
-	auto sprite = Sprite::create();
-	enemy.hp -= tower.attack;
-	switch (tower.name_tag) {
-	case Tower_Bottle:
-		attacked.pushBack(SpriteFrame::create("/Tower/Bottle/ID1_20.PNG", Rect(0, 0, 28, 29)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Bottle/ID1_10.PNG", Rect(0, 0, 64, 60)));
-		break;
-	case Tower_Shit:
-		attacked.pushBack(SpriteFrame::create("/Tower/Shit/ID2_41.PNG", Rect(0, 0, 22, 21)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Shit/ID2_13.PNG", Rect(0, 0, 52, 47)));
-		break;
-	case Tower_Fan:
-		attacked.pushBack(SpriteFrame::create("/Tower/Fan/ID4_14.PNG", Rect(0, 0, 61, 66)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Fan/ID4_15.PNG", Rect(0, 0, 79, 87)));
-		break;
-	case Tower_Star:
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_78.PNG", Rect(0, 0, 30, 30)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_94.PNG", Rect(0, 0, 52, 52)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_79.PNG", Rect(0, 0, 103, 104)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_57.PNG", Rect(0, 0, 148, 144)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_22.PNG", Rect(0, 0, 192, 189)));
-		attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_21.PNG", Rect(0, 0, 217, 212)));
-	}
-	sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(attacked, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), nullptr), 1));
-	sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height/2));
-	this->addChild(sprite);
-	
-	if (enemy.origin_speed != 0) {
-		if (tower.attack_special == Slow) {	
-			if (tower.level == 1)
-				enemy.speed = enemy.origin_speed * 0.8;
-			else if (tower.level == 2)
-				enemy.speed = enemy.origin_speed * 0.6;
-			else if (tower.level == 3)
-				enemy.speed = enemy.origin_speed * 0.4;
-			if (tower.name_tag == Tower_Shit&&enemy.time==0) {
-				auto slowByShit = Sprite::create();
-				Vector<SpriteFrame*>shit;
-				shit.pushBack(SpriteFrame::create("/Tower/Shit/ID2_1.PNG", Rect(0, 0, 80, 21)));
-				shit.pushBack(SpriteFrame::create("/Tower/Shit/ID2_10.PNG", Rect(0, 0, 78, 18)));
-				slowByShit->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(shit, 0.1 / (1 + if_speed_up))), nullptr)));
-				slowByShit->setPosition(Vec2(this->getContentSize().width / 2, 0));
-				slowByShit->setName("shit");
-				this->addChild(slowByShit);
+	if (enemy.hp > 0) {
+		if (op == 0) {
+			Vec2 currentPosition = this->getPosition();
+			Vector<SpriteFrame*> attacked;
+			auto sprite = Sprite::create();
+			enemy.hp -= tower.attack;
+			switch (tower.name_tag) {
+				case Tower_Bottle:
+					attacked.pushBack(SpriteFrame::create("/Tower/Bottle/ID1_20.PNG", Rect(0, 0, 28, 29)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Bottle/ID1_10.PNG", Rect(0, 0, 64, 60)));
+					break;
+				case Tower_Shit:
+					attacked.pushBack(SpriteFrame::create("/Tower/Shit/ID2_41.PNG", Rect(0, 0, 22, 21)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Shit/ID2_13.PNG", Rect(0, 0, 52, 47)));
+					break;
+				case Tower_Fan:
+					attacked.pushBack(SpriteFrame::create("/Tower/Fan/ID4_14.PNG", Rect(0, 0, 61, 66)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Fan/ID4_15.PNG", Rect(0, 0, 79, 87)));
+					break;
+				case Tower_Star:
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_78.PNG", Rect(0, 0, 30, 30)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_94.PNG", Rect(0, 0, 52, 52)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_79.PNG", Rect(0, 0, 103, 104)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_57.PNG", Rect(0, 0, 148, 144)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_22.PNG", Rect(0, 0, 192, 189)));
+					attacked.pushBack(SpriteFrame::create("/Tower/Star/ID3_21.PNG", Rect(0, 0, 217, 212)));
 			}
-			enemy.time = 0;
+			sprite->runAction(Repeat::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(attacked, 0.05 / (1 + if_speed_up))), FadeOut::create(0.2 / (1 + if_speed_up)), nullptr), 1));
+			sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
+			this->addChild(sprite);
+
+			if (enemy.origin_speed != 0) {
+				if (tower.attack_special == Slow) {
+					if (tower.level == 1)
+						enemy.speed = enemy.origin_speed * 0.8;
+					else if (tower.level == 2)
+						enemy.speed = enemy.origin_speed * 0.6;
+					else if (tower.level == 3)
+						enemy.speed = enemy.origin_speed * 0.4;
+					if (tower.name_tag == Tower_Shit && enemy.time == 0) {
+						auto slowByShit = Sprite::create();
+						Vector<SpriteFrame*>shit;
+						shit.pushBack(SpriteFrame::create("/Tower/Shit/ID2_1.PNG", Rect(0, 0, 80, 21)));
+						shit.pushBack(SpriteFrame::create("/Tower/Shit/ID2_10.PNG", Rect(0, 0, 78, 18)));
+						slowByShit->runAction(RepeatForever::create(Sequence::create(Animate::create(Animation::createWithSpriteFrames(shit, 0.1)), nullptr)));
+						slowByShit->setPosition(Vec2(this->getContentSize().width / 2, 0));
+						slowByShit->setName("shit");
+						this->addChild(slowByShit);
+					}
+					enemy.time = 0;
+				}
+			}
+		}
+		else if (op == 1 && tower.name_tag == Tower_Star) {
+			Vec2 currentPosition = this->getPosition();
+			auto sprite = Sprite::create();
+			enemy.hp -= tower.attack * 0.3;
+			switch (tower.level) {
+				case 1:
+				case 2:
+					sprite->setTexture("/Tower/Star/ID3_73.PNG");
+					break;
+				case 3:
+					sprite->setTexture("/Tower/Star/ID3_85.PNG");
+					break;
+				default:
+					break;
+			}
+			sprite->runAction(Sequence::create(Blink::create(0.3 / (1 + if_speed_up), 1), FadeOut::create(0.1 / (1 + if_speed_up)), nullptr));
+			sprite->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
+			this->addChild(sprite);
 		}
 	}
-
-
 }
 
 void enemy_appear(int species, int model, int picture,int x, int y, Layer* this_layer)

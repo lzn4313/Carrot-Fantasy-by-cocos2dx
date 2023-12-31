@@ -57,7 +57,7 @@ struct Enemy_information {
 	int damage;                                   //对萝卜造成的伤害
 	cocos2d::Sprite* enemy_picture;               //障碍贴图
 	int count;                                    //走过的格子数
-	int time = 0;                                 //记录生效时间
+	double time = 0;                                 //记录生效时间
 	int origin_speed;                             //记录常态化速度
 	int full_hp;                                  //记录满血血量
 	float total_length = 0;						  //记录走过的路程长度
@@ -91,7 +91,7 @@ public:
 	void setType(int selection);
 	void set_position(pos _position) { enemy.position = _position; }
 	pos get_position() { return enemy.position; }
-	void declineHp(Tower_information tower);
+	void declineHp(Tower_information tower, int op);
 };
 
 
