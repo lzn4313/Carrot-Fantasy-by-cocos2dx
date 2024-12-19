@@ -84,7 +84,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     //设置存档地址（存档相关请跳转至GameData.h）
-    FileUtils::getInstance()->setWritablePath("D:/Carrot Fantasy/Carrot_Fantasy/proj.win32/");
+    FileUtils::getInstance()->setWritablePath(FileUtils::getInstance()->getDefaultResourceRootPath()+"../");
     //初始化存档数据
     init_data();
     //如果背景音乐开，则播放背景音乐

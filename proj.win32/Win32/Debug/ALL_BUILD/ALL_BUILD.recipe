@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Carrot_Fantasy\proj.win32\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Carrot_Fantasy\proj.win32\Debug\SYNC_RESOURCE-Carrot_Fantasy</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Carrot_Fantasy\proj.win32\bin\Carrot_Fantasy\Debug\Carrot_Fantasy.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Carrot_Fantasy\proj.win32\Debug\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

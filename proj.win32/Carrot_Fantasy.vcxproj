@@ -1,0 +1,1301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FFAF4F3A-E145-3B22-8C26-E3F229407D27}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>Win32</Platform>
+    <ProjectName>Carrot_Fantasy</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Carrot_Fantasy\proj.win32\bin\Carrot_Fantasy\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Carrot_Fantasy.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Carrot_Fantasy</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Carrot_Fantasy\proj.win32\bin\Carrot_Fantasy\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Carrot_Fantasy.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Carrot_Fantasy</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Carrot_Fantasy\proj.win32\bin\Carrot_Fantasy\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Carrot_Fantasy.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Carrot_Fantasy</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Carrot_Fantasy\proj.win32\bin\Carrot_Fantasy\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Carrot_Fantasy.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Carrot_Fantasy</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Carrot_Fantasy/cocos2d/external/Box2D/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/chipmunk/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/freetype2/include/win32/freetype2" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include/bullet" /external:I "D:/Carrot_Fantasy/cocos2d/external/jpeg/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/openssl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/uv/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/webp/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/websockets/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/curl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/png/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/glfw3/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;COCOS2D_DEBUG=1;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libssl-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libcrypto-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libcrypto-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/uv/prebuilt/win32/uv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/uv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/websockets/prebuilt/win32/websockets.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/websockets.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/curl/prebuilt/win32/libcurl.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libcurl.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/prebuilt/glew32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/glew32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/prebuilt/iconv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/iconv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/prebuilt/libmpg123.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libmpg123.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libogg.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libogg.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbis.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libvorbis.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbisfile.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/libvorbisfile.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/prebuilt/OpenAL32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/OpenAL32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/prebuilt/zlib1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/zlib1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lib\Debug\cocos2d.lib;lib\Debug\external.lib;D:\Carrot_Fantasy\cocos2d\external\Box2D\prebuilt\win32\debug\libbox2d.lib;D:\Carrot_Fantasy\cocos2d\external\chipmunk\prebuilt\win32\debug-lib\libchipmunk.lib;D:\Carrot_Fantasy\cocos2d\external\freetype2\prebuilt\win32\freetype.lib;lib\Debug\ext_recast.lib;D:\Carrot_Fantasy\cocos2d\external\bullet\prebuilt\win32\debug\libbullet.lib;D:\Carrot_Fantasy\cocos2d\external\jpeg\prebuilt\win32\libjpeg.lib;D:\Carrot_Fantasy\cocos2d\external\webp\prebuilt\win32\libwebp.lib;D:\Carrot_Fantasy\cocos2d\external\websockets\prebuilt\win32\websockets.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libssl.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libcrypto.lib;D:\Carrot_Fantasy\cocos2d\external\uv\prebuilt\win32\uv_a.lib;lib\Debug\ext_tinyxml2.lib;lib\Debug\ext_xxhash.lib;lib\Debug\ext_xxtea.lib;lib\Debug\ext_clipper.lib;lib\Debug\ext_edtaa3func.lib;lib\Debug\ext_convertUTF.lib;lib\Debug\ext_poly2tri.lib;lib\Debug\ext_md5.lib;D:\Carrot_Fantasy\cocos2d\external\curl\prebuilt\win32\libcurl.lib;D:\Carrot_Fantasy\cocos2d\external\png\prebuilt\win32\libpng.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\prebuilt\glew32.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\prebuilt\libiconv.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\prebuilt\libmpg123.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libogg.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbis.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbisfile.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\prebuilt\OpenAL32.lib;D:\Carrot_Fantasy\cocos2d\external\glfw3\prebuilt\win32\glfw3.lib;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\prebuilt\libzlib.lib;lib\Debug\ext_unzip.lib;ws2_32.lib;userenv.lib;psapi.lib;winmm.lib;Version.lib;Iphlpapi.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Carrot_Fantasy/proj.win32/Debug/Carrot_Fantasy.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Debug/Carrot_Fantasy.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Carrot_Fantasy/cocos2d/external/Box2D/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/chipmunk/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/freetype2/include/win32/freetype2" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include/bullet" /external:I "D:/Carrot_Fantasy/cocos2d/external/jpeg/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/openssl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/uv/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/webp/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/websockets/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/curl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/png/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/glfw3/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libssl-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libcrypto-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libcrypto-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/uv/prebuilt/win32/uv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/uv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/websockets/prebuilt/win32/websockets.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/websockets.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/curl/prebuilt/win32/libcurl.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libcurl.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/prebuilt/glew32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/glew32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/prebuilt/iconv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/iconv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/prebuilt/libmpg123.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libmpg123.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libogg.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libogg.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbis.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libvorbis.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbisfile.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/libvorbisfile.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/prebuilt/OpenAL32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/OpenAL32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/prebuilt/zlib1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/zlib1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lib\Release\cocos2d.lib;lib\Release\external.lib;D:\Carrot_Fantasy\cocos2d\external\Box2D\prebuilt\win32\release\libbox2d.lib;D:\Carrot_Fantasy\cocos2d\external\chipmunk\prebuilt\win32\release-lib\libchipmunk.lib;D:\Carrot_Fantasy\cocos2d\external\freetype2\prebuilt\win32\freetype.lib;lib\Release\ext_recast.lib;D:\Carrot_Fantasy\cocos2d\external\bullet\prebuilt\win32\release\libbullet.lib;D:\Carrot_Fantasy\cocos2d\external\jpeg\prebuilt\win32\libjpeg.lib;D:\Carrot_Fantasy\cocos2d\external\webp\prebuilt\win32\libwebp.lib;D:\Carrot_Fantasy\cocos2d\external\websockets\prebuilt\win32\websockets.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libssl.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libcrypto.lib;D:\Carrot_Fantasy\cocos2d\external\uv\prebuilt\win32\uv_a.lib;lib\Release\ext_tinyxml2.lib;lib\Release\ext_xxhash.lib;lib\Release\ext_xxtea.lib;lib\Release\ext_clipper.lib;lib\Release\ext_edtaa3func.lib;lib\Release\ext_convertUTF.lib;lib\Release\ext_poly2tri.lib;lib\Release\ext_md5.lib;D:\Carrot_Fantasy\cocos2d\external\curl\prebuilt\win32\libcurl.lib;D:\Carrot_Fantasy\cocos2d\external\png\prebuilt\win32\libpng.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\prebuilt\glew32.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\prebuilt\libiconv.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\prebuilt\libmpg123.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libogg.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbis.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbisfile.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\prebuilt\OpenAL32.lib;D:\Carrot_Fantasy\cocos2d\external\glfw3\prebuilt\win32\glfw3.lib;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\prebuilt\libzlib.lib;lib\Release\ext_unzip.lib;ws2_32.lib;userenv.lib;psapi.lib;winmm.lib;Version.lib;Iphlpapi.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Carrot_Fantasy/proj.win32/Release/Carrot_Fantasy.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/Release/Carrot_Fantasy.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Carrot_Fantasy/cocos2d/external/Box2D/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/chipmunk/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/freetype2/include/win32/freetype2" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include/bullet" /external:I "D:/Carrot_Fantasy/cocos2d/external/jpeg/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/openssl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/uv/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/webp/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/websockets/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/curl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/png/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/glfw3/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libssl-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libcrypto-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libcrypto-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/uv/prebuilt/win32/uv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/uv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/websockets/prebuilt/win32/websockets.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/websockets.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/curl/prebuilt/win32/libcurl.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libcurl.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/prebuilt/glew32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/glew32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/prebuilt/iconv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/iconv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/prebuilt/libmpg123.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libmpg123.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libogg.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libogg.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbis.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libvorbis.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbisfile.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/libvorbisfile.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/prebuilt/OpenAL32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/OpenAL32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/prebuilt/zlib1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/zlib1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lib\MinSizeRel\cocos2d.lib;lib\MinSizeRel\external.lib;D:\Carrot_Fantasy\cocos2d\external\Box2D\prebuilt\win32\release\libbox2d.lib;D:\Carrot_Fantasy\cocos2d\external\chipmunk\prebuilt\win32\release-lib\libchipmunk.lib;D:\Carrot_Fantasy\cocos2d\external\freetype2\prebuilt\win32\freetype.lib;lib\MinSizeRel\ext_recast.lib;D:\Carrot_Fantasy\cocos2d\external\bullet\prebuilt\win32\release\libbullet.lib;D:\Carrot_Fantasy\cocos2d\external\jpeg\prebuilt\win32\libjpeg.lib;D:\Carrot_Fantasy\cocos2d\external\webp\prebuilt\win32\libwebp.lib;D:\Carrot_Fantasy\cocos2d\external\websockets\prebuilt\win32\websockets.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libssl.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libcrypto.lib;D:\Carrot_Fantasy\cocos2d\external\uv\prebuilt\win32\uv_a.lib;lib\MinSizeRel\ext_tinyxml2.lib;lib\MinSizeRel\ext_xxhash.lib;lib\MinSizeRel\ext_xxtea.lib;lib\MinSizeRel\ext_clipper.lib;lib\MinSizeRel\ext_edtaa3func.lib;lib\MinSizeRel\ext_convertUTF.lib;lib\MinSizeRel\ext_poly2tri.lib;lib\MinSizeRel\ext_md5.lib;D:\Carrot_Fantasy\cocos2d\external\curl\prebuilt\win32\libcurl.lib;D:\Carrot_Fantasy\cocos2d\external\png\prebuilt\win32\libpng.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\prebuilt\glew32.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\prebuilt\libiconv.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\prebuilt\libmpg123.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libogg.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbis.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbisfile.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\prebuilt\OpenAL32.lib;D:\Carrot_Fantasy\cocos2d\external\glfw3\prebuilt\win32\glfw3.lib;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\prebuilt\libzlib.lib;lib\MinSizeRel\ext_unzip.lib;ws2_32.lib;userenv.lib;psapi.lib;winmm.lib;Version.lib;Iphlpapi.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Carrot_Fantasy/proj.win32/MinSizeRel/Carrot_Fantasy.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/MinSizeRel/Carrot_Fantasy.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Carrot_Fantasy/cocos2d/external/Box2D/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/chipmunk/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/freetype2/include/win32/freetype2" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/bullet/include/bullet" /external:I "D:/Carrot_Fantasy/cocos2d/external/jpeg/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/openssl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/uv/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/webp/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/websockets/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/curl/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/png/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "D:/Carrot_Fantasy/cocos2d/external/glfw3/include/win32" /external:I "D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_WIN32;UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CC_STATIC;LWS_WITH_LIBUV;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Carrot_Fantasy\Classes;D:\Carrot_Fantasy\cocos2d\cocos\audio\include;D:\Carrot_Fantasy\cocos2d;D:\Carrot_Fantasy\cocos2d\cocos;D:\Carrot_Fantasy\cocos2d\extensions;D:\Carrot_Fantasy\cocos2d\cocos\platform;D:\Carrot_Fantasy\cocos2d\cocos\editor-support;D:\Carrot_Fantasy\cocos2d\cocos\base;D:\Carrot_Fantasy\cocos2d\cocos\platform\win32;D:\Carrot_Fantasy\cocos2d\external\recast\..;D:\Carrot_Fantasy\cocos2d\external\tinyxml2\.;D:\Carrot_Fantasy\cocos2d\external\xxhash\.;D:\Carrot_Fantasy\cocos2d\external\xxtea\.;D:\Carrot_Fantasy\cocos2d\external\clipper\.;D:\Carrot_Fantasy\cocos2d\external\edtaa3func\.;D:\Carrot_Fantasy\cocos2d\external\ConvertUTF\.;D:\Carrot_Fantasy\cocos2d\external\poly2tri\..;D:\Carrot_Fantasy\cocos2d\external\md5\..;D:\Carrot_Fantasy\cocos2d\external\unzip\.;D:\Carrot_Fantasy\cocos2d\external\Box2D\include;D:\Carrot_Fantasy\cocos2d\external\chipmunk\include;D:\Carrot_Fantasy\cocos2d\external\freetype2\include\win32\freetype2;D:\Carrot_Fantasy\cocos2d\external\bullet\include;D:\Carrot_Fantasy\cocos2d\external\bullet\include\bullet;D:\Carrot_Fantasy\cocos2d\external\jpeg\include\win32;D:\Carrot_Fantasy\cocos2d\external\openssl\include\win32;D:\Carrot_Fantasy\cocos2d\external\uv\include;D:\Carrot_Fantasy\cocos2d\external\webp\include\win32;D:\Carrot_Fantasy\cocos2d\external\websockets\include\win32;D:\Carrot_Fantasy\cocos2d\external\curl\include\win32;D:\Carrot_Fantasy\cocos2d\external\png\include\win32;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\include\OGLES;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\include;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\include;D:\Carrot_Fantasy\cocos2d\external\glfw3\include\win32;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libssl-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libssl-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/openssl/prebuilt/win32/libcrypto-1_1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libcrypto-1_1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/uv/prebuilt/win32/uv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/uv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/websockets/prebuilt/win32/websockets.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/websockets.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/curl/prebuilt/win32/libcurl.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libcurl.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/gles/prebuilt/glew32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/glew32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/icon/prebuilt/iconv.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/iconv.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/MP3Decoder/prebuilt/libmpg123.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libmpg123.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libogg.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libogg.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbis.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libvorbis.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OggDecoder/prebuilt/libvorbisfile.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/libvorbisfile.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/win32-specific/OpenalSoft/prebuilt/OpenAL32.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/OpenAL32.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -E copy_if_different D:/Carrot_Fantasy/cocos2d/external/zlib/../win32-specific/zlib/prebuilt/zlib1.dll D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/zlib1.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lib\RelWithDebInfo\cocos2d.lib;lib\RelWithDebInfo\external.lib;D:\Carrot_Fantasy\cocos2d\external\Box2D\prebuilt\win32\release\libbox2d.lib;D:\Carrot_Fantasy\cocos2d\external\chipmunk\prebuilt\win32\release-lib\libchipmunk.lib;D:\Carrot_Fantasy\cocos2d\external\freetype2\prebuilt\win32\freetype.lib;lib\RelWithDebInfo\ext_recast.lib;D:\Carrot_Fantasy\cocos2d\external\bullet\prebuilt\win32\release\libbullet.lib;D:\Carrot_Fantasy\cocos2d\external\jpeg\prebuilt\win32\libjpeg.lib;D:\Carrot_Fantasy\cocos2d\external\webp\prebuilt\win32\libwebp.lib;D:\Carrot_Fantasy\cocos2d\external\websockets\prebuilt\win32\websockets.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libssl.lib;D:\Carrot_Fantasy\cocos2d\external\openssl\prebuilt\win32\libcrypto.lib;D:\Carrot_Fantasy\cocos2d\external\uv\prebuilt\win32\uv_a.lib;lib\RelWithDebInfo\ext_tinyxml2.lib;lib\RelWithDebInfo\ext_xxhash.lib;lib\RelWithDebInfo\ext_xxtea.lib;lib\RelWithDebInfo\ext_clipper.lib;lib\RelWithDebInfo\ext_edtaa3func.lib;lib\RelWithDebInfo\ext_convertUTF.lib;lib\RelWithDebInfo\ext_poly2tri.lib;lib\RelWithDebInfo\ext_md5.lib;D:\Carrot_Fantasy\cocos2d\external\curl\prebuilt\win32\libcurl.lib;D:\Carrot_Fantasy\cocos2d\external\png\prebuilt\win32\libpng.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\gles\prebuilt\glew32.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\icon\prebuilt\libiconv.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\MP3Decoder\prebuilt\libmpg123.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libogg.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbis.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OggDecoder\prebuilt\libvorbisfile.lib;D:\Carrot_Fantasy\cocos2d\external\win32-specific\OpenalSoft\prebuilt\OpenAL32.lib;D:\Carrot_Fantasy\cocos2d\external\glfw3\prebuilt\win32\glfw3.lib;D:\Carrot_Fantasy\cocos2d\external\zlib\..\win32-specific\zlib\prebuilt\libzlib.lib;lib\RelWithDebInfo\ext_unzip.lib;ws2_32.lib;userenv.lib;psapi.lib;winmm.lib;Version.lib;Iphlpapi.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Carrot_Fantasy/proj.win32/RelWithDebInfo/Carrot_Fantasy.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Carrot_Fantasy/proj.win32/bin/Carrot_Fantasy/RelWithDebInfo/Carrot_Fantasy.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Carrot_Fantasy\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/Carrot_Fantasy/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -SD:/Carrot_Fantasy -BD:/Carrot_Fantasy/proj.win32 --check-stamp-file D:/Carrot_Fantasy/proj.win32/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildHelpers.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildSet.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDefine.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDepend.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCXXCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeRCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseArguments.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\cmake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Carrot_Fantasy\proj.win32\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/Carrot_Fantasy/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -SD:/Carrot_Fantasy -BD:/Carrot_Fantasy/proj.win32 --check-stamp-file D:/Carrot_Fantasy/proj.win32/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildHelpers.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildSet.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDefine.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDepend.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCXXCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeRCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseArguments.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\cmake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Carrot_Fantasy\proj.win32\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/Carrot_Fantasy/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -SD:/Carrot_Fantasy -BD:/Carrot_Fantasy/proj.win32 --check-stamp-file D:/Carrot_Fantasy/proj.win32/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildHelpers.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildSet.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDefine.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDepend.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCXXCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeRCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseArguments.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\cmake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Carrot_Fantasy\proj.win32\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/Carrot_Fantasy/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"D:\Program Files\cmake\bin\cmake.exe" -SD:/Carrot_Fantasy -BD:/Carrot_Fantasy/proj.win32 --check-stamp-file D:/Carrot_Fantasy/proj.win32/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildHelpers.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosBuildSet.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDefine.cmake;D:\Carrot_Fantasy\cocos2d\cmake\Modules\CocosConfigDepend.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeCXXCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeRCCompiler.cmake;D:\Carrot_Fantasy\proj.win32\CMakeFiles\3.28.0-rc5\CMakeSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseArguments.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\cmake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\cmake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Carrot_Fantasy\proj.win32\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\enemy.h" />
+    <ClInclude Include="..\Classes\EnemyCreate.h" />
+    <ClInclude Include="..\Classes\GameData.h" />
+    <ClInclude Include="..\Classes\GameScene.h" />
+    <ClInclude Include="..\Classes\GameSelectionScene.h" />
+    <ClInclude Include="..\Classes\HelperScene.h" />
+    <ClInclude Include="..\Classes\Level_1_1.h" />
+    <ClInclude Include="..\Classes\Level_1_2.h" />
+    <ClInclude Include="..\Classes\MenuScene.h" />
+    <ClInclude Include="..\Classes\OptionsScene.h" />
+    <ClInclude Include="..\Classes\sound&amp;music.h" />
+    <ClInclude Include="..\Classes\Tower.h" />
+    <ClInclude Include="D:\Carrot_Fantasy\Classes\AppDelegate.h" />
+    <ClInclude Include="D:\Carrot_Fantasy\proj.win32\main.h" />
+    <ClInclude Include="D:\Carrot_Fantasy\proj.win32\resource.h" />
+    <ClCompile Include="..\Classes\enemy.cpp" />
+    <ClCompile Include="..\Classes\EnemyCreate.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\Classes\GameSelectionScene.cpp" />
+    <ClCompile Include="..\Classes\HelperScene.cpp" />
+    <ClCompile Include="..\Classes\Level_1_1.cpp" />
+    <ClCompile Include="..\Classes\Level_1_2.cpp" />
+    <ClCompile Include="..\Classes\MenuScene.cpp" />
+    <ClCompile Include="..\Classes\OptionsScene.cpp" />
+    <ClCompile Include="..\Classes\Tower.cpp" />
+    <ClCompile Include="D:\Carrot_Fantasy\Classes\AppDelegate.cpp" />
+    <ClCompile Include="D:\Carrot_Fantasy\proj.win32\main.cpp" />
+    <ResourceCompile Include="D:\Carrot_Fantasy\proj.win32\game.rc" />
+    <ClCompile Include="D:\Carrot_Fantasy\cocos2d\cocos\precheader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\ZERO_CHECK.vcxproj">
+      <Project>{6656E86D-8DB9-3CA2-9EE2-1BCCC99A3EF4}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\SYNC_RESOURCE-Carrot_Fantasy.vcxproj">
+      <Project>{D3E7E800-9087-39F2-9E76-188B70E420F6}</Project>
+      <Name>SYNC_RESOURCE-Carrot_Fantasy</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\cocos\core\cocos2d.vcxproj">
+      <Project>{502CFCF8-7A0D-3848-B6F9-1C6402F05008}</Project>
+      <Name>cocos2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\clipper\ext_clipper.vcxproj">
+      <Project>{3051844B-9CD0-32E8-ABC4-49422C76600D}</Project>
+      <Name>ext_clipper</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\ConvertUTF\ext_convertUTF.vcxproj">
+      <Project>{AA7C4D85-1BBE-307B-93C2-E0743FC363A0}</Project>
+      <Name>ext_convertUTF</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\edtaa3func\ext_edtaa3func.vcxproj">
+      <Project>{BE28D50D-4606-3B8B-AAE7-23BCD2EF7A11}</Project>
+      <Name>ext_edtaa3func</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\md5\ext_md5.vcxproj">
+      <Project>{FCC55294-A4AF-34CC-8562-AAC061F53B53}</Project>
+      <Name>ext_md5</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\poly2tri\ext_poly2tri.vcxproj">
+      <Project>{73E04EA9-F2EB-3F4F-B37C-76FF4370B30F}</Project>
+      <Name>ext_poly2tri</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\recast\ext_recast.vcxproj">
+      <Project>{D4B2E0BE-910C-3C0F-BB90-83A5267B8923}</Project>
+      <Name>ext_recast</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\tinyxml2\ext_tinyxml2.vcxproj">
+      <Project>{9997FDD4-6523-3356-8229-946E99A2FF76}</Project>
+      <Name>ext_tinyxml2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\unzip\ext_unzip.vcxproj">
+      <Project>{94D578CB-77DB-3535-9817-FAFE15C415AC}</Project>
+      <Name>ext_unzip</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\xxhash\ext_xxhash.vcxproj">
+      <Project>{8F1D1651-9FE2-3492-95F9-D24F43DCC308}</Project>
+      <Name>ext_xxhash</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\xxtea\ext_xxtea.vcxproj">
+      <Project>{2CF2C418-EB04-3073-9830-5F015D2E314D}</Project>
+      <Name>ext_xxtea</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Carrot_Fantasy\proj.win32\engine\external\external.vcxproj">
+      <Project>{576F9BAB-886B-3901-9F3D-259A239D7674}</Project>
+      <Name>external</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Carrot\Hp.png" />
+    <Image Include="..\Resources\Carrot\HP_1.PNG" />
+    <Image Include="..\Resources\Carrot\HP_2.PNG" />
+    <Image Include="..\Resources\Carrot\HP_3.PNG" />
+    <Image Include="..\Resources\Carrot\HP_4.PNG" />
+    <Image Include="..\Resources\Carrot\HP_5-6.PNG" />
+    <Image Include="..\Resources\Carrot\HP_7-8.PNG" />
+    <Image Include="..\Resources\Carrot\HP_9.PNG" />
+    <Image Include="..\Resources\Carrot\HP_MAX.PNG" />
+    <Image Include="..\Resources\EnemyCreate\Items02-hd_0.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\Four1.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\Four2.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\One1.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\One2.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\Two1.PNG" />
+    <Image Include="..\Resources\Enemy\barrier\0\Two2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\fast01-1.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\fast01-2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\huge01-1.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\huge01-2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\normal01-1.PNG" />
+    <Image Include="..\Resources\Enemy\monster\0\normal01-2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\1.PNG" />
+    <Image Include="..\Resources\Enemy\monster\2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\3.PNG" />
+    <Image Include="..\Resources\Enemy\monster\4.PNG" />
+    <Image Include="..\Resources\Enemy\monster\5.PNG" />
+    <Image Include="..\Resources\Enemy\monster\6.PNG" />
+    <Image Include="..\Resources\Enemy\monster\appear1.PNG" />
+    <Image Include="..\Resources\Enemy\monster\appear2.PNG" />
+    <Image Include="..\Resources\Enemy\monster\HpHolder.PNG" />
+    <Image Include="..\Resources\Enemy\monster\HpSlider.PNG" />
+    <Image Include="..\Resources\Enemy\monster\Items02-hd_0.PNG" />
+    <Image Include="..\Resources\Enemy\monster\Items02-hd_116.PNG" />
+    <Image Include="..\Resources\Enemy\selected.PNG" />
+    <Image Include="..\Resources\GameScene\again_normal.png" />
+    <Image Include="..\Resources\GameScene\again_selected.png" />
+    <Image Include="..\Resources\GameScene\cantBuild.png" />
+    <Image Include="..\Resources\GameScene\gameover0-hd_0.PNG" />
+    <Image Include="..\Resources\GameScene\Grid.png" />
+    <Image Include="..\Resources\GameScene\Items02-hd_165.PNG" />
+    <Image Include="..\Resources\GameScene\Items02-hd_50.PNG" />
+    <Image Include="..\Resources\GameScene\Items02-hd_68.PNG" />
+    <Image Include="..\Resources\GameScene\Items02-hd_88.PNG" />
+    <Image Include="..\Resources\GameScene\Items02-hd_92.PNG" />
+    <Image Include="..\Resources\GameScene\lose.png" />
+    <Image Include="..\Resources\GameScene\options_bg.png" />
+    <Image Include="..\Resources\GameScene\paused.png" />
+    <Image Include="..\Resources\GameScene\restart_normal.png" />
+    <Image Include="..\Resources\GameScene\restart_selected.png" />
+    <Image Include="..\Resources\GameScene\resume_normal.png" />
+    <Image Include="..\Resources\GameScene\resume_selected.png" />
+    <Image Include="..\Resources\GameScene\return_normal.png" />
+    <Image Include="..\Resources\GameScene\return_selected.png" />
+    <Image Include="..\Resources\GameScene\StartSprite.png" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_11.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_12.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_13.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_25.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_26.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_28.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_7.PNG" />
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_9.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\1\CanClick0.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\1\CanClick1.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\2\CanClick0.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\2\CanClick1.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\3\CanClick0.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\3\CanClick1.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\4\CanClick0.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\4\CanClick1.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\AttackRange.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\Btn_CantUpLevel.png" />
+    <Image Include="..\Resources\GameScene\Tower\Btn_CanUpLevel.png" />
+    <Image Include="..\Resources\GameScene\Tower\Btn_ReachHighestLevel.PNG" />
+    <Image Include="..\Resources\GameScene\Tower\Btn_SellTower.png" />
+    <Image Include="..\Resources\GameScene\win.png" />
+    <Image Include="..\Resources\GameSelectionScene\BG_Left.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\BG_Right.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\close_evaluate_normal.png" />
+    <Image Include="..\Resources\GameSelectionScene\close_evaluate_selected.png" />
+    <Image Include="..\Resources\GameSelectionScene\evaluate.png" />
+    <Image Include="..\Resources\GameSelectionScene\Items03-hd.pvr_0.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Level_1.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Level_2.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\level_2_lock.png" />
+    <Image Include="..\Resources\GameSelectionScene\Level_3.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\level_3_lock.png" />
+    <Image Include="..\Resources\GameSelectionScene\Level_4.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Level_5.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\lock_btn_normal.png" />
+    <Image Include="..\Resources\GameSelectionScene\lock_btn_selected.png" />
+    <Image Include="..\Resources\GameSelectionScene\lock_image.png" />
+    <Image Include="..\Resources\GameSelectionScene\page_no.png" />
+    <Image Include="..\Resources\GameSelectionScene\page_yes.png" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_0.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_28.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_30.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_31.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_33.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_39.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_40.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_41.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_42.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd.png" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_10.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_17.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_25.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_26.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_31.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_32.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_8.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_0.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_1.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_2.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\total_waves.png" />
+    <Image Include="..\Resources\GameSelectionScene\Tower_1.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Tower_2.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Tower_3.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Tower_4.PNG" />
+    <Image Include="..\Resources\GameSelectionScene\Tower_5.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd-33_normal.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_0.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_1.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_14.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_2.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_29.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_3.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_33.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_38.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_39.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_4.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_50.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_65.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_66.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_66_normal.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_67.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_71.PNG" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_71_normal.png" />
+    <Image Include="..\Resources\HelperScene\help_1-hd_73.PNG" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_1.png" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_2.png" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_3.png" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_4.png" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_bg.png" />
+    <Image Include="..\Resources\HelperScene\help_3-hd_monster.png" />
+    <Image Include="..\Resources\HelperScene\num_-1.png" />
+    <Image Include="..\Resources\HelperScene\num_0.png" />
+    <Image Include="..\Resources\HelperScene\num_1.png" />
+    <Image Include="..\Resources\HelperScene\num_10.png" />
+    <Image Include="..\Resources\HelperScene\num_2.png" />
+    <Image Include="..\Resources\HelperScene\num_3.png" />
+    <Image Include="..\Resources\HelperScene\num_4.png" />
+    <Image Include="..\Resources\HelperScene\num_5.png" />
+    <Image Include="..\Resources\HelperScene\num_6.png" />
+    <Image Include="..\Resources\HelperScene\num_7.png" />
+    <Image Include="..\Resources\HelperScene\num_8.png" />
+    <Image Include="..\Resources\HelperScene\num_9.png" />
+    <Image Include="..\Resources\HelperScene\tower_1.png" />
+    <Image Include="..\Resources\HelperScene\tower_10.png" />
+    <Image Include="..\Resources\HelperScene\tower_2.png" />
+    <Image Include="..\Resources\HelperScene\tower_3.png" />
+    <Image Include="..\Resources\HelperScene\tower_4.png" />
+    <Image Include="..\Resources\HelperScene\tower_5.png" />
+    <Image Include="..\Resources\HelperScene\tower_6.png" />
+    <Image Include="..\Resources\HelperScene\tower_7.png" />
+    <Image Include="..\Resources\HelperScene\tower_8.png" />
+    <Image Include="..\Resources\HelperScene\tower_9.png" />
+    <Image Include="..\Resources\Level\Level_1_1_bg.png" />
+    <Image Include="..\Resources\Level\Level_1_2_bg.png" />
+    <Image Include="..\Resources\Level\startPoint.PNG" />
+    <Image Include="..\Resources\MenuScene\boss_lock_image.png" />
+    <Image Include="..\Resources\MenuScene\Btn_Boss.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_BossLight.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_Help.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_HelpLight.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_MonsterNest.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_MonsterNestLight.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_NormalModle.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_NormalModleLight.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_Set.PNG" />
+    <Image Include="..\Resources\MenuScene\Btn_SetLight.PNG" />
+    <Image Include="..\Resources\MenuScene\CarrotBody.PNG" />
+    <Image Include="..\Resources\MenuScene\Cloud.PNG" />
+    <Image Include="..\Resources\MenuScene\Cloud2.PNG" />
+    <Image Include="..\Resources\MenuScene\FlyMonster.PNG" />
+    <Image Include="..\Resources\MenuScene\Leaf1.PNG" />
+    <Image Include="..\Resources\MenuScene\leaf2.PNG" />
+    <Image Include="..\Resources\MenuScene\Leaf3.PNG" />
+    <Image Include="..\Resources\MenuScene\lock.png" />
+    <Image Include="..\Resources\MenuScene\lock_btn_normal.png" />
+    <Image Include="..\Resources\MenuScene\lock_btn_selected.png" />
+    <Image Include="..\Resources\MenuScene\MainBG.PNG" />
+    <Image Include="..\Resources\MenuScene\MainTitle.PNG" />
+    <Image Include="..\Resources\MenuScene\nest_lock_image.png" />
+    <Image Include="..\Resources\OptionsScene\Btn_Return.PNG" />
+    <Image Include="..\Resources\OptionsScene\Btn_ReturnLight.PNG" />
+    <Image Include="..\Resources\OptionsScene\reset_image.png" />
+    <Image Include="..\Resources\OptionsScene\reset_no_normal.png" />
+    <Image Include="..\Resources\OptionsScene\reset_no_selected.png" />
+    <Image Include="..\Resources\OptionsScene\reset_yes_normal.png" />
+    <Image Include="..\Resources\OptionsScene\reset_yes_selected.png" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_0.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_11.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_12.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_15.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_16.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_2.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_21.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_22.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_23.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_27.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_31.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_35.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_38.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_42.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_43.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_43_normal.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_44.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_45.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_45_normal.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_48.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_48_normal.png" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_54.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_55.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_6.PNG" />
+    <Image Include="..\Resources\OptionsScene\setting02-hd_7.PNG" />
+    <Image Include="..\Resources\OptionsScene\SettingBG1.png" />
+    <Image Include="..\Resources\OptionsScene\SettingBG2.png" />
+    <Image Include="..\Resources\OptionsScene\SettingBG3.png" />
+    <Image Include="..\Resources\Tower\Bottle\atk11.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\atk12.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\atk21.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\atk22.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\atk31.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\atk32.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\bullet1.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\bullet2.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\bullet3.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\CanClick0.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\CanClick1.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_0.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_10.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_11.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_12.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_13.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_14.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_15.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_16.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_17.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_18.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_19.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_2.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_20.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_21.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_22.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_3.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_5.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_6.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_7.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_8.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\ID1_9.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\origin1.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\origin2.PNG" />
+    <Image Include="..\Resources\Tower\Bottle\origin3.PNG" />
+    <Image Include="..\Resources\Tower\Build\Items02-hd_1.PNG" />
+    <Image Include="..\Resources\Tower\Build\Items02-hd_2.PNG" />
+    <Image Include="..\Resources\Tower\Build\Items02-hd_3.PNG" />
+    <Image Include="..\Resources\Tower\Build\Items02-hd_4.PNG" />
+    <Image Include="..\Resources\Tower\Build\up1.png" />
+    <Image Include="..\Resources\Tower\Build\up2.png" />
+    <Image Include="..\Resources\Tower\Build\up3.png" />
+    <Image Include="..\Resources\Tower\Build\up4.png" />
+    <Image Include="..\Resources\Tower\Build\up5.png" />
+    <Image Include="..\Resources\Tower\Fan\atk11.PNG" />
+    <Image Include="..\Resources\Tower\Fan\atk12.PNG" />
+    <Image Include="..\Resources\Tower\Fan\atk21.PNG" />
+    <Image Include="..\Resources\Tower\Fan\atk22.PNG" />
+    <Image Include="..\Resources\Tower\Fan\atk31.PNG" />
+    <Image Include="..\Resources\Tower\Fan\atk32.PNG" />
+    <Image Include="..\Resources\Tower\Fan\bullet1.PNG" />
+    <Image Include="..\Resources\Tower\Fan\bullet2.PNG" />
+    <Image Include="..\Resources\Tower\Fan\bullet3.PNG" />
+    <Image Include="..\Resources\Tower\Fan\CanClick0.PNG" />
+    <Image Include="..\Resources\Tower\Fan\CanClick1.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_0.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_1.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_10.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_11.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_12.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_13.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_14.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_15.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_16.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_17.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_18.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_2.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_5.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_6.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_7.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_8.PNG" />
+    <Image Include="..\Resources\Tower\Fan\ID4_9.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk11.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk12.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk21.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk22.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk31.PNG" />
+    <Image Include="..\Resources\Tower\Shit\atk32.PNG" />
+    <Image Include="..\Resources\Tower\Shit\bullet1.PNG" />
+    <Image Include="..\Resources\Tower\Shit\bullet2.PNG" />
+    <Image Include="..\Resources\Tower\Shit\bullet3.PNG" />
+    <Image Include="..\Resources\Tower\Shit\CanClick0.PNG" />
+    <Image Include="..\Resources\Tower\Shit\CanClick1.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_1.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_10.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_13.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_14.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_19.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_21.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_22.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_23.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_27.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_28.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_29.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_33.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_35.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_37.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_39.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_4.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_41.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_42.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_43.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_5.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_7.PNG" />
+    <Image Include="..\Resources\Tower\Shit\ID2_9.PNG" />
+    <Image Include="..\Resources\Tower\Shit\origin1.PNG" />
+    <Image Include="..\Resources\Tower\Shit\origin2.PNG" />
+    <Image Include="..\Resources\Tower\Shit\origin3.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk11.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk12.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk21.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk22.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk31.PNG" />
+    <Image Include="..\Resources\Tower\Star\atk32.PNG" />
+    <Image Include="..\Resources\Tower\Star\bullet1.PNG" />
+    <Image Include="..\Resources\Tower\Star\bullet2.PNG" />
+    <Image Include="..\Resources\Tower\Star\bullet3.PNG" />
+    <Image Include="..\Resources\Tower\Star\CanClick0.PNG" />
+    <Image Include="..\Resources\Tower\Star\CanClick1.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_0.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_1.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_21.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_22.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_46.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_56.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_57.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_71.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_73.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_78.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_79.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_84.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_85.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_87.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_88.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_89.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_94.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_97.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_98.PNG" />
+    <Image Include="..\Resources\Tower\Star\ID3_99.PNG" />
+    <Image Include="..\Resources\Tower\Star\origin1.PNG" />
+    <Image Include="..\Resources\Tower\Star\origin2.PNG" />
+    <Image Include="..\Resources\Tower\Star\origin3.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\Resources\fonts\arial.ttf" />
+    <Font Include="..\Resources\fonts\Marker Felt.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\sound\bottle_atk.mp3" />
+    <Media Include="..\Resources\sound\build_tower.mp3" />
+    <Media Include="..\Resources\sound\button.mp3" />
+    <Media Include="..\Resources\sound\CarrotFantasy.mp3" />
+    <Media Include="..\Resources\sound\carrot_eaten.mp3" />
+    <Media Include="..\Resources\sound\fan_atk.mp3" />
+    <Media Include="..\Resources\sound\Fat141.mp3" />
+    <Media Include="..\Resources\sound\Fly162.mp3" />
+    <Media Include="..\Resources\sound\Land112.mp3" />
+    <Media Include="..\Resources\sound\page.mp3" />
+    <Media Include="..\Resources\sound\sell_tower.mp3" />
+    <Media Include="..\Resources\sound\shit_atk.mp3" />
+    <Media Include="..\Resources\sound\star_atk.mp3" />
+    <Media Include="..\Resources\sound\uplevel_tower.mp3" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,5 @@
+cocos2d
+proj.win32/.vs
+proj.win32/bin
+proj.win32/engine
+proj.win32/lib
