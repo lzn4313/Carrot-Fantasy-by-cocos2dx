@@ -1,0 +1,1361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Carrot_Fantasy\Classes\AppDelegate.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Carrot_Fantasy\proj.win32\main.cpp">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Carrot_Fantasy\cocos2d\cocos\precheader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\enemy.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnemyCreate.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameSelectionScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelperScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Level_1_1.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Level_1_2.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\OptionsScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tower.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Carrot_Fantasy\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Carrot_Fantasy\proj.win32\main.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Carrot_Fantasy\proj.win32\resource.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\enemy.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnemyCreate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameData.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameSelectionScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelperScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Level_1_1.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Level_1_2.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\OptionsScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\sound&amp;music.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tower.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Carrot_Fantasy\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\Carrot_Fantasy\proj.win32\game.rc">
+      <Filter>Source Files\proj.win32</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{488F42B7-1F77-3CD1-A48B-5CDC7E68E9C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{67F459AB-2CC0-38DA-81BF-C41F07170C03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{F97D834B-CB3B-393E-91A2-050387191AE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\proj.win32">
+      <UniqueIdentifier>{C29E8FE2-0DC5-3379-929E-D4650884A1E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Carrot">
+      <UniqueIdentifier>{9797fb00-e499-4416-a7b4-a5887fbf2510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Enemy">
+      <UniqueIdentifier>{7c0e8c0b-4cee-4c50-a14c-1de7db7b8c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\EnemyCreate">
+      <UniqueIdentifier>{0236817f-99b9-4ced-abd2-fff8f8a6d09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\fonts">
+      <UniqueIdentifier>{9fca2c23-1dec-46f1-9477-f32fee236fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene">
+      <UniqueIdentifier>{6d07b102-f566-494f-b8ec-e29885201f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameSelectionScene">
+      <UniqueIdentifier>{bd9132b8-7d86-4a96-87ad-235596189769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\HelperScene">
+      <UniqueIdentifier>{5e3da889-5d77-4ffd-9564-f85567959b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Level">
+      <UniqueIdentifier>{907c6055-a6fd-421d-9e5d-79941469a9e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\MenuScene">
+      <UniqueIdentifier>{ef270840-3bbb-4e23-a527-0cc0de4d15cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\OptionsScene">
+      <UniqueIdentifier>{162f2ba1-e5d7-4b29-a011-26498898dd91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower">
+      <UniqueIdentifier>{b8323491-1f01-425f-9eb7-a321f069dd43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Enemy\barrier">
+      <UniqueIdentifier>{8be4b3be-0c86-4442-b04b-e49989908b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Enemy\barrier\0">
+      <UniqueIdentifier>{d6da9ce0-a48a-4771-a282-993f512e25d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Enemy\monster">
+      <UniqueIdentifier>{24b86fd1-8e2b-47e9-8e31-dd68791f59db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Enemy\monster\0">
+      <UniqueIdentifier>{0ddc7858-6317-4cdf-9e02-4315d5e567b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene\Tower">
+      <UniqueIdentifier>{dde08a2e-e26f-47b0-bbba-17ee2df15cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene\Tower\1">
+      <UniqueIdentifier>{f28f65bb-474a-4bbf-80c9-83022d16ad2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene\Tower\2">
+      <UniqueIdentifier>{4d19c89b-c14d-4adf-866a-57ce9c4732a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene\Tower\3">
+      <UniqueIdentifier>{9c25a162-1a5f-4c46-8dcc-8f6c251c5718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\GameScene\Tower\4">
+      <UniqueIdentifier>{ca566e85-f877-4fcb-bcb1-af9ec29e0ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\sound">
+      <UniqueIdentifier>{e8dc5ea0-5ab4-4a9e-a77d-21df40c17ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower\Bottle">
+      <UniqueIdentifier>{ffda4b59-b4a1-4577-8aea-3758eba1b9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower\Star">
+      <UniqueIdentifier>{40dcc907-f35e-4821-ae8b-2202c73148ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower\Build">
+      <UniqueIdentifier>{55e200a6-93f5-4600-9aba-6d1ac4ca5754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower\Fan">
+      <UniqueIdentifier>{001ad638-e1e2-4f10-b077-286bb63ba17a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Tower\Shit">
+      <UniqueIdentifier>{5b4e9873-9ce9-4054-afc1-75752459238b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Carrot\Hp.png">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_1.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_2.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_3.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_4.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_5-6.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_7-8.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_9.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Carrot\HP_MAX.PNG">
+      <Filter>Resources\Carrot</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\selected.PNG">
+      <Filter>Resources\Enemy</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\Four1.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\Four2.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\One1.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\One2.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\Two1.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\barrier\0\Two2.PNG">
+      <Filter>Resources\Enemy\barrier\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\1.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\2.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\3.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\4.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\5.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\6.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\appear1.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\appear2.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\HpHolder.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\HpSlider.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\Items02-hd_0.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\Items02-hd_116.PNG">
+      <Filter>Resources\Enemy\monster</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\fast01-1.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\fast01-2.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\huge01-1.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\huge01-2.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\normal01-1.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\Enemy\monster\0\normal01-2.PNG">
+      <Filter>Resources\Enemy\monster\0</Filter>
+    </Image>
+    <Image Include="..\Resources\EnemyCreate\Items02-hd_0.PNG">
+      <Filter>Resources\EnemyCreate</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\again_normal.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\again_selected.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\cantBuild.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\gameover0-hd_0.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Grid.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Items02-hd_50.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Items02-hd_68.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Items02-hd_88.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Items02-hd_92.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Items02-hd_165.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\lose.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\options_bg.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\paused.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\restart_normal.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\restart_selected.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\resume_normal.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\resume_selected.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\return_normal.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\return_selected.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\StartSprite.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_7.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_9.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_11.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_12.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_13.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_25.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_26.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\touming-hd.pvr_28.PNG">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\win.png">
+      <Filter>Resources\GameScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\AttackRange.PNG">
+      <Filter>Resources\GameScene\Tower</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\Btn_CantUpLevel.png">
+      <Filter>Resources\GameScene\Tower</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\Btn_CanUpLevel.png">
+      <Filter>Resources\GameScene\Tower</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\Btn_ReachHighestLevel.PNG">
+      <Filter>Resources\GameScene\Tower</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\Btn_SellTower.png">
+      <Filter>Resources\GameScene\Tower</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\1\CanClick0.PNG">
+      <Filter>Resources\GameScene\Tower\1</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\1\CanClick1.PNG">
+      <Filter>Resources\GameScene\Tower\1</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\2\CanClick0.PNG">
+      <Filter>Resources\GameScene\Tower\2</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\2\CanClick1.PNG">
+      <Filter>Resources\GameScene\Tower\2</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\3\CanClick0.PNG">
+      <Filter>Resources\GameScene\Tower\3</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\3\CanClick1.PNG">
+      <Filter>Resources\GameScene\Tower\3</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\4\CanClick0.PNG">
+      <Filter>Resources\GameScene\Tower\4</Filter>
+    </Image>
+    <Image Include="..\Resources\GameScene\Tower\4\CanClick1.PNG">
+      <Filter>Resources\GameScene\Tower\4</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\BG_Left.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\BG_Right.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\close_evaluate_normal.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\close_evaluate_selected.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\evaluate.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Items03-hd.pvr_0.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Level_1.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Level_2.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\level_2_lock.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Level_3.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\level_3_lock.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Level_4.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Level_5.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\lock_btn_normal.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\lock_btn_selected.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\lock_image.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\page_no.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\page_yes.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_0.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_28.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_30.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_31.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_33.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_39.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_40.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_41.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\stages_bg-hd_42.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_8.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_10.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_17.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_25.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_26.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_31.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene1-hd_32.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_0.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_1.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\themescene2-hd.pvr_2.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\total_waves.png">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Tower_1.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Tower_2.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Tower_3.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Tower_4.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\GameSelectionScene\Tower_5.PNG">
+      <Filter>Resources\GameSelectionScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_0.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_1.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_2.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_3.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_4.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_14.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_29.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_33.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_38.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_39.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_50.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_65.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_66.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_66_normal.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_67.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_71.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_71_normal.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd_73.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_1-hd-33_normal.PNG">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_1.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_2.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_3.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_4.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_bg.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\help_3-hd_monster.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_0.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_1.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_-1.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_2.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_3.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_4.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_5.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_6.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_7.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_8.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_9.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\num_10.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_1.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_2.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_3.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_4.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_5.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_6.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_7.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_8.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_9.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\HelperScene\tower_10.png">
+      <Filter>Resources\HelperScene</Filter>
+    </Image>
+    <Image Include="..\Resources\Level\Level_1_1_bg.png">
+      <Filter>Resources\Level</Filter>
+    </Image>
+    <Image Include="..\Resources\Level\Level_1_2_bg.png">
+      <Filter>Resources\Level</Filter>
+    </Image>
+    <Image Include="..\Resources\Level\startPoint.PNG">
+      <Filter>Resources\Level</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\boss_lock_image.png">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_Boss.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_BossLight.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_Help.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_HelpLight.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_MonsterNest.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_MonsterNestLight.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_NormalModle.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_NormalModleLight.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_Set.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Btn_SetLight.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\CarrotBody.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Cloud.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Cloud2.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\FlyMonster.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Leaf1.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\leaf2.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\Leaf3.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\lock.png">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\lock_btn_normal.png">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\lock_btn_selected.png">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\MainBG.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\MainTitle.PNG">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\MenuScene\nest_lock_image.png">
+      <Filter>Resources\MenuScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\Btn_Return.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\Btn_ReturnLight.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\reset_image.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\reset_no_normal.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\reset_no_selected.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\reset_yes_normal.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\reset_yes_selected.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_0.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_2.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_6.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_7.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_11.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_12.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_15.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_16.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_21.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_22.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_23.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_27.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_31.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_35.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_38.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_42.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_43.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_43_normal.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_44.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_45.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_45_normal.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_48.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_48_normal.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_54.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\setting02-hd_55.PNG">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\SettingBG1.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\SettingBG2.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\OptionsScene\SettingBG3.png">
+      <Filter>Resources\OptionsScene</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk11.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk12.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk21.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk22.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk31.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\atk32.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\bullet1.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\bullet2.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\bullet3.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\CanClick0.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\CanClick1.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_0.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_2.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_3.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_5.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_6.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_7.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_8.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_9.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_10.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_11.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_12.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_13.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_14.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_15.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_16.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_17.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_18.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_19.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_20.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_21.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\ID1_22.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\origin1.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\origin2.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Bottle\origin3.PNG">
+      <Filter>Resources\Tower\Bottle</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\Items02-hd_1.PNG">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\Items02-hd_2.PNG">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\Items02-hd_3.PNG">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\Items02-hd_4.PNG">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\up1.png">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\up2.png">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\up3.png">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\up4.png">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Build\up5.png">
+      <Filter>Resources\Tower\Build</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk11.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk12.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk21.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk22.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk31.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\atk32.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\bullet1.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\bullet2.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\bullet3.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\CanClick0.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\CanClick1.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_0.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_1.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_2.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_5.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_6.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_7.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_8.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_9.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_10.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_11.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_12.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_13.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_14.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_15.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_16.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_17.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Fan\ID4_18.PNG">
+      <Filter>Resources\Tower\Fan</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk11.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk12.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk21.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk22.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk31.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\atk32.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\bullet1.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\bullet2.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\bullet3.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\CanClick0.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\CanClick1.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_1.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_4.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_5.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_7.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_9.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_10.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_13.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_14.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_19.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_21.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_22.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_23.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_27.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_28.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_29.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_33.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_35.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_37.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_39.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_41.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_42.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\ID2_43.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\origin1.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\origin2.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Shit\origin3.PNG">
+      <Filter>Resources\Tower\Shit</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk11.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk12.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk21.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk22.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk31.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\atk32.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\bullet1.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\bullet2.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\bullet3.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\CanClick0.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\CanClick1.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_0.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_1.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_21.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_22.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_46.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_56.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_57.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_71.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_73.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_78.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_79.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_84.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_85.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_87.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_88.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_89.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_94.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_97.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_98.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\ID3_99.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\origin1.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\origin2.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+    <Image Include="..\Resources\Tower\Star\origin3.PNG">
+      <Filter>Resources\Tower\Star</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\Resources\fonts\arial.ttf">
+      <Filter>Resources\fonts</Filter>
+    </Font>
+    <Font Include="..\Resources\fonts\Marker Felt.ttf">
+      <Filter>Resources\fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\sound\bottle_atk.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\build_tower.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\button.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\carrot_eaten.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\CarrotFantasy.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\fan_atk.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\Fat141.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\Fly162.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\Land112.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\page.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\sell_tower.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\shit_atk.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\star_atk.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+    <Media Include="..\Resources\sound\uplevel_tower.mp3">
+      <Filter>Resources\sound</Filter>
+    </Media>
+  </ItemGroup>
+</Project>
